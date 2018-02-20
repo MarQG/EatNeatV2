@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+const CommentSchema = new Schema({
   blog_id: {
     type: String,
     required: true
@@ -22,6 +22,6 @@ const UserSchema = new Schema({
   }
 });
 
-var comment = mongoose.model("Comment", UserSchema);
+var comment = mongoose.model("Comment", CommentSchema);
 
 module.exports = comment;
