@@ -17,7 +17,7 @@ const yumListURL = "https://api.yummly.com/v1/api/recipes" + yumAppId + yumKey +
 //     })
 // })
 
-//For Testing Purpose
+//For Testing Purpose, The commented out code is the route.
 module.exports = request(`${yumListURL}chicken`, function(err, response, body){
     console.log("Error:", err);
     console.log("Status Code:", response && response.statusCode);

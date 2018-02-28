@@ -14,6 +14,7 @@ app.use(cors());
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
+    //This console.log is to test we are getting a response from yummly
     console.log(apiRoutes)
 });
 
