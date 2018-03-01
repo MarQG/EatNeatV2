@@ -8,20 +8,21 @@ const yumListURL = "https://api.yummly.com/v1/api/recipes" + yumAppId + yumKey +
 
 
 // Replace "chicken" in yummly request with userSearch variable once route has been identified for a search"
-// router.get("/search", function(req, res){
-//     request(`${yumListURL}chicken`, function(err, response, body){
-//         console.log("Error:", err);
-//         console.log("Status Code:", response && response.statusCode);
-//         console.log("Body:", body);
-//         res.json(body)
-//     })
-// })
-
-//For Testing Purpose, The commented out code is the route.
-module.exports = request(`${yumListURL}chicken`, function(err, response, body){
-    console.log("Error:", err);
-    console.log("Status Code:", response && response.statusCode);
-    console.log("Body:", body);
+router.post("/search", function(req, res){
+    request(`${yumListURL}${req.body.search.query}`, function(err, response, body){
+        console.log("Error:", err);
+        console.log("Status Code:", response && response.statusCode);
+        console.log("Body:", body);
+        res.json(JSON.parse(body));
+    })
 })
+
+module.exports = router;
+//For Testing Purpose, The commented out code is the route.
+// module.exports = request(`${yumListURL}chicken`, function(err, response, body){
+//     console.log("Error:", err);
+//     console.log("Status Code:", response && response.statusCode);
+//     console.log("Body:", body);
+// })
 
 

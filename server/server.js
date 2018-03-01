@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const bodyParser = require('body-parser')
 const apiRoutes = require("./controller/yummlyAPI.js")
 
 const publicPath = path.join(__dirname, '../public');
@@ -11,11 +12,16 @@ app.use(express.static(publicPath));
 app.use(cors());
 
 
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(bodyParser.json())
+
+app.use("/api", apiRoutes);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
     //This console.log is to test we are getting a response from yummly
-    console.log(apiRoutes)
+    // console.log(apiRoutes)
 });
 
 app.listen(port, () => {
