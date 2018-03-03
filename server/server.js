@@ -11,6 +11,7 @@ const port = process.env.PORT || 4000;
 app.use(express.static(publicPath));
 app.use(cors());
 
+console.log("Line 14: " + process.env.NODE_ENV)
 
 app.use(bodyParser.urlencoded({ extended: true }))
 

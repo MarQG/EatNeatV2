@@ -47,6 +47,7 @@ npm manifest:
       "history": "^4.7.2",
       "moment": "^2.20.1",
       "moments": "^0.0.2",
+      "mongoose": "^5.0.8",
       "node-sass": "^4.7.2",
       "normalize.css": "^7.0.0",
       "numeral": "^2.0.6",
