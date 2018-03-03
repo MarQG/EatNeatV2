@@ -17,6 +17,7 @@ db.on("error", function (error) {
 });
 
 let recipeId;
+let recSource;
 const yumListURL = "https://api.yummly.com/v1/api/recipes?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY + "&q=";
 const spoon = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/extract?forceExtraction=true&url=";
 
@@ -55,18 +56,19 @@ router.get("/search/:recipe_id", function(req, res){
     recipeId = req.params.recipe_id
     
     let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
-    let recSource;
     
     request(yumRecURL, function(err, response, body){
         console.log("Error:", err);
         console.log("Status Code:", response && response.statusCode);
         // console.log("Body:", body);
         
-        // res.json(JSON.parse(body));
+        res.json(JSON.parse(body));
         
         recSource = JSON.parse(body).source.sourceRecipeUrl
     })
+})
 
+router.get("/search/:recipe_id/details", function(req, res){
     request({
         "url": spoon + encodeURI(recSource),
         "headers": {
