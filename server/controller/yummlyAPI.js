@@ -24,12 +24,12 @@ const spoon = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipe
 // Replace "chicken" in yummly request with userSearch variable once route has been identified for a search"
 //Searches for multiple recipes
 router.get("/search", function(req, res){
-    db.find({userSearch: "chicken"}, function (err, data) {
+    db.find({userSearch: "creamy avocado tuna sandwich"}, function (err, data) {
         if (err) {
             console.log(err)
         } else {
             if (data.length === 0) {
-                request(`${yumListURL}chicken`, function (err, response, body) {
+                request(`${yumListURL}creamy avocado tuna sandwich`, function (err, response, body) {
                     console.log("Error:", err);
                     console.log("Status Code:", response && response.statusCode);
                     
@@ -69,12 +69,12 @@ router.get("/search/:recipe_id", function(req, res){
 })
 
 router.get("/search/:recipe_id/details", function(req, res){
+    console.log(spoon + encodeURI(recSource))
     request({
         "url": spoon + encodeURI(recSource),
         "headers": {
             "X-Mashape-Key": process.env.RECIPE_API_KEY,
             "Content-Type": "application/json",
-            "Accept": "application/json"
         }
     }, function (error, resp, data) {
         console.log("Error:", error);
