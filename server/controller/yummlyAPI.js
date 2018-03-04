@@ -24,18 +24,35 @@ const spoon = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipe
 // Replace "chicken" in yummly request with userSearch variable once route has been identified for a search"
 //Searches for multiple recipes
 router.get("/search", function(req, res){
-    db.find({userSearch: "creamy avocado tuna sandwich"}, function (err, data) {
+    db.find({userSearch: "steak"}, function (err, data) {
         if (err) {
             console.log(err)
         } else {
             if (data.length === 0) {
-                request(`${yumListURL}creamy avocado tuna sandwich`, function (err, response, body) {
+                request(`${yumListURL}steak`, function (err, response, body) {
                     console.log("Error:", err);
                     console.log("Status Code:", response && response.statusCode);
                     
+                    function EachMatch(recipe_id, imageUrlBySize, recipe_name, totalTimeInSeconds, attributes, rating) {
+                        this.recipe_id = recipe_id,
+                        this.imageUrlBySize = imageUrlBySize,
+                        this.recipe_name = recipe_name,
+                        this.totalTimeInSeconds = totalTimeInSeconds,
+                        this.attributes = attributes,
+                        this.rating = rating
+                    }
+                    
+                    var currentMatches = [];
+                    
+                    
+                    for (var i = 0; i < JSON.parse(body).matches.length; i++) {
+                        var json = JSON.parse(body).matches[i];
+                        currentMatches.push(new EachMatch (json.id, json.imageUrlsBySize, json.recipeName, json.totalTimeInSeconds, json.attributes, json.rating))
+                    }
+
                     db.create({
                         userSearch: JSON.parse(body).criteria.q,
-                        matches: JSON.parse(body).matches
+                        matches: currentMatches
                     }, function (err, data) {
                         if (err) {
                             console.log(err)
