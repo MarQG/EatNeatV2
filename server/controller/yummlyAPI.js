@@ -62,6 +62,7 @@ router.get("/search", function(req, res){
                     })
                 })
             } else {
+                console.log("Testing")
                 res.json(data)
             }
         }
