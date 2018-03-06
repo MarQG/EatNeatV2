@@ -15,6 +15,7 @@ const port = process.env.PORT || 4000;
 app.use(express.static(publicPath));
 app.use(cors());
 
+console.log("Line 14: " + process.env.NODE_ENV)
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -24,8 +25,6 @@ app.use("/api", yummlyRoutes);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
-    //This console.log is to test we are getting a response from yummly
-    // console.log(apiRoutes)
 });
 
 app.listen(port, () => {
