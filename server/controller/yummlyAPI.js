@@ -28,14 +28,14 @@ router.get("/search", function(req, res){
     db.find({userSearch: "steak"}, function (err, data) {
         if (err) {
             console.log(err)
-            res.redirect("/dashboard")
+            res.json({Error: "Something went wrong. Please go back and try again"})
         } else {
             if (data.length === 0) {
                 request(`${yumListURL}steak`, function (err, response, body) {
                     if (response.statusCode === 404) {
                         console.log(err)
                         console.log("Status Code:", response && response.statusCode);
-                        res.redirect("/dashboard")
+                        res.json({Error: "Something went wrong. Please go back and try again"})
                     }
                     
                     
@@ -62,7 +62,7 @@ router.get("/search", function(req, res){
                     }, function (err, data) {
                         if (err) {
                             console.log(err)
-                            res.redirect("/dashboard")
+                            res.json({Error: "Something went wrong. Please go back and try again"})
                         } else {
                             res.json(data)
                         }
@@ -87,7 +87,7 @@ router.get("/search/:recipe_id", function(req, res){
         if (response.statusCode === 404) {
             console.log(err)
             console.log("Status Code:", response && response.statusCode);
-            res.redirect("/dashboard")
+            res.json({Error: "Something went wrong. Please go back and try again"})
         } else {
                
             recSource = JSON.parse(body).source.sourceRecipeUrl
@@ -102,7 +102,7 @@ router.get("/search/:recipe_id", function(req, res){
                 if (resp.statusCode === 404) {
                     console.log(error)
                     console.log("Status Code:", resp && resp.statusCode);
-                    res.redirect("/dashboard")
+                    res.json({Error: "Something went wrong. Please go back and try again"})
                 }
 
                 let info = {
@@ -124,7 +124,7 @@ router.get("/search/:recipe_id/nutrition", function(req, res){
         if (response.statusCode === 404) {
             console.log(err)
             console.log("Status Code:", response && response.statusCode);
-            res.redirect("/dashboard")
+            res.json({Error: "Something went wrong. Please go back and try again"})
         }
         let json = JSON.parse(body).nutritionEstimates
         if (json.length === 0) {
@@ -171,7 +171,7 @@ router.post("/favorites", function (req, res) {
         if (response.statusCode === 404) {
             console.log(err)
             console.log("Status Code:", response && response.statusCode);
-            res.redirect("/dashboard")
+            res.json({Error: "Something went wrong. Please go back and try again"})
         }
 
         recSource = JSON.parse(body).source.sourceRecipeUrl
@@ -186,7 +186,7 @@ router.post("/favorites", function (req, res) {
             if (resp.statusCode === 404) {
                 console.log(error)
                 console.log("Status Code:", resp && resp.statusCode);
-                res.redirect("/dashboard")
+                res.json({Error: "Something went wrong. Please go back and try again"})
             }
           
             function EachFav(recipe_id, imageUrlBySize, recipe_name, totalTime, servings, recipe_url, ingredients, instructions, analyzedInstructions) {
@@ -241,7 +241,7 @@ router.put("/favorites", function(req, res){
     user.find({user_id: "testing"}, function (error, response) {
         if(error){
             console.log(error);
-            res.redirect("/dashboard")
+            res.json({Error: "Something went wrong. Please go back and try again"})
 
         } else {
             let setFavs = response[0].favorites
