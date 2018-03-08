@@ -4,10 +4,10 @@ const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser')
 const yummlyRoutes = require("./controller/yummlyAPI");
-const favRoutes = require("../routes/favorites.js");
-const listRoutes = require("../routes/groceryList.js");
-const weekRoutes = require("../routes/myWeek.js");
-const searchRoutes = require("../routes/searches.js");
+const favRoutes = require("./routes/favorites.js");
+const listRoutes = require("./routes/groceryList.js");
+const weekRoutes = require("./routes/myWeek.js");
+const searchRoutes = require("./routes/search.js");
 
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 4000;

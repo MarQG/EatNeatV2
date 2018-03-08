@@ -3,7 +3,7 @@ const router = express.Router();
 
 // GET All Searches
 
-router.get("/searches", function (req, res) {
+router.get("/search", function (req, res) {
     res.status(200);
     res.send("recent search route reached");
 
@@ -11,7 +11,7 @@ router.get("/searches", function (req, res) {
 
 // GET byID Searches
 
-router.get("/searches/:id", function (req, res) {
+router.get("/search/:id", function (req, res) {
     res.status(200);
     res.send("recent search id route reached");
 
@@ -20,7 +20,7 @@ router.get("/searches/:id", function (req, res) {
 // POST new myWeek
 
 
-router.post("/searches", function (req, res) {
+router.post("/search", function (req, res) {
     res.status(200);
     res.send("recent search route reached");
 
@@ -28,7 +28,7 @@ router.post("/searches", function (req, res) {
 
 // PUT update myWeek
 
-router.put("/searches/:id", function (req, res) {
+router.put("/search/:id", function (req, res) {
     res.status(200);
     res.send("recent search id route reached");
 
@@ -36,7 +36,7 @@ router.put("/searches/:id", function (req, res) {
 
 // DELETE myWeek
 
-router.delete("/searches/:id", function (req, res) {
+router.delete("/search/:id", function (req, res) {
     res.status(200);
     res.send("recent search id route reached");
 

@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+const db = require("./../models/user.js");
+
 // GET All Favorites
 
 router.get("/favorites", function (req, res) {
-    res.status(200);
-    res.send("Favorites route reached");
+    db.find({favorites})
 
 });
 
@@ -18,20 +19,11 @@ router.get("/favorites/:id", function (req, res) {
 });
 
 // POST new Favorites
-// need model info to update column 
 
 router.post("/favorites", function (req, res) {
     res.status(200);
     res.send("Favorites route reached");
 
-});
-
-// PUT update Favorites
-// need model info to update column 
-
-router.put("/favorites/:id", function (req, res) {
-    res.status(200);
-    res.send("Favorites route reached");
 
 });
 
@@ -42,5 +34,6 @@ router.delete("/favorites/:id", function (req, res) {
     res.send("Favorites route reached");
 
 });
+
 
 module.exports = router;

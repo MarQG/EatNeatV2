@@ -9,6 +9,8 @@ export default () => {
     const store = createStore(
         combineReducers({
             auth: authReducer
+            //user: userReducer
+            //search: searchReducer
         }),
         composeEnhancers(applyMiddleware(thunk))
     );
