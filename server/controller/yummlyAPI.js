@@ -163,7 +163,7 @@ router.get("/search/:recipe_id/nutrition", function(req, res){
 
 // POST Favorite
 router.post("/favorites", function (req, res) {
-    recipeId = "Asian-Steak-Bites-1979118"
+    recipeId = "Steak-1851748"
 
     let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
 
@@ -254,7 +254,7 @@ router.put("/favorites", function(req, res){
             }
             
 
-            user.findOneAndUpdate({user_id: "testing"}, {favorites: setFavs}, function(err, data){
+            user.findOneAndUpdate({user_id: "testing"}, { $set: {favorites: setFavs} }, function(err, data){
                 if (error) {
                     console.log(err)
                 } else {
@@ -278,11 +278,12 @@ router.get("/myweek", function(req, res){
 
 router.put("/myweek", function(req, res){
     
-    let newMealDay = req.body.newMealDay
-    let newMeal = req.body.newMeal
+    let newMealDay = "myWeek.monday.breakfast";
+    console.log(newMealDay)
+    let newMeal = "Oatmeal"
 
 
-    user.findOneAndUpdate({user_id: "testing"}, { newMealDay: newMeal }, function(error, data){
+    user.findOneAndUpdate({user_id: "testing"}, { $set: { 'myWeek.monday.breakfast': "Oatmeal" } }, function(error, data){
         if (error) {
             console.log(error)
         } else {
