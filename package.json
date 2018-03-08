@@ -7,9 +7,10 @@
   "scripts": {
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
-    "dev-server": "concurrently \"webpack-dev-server\" \"yarn start\" ",
+    "dev-server": "concurrently \"webpack-dev-server\" \"yarn start-dev\" ",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
     "start": "node server/server.js",
+    "start-dev": "nodemon server/server.js",
     "heroku-postbuild": "yarn run build:prod"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "history": "^4.7.2",
     "moment": "^2.20.1",
     "moments": "^0.0.2",
+    "mongoose": "^5.0.8",
     "node-sass": "^4.7.2",
     "normalize.css": "^7.0.0",
     "numeral": "^2.0.6",
