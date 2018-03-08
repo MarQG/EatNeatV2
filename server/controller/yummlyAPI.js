@@ -1,7 +1,10 @@
 const request = require("request");
 const express = require("express");
 const router = express.Router();
-require('dotenv').config({ path: './.env.development' });
+if(process.env.NODE_ENV === 'development'){
+    require('dotenv').config({ path: './.env.development' });
+}
+
 
 const mongoose = require("mongoose");
 
