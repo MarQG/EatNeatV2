@@ -1,0 +1,177 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon/icomoon.eot?srf3rx");
+  src: url("../fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Work Sans", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #828282;
+  background: #fff;
+}
+
+#page {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#fh5co-services,
+#fh5co-started,
+#fh5co-testimonial,
+#fh5co-started,
+#fh5co-project,
+#fh5co-about,
+#fh5co-contact,
+#fh5co-footer {
+  padding: 7em 0;
+  clear: both;
+}
+@media screen and (max-width: 768px) {
+  #fh5co-services,
+  #fh5co-started,
+  #fh5co-testimonial,
+  #fh5co-started,
+  #fh5co-project,
+  #fh5co-about,
+  #fh5co-contact,
+  #fh5co-footer {
+    padding: 3em 0;
+  }
+}
+
+.project-content {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    float: left;
+    padding-bottom: 7em;
+  }
+  .project-content .col-forth {
+    width: 25%;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  @media screen and (max-width: 1200px) {
+    .project-content .col-forth {
+      width: 25%;
+    }
+  }
+  @media screen and (max-width: 992px) {
+    .project-content .col-forth {
+      width: 50%;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .project-content .col-forth {
+      width: 100%;
+    }
+  }
+  .project-content .col-forth .project {
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+    -ms-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+    -o-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+  }
+  .project-content .col-forth .project:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: '';
+    z-index: -2;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+  }
+  .project-content .col-forth .project:hover, .project-content .col-forth .project:focus {
+    -webkit-box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.19);
+    -ms-box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.19);
+    -o-box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.19);
+    box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.19);
+  }
+  .project-content .col-forth .project:hover:after, .project-content .col-forth .project:focus:after {
+    opacity: 1;
+  }
+  .project-content .col-forth .project:hover .desc, .project-content .col-forth .project:focus .desc {
+    bottom: 0;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+  }
+  @media screen and (max-width: 480px) {
+    .project-content .col-forth .project {
+      height: 340px !important;
+      margin-bottom: 20px;
+    }
+  }
+  .project-content .col-forth .project {
+    height: 400px;
+  }
+  .project-content .desc {
+    background: white;
+    padding: 10px 20px;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+  }
+  .project-content .desc:after {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    left: 0;
+    width: 103%;
+    margin-left: -4px;
+    height: 50px;
+    z-index: -1;
+    content: "";
+    background: #fff;
+    -webkit-transform: rotate(4deg);
+    -moz-transform: rotate(4deg);
+    -ms-transform: rotate(4deg);
+    -o-transform: rotate(4deg);
+    transform: rotate(4deg);
+  }
+  .project-content .desc h3 {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .project-content .desc span {
+    color: rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+  }
+  @media screen and (max-width: 768px) {
+    .project-content .desc {
+      bottom: 0;
+    }
+  }
