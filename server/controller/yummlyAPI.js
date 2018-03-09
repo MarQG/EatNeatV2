@@ -1,7 +1,10 @@
 const request = require("request");
 const express = require("express");
 const router = express.Router();
-require('dotenv').config({ path: './.env.development' });
+if(process.env.NODE_ENV === 'development'){
+    require('dotenv').config({ path: './.env.development' });
+}
+
 
 const mongoose = require("mongoose");
 
@@ -28,11 +31,16 @@ router.get("/search", function(req, res){
     db.find({userSearch: "steak"}, function (err, data) {
         if (err) {
             console.log(err)
+            res.json({Error: "Something went wrong. Please go back and try again"})
         } else {
             if (data.length === 0) {
                 request(`${yumListURL}steak`, function (err, response, body) {
-                    console.log("Error:", err);
-                    console.log("Status Code:", response && response.statusCode);
+                    if (response.statusCode === 404) {
+                        console.log(err)
+                        console.log("Status Code:", response && response.statusCode);
+                        res.json({Error: "Something went wrong. Please go back and try again"})
+                    }
+                    
                     
                     function EachMatch(recipe_id, imageUrlBySize, recipe_name, totalTimeInSeconds, attributes, rating) {
                         this.recipe_id = recipe_id,
@@ -43,11 +51,11 @@ router.get("/search", function(req, res){
                         this.rating = rating
                     }
                     
-                    var currentMatches = [];
+                    let currentMatches = [];
                     
                     
-                    for (var i = 0; i < JSON.parse(body).matches.length; i++) {
-                        var json = JSON.parse(body).matches[i];
+                    for (let i = 0; i < JSON.parse(body).matches.length; i++) {
+                        let json = JSON.parse(body).matches[i];
                         currentMatches.push(new EachMatch (json.id, json.imageUrlsBySize, json.recipeName, json.totalTimeInSeconds, json.attributes, json.rating))
                     }
 
@@ -57,12 +65,14 @@ router.get("/search", function(req, res){
                     }, function (err, data) {
                         if (err) {
                             console.log(err)
+                            res.json({Error: "Something went wrong. Please go back and try again"})
                         } else {
                             res.json(data)
                         }
                     })
                 })
             } else {
+                console.log("Testing")
                 res.json(data)
             }
         }
@@ -76,28 +86,81 @@ router.get("/search/:recipe_id", function(req, res){
     let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
     
     request(yumRecURL, function(err, response, body){
-        console.log("Error:", err);
-        console.log("Status Code:", response && response.statusCode);
-        // console.log("Body:", body);
-        
-        res.json(JSON.parse(body));
-        
-        recSource = JSON.parse(body).source.sourceRecipeUrl
+        console.log("Status Code:", response.statusCode);
+        if (response.statusCode === 404) {
+            console.log(err)
+            console.log("Status Code:", response && response.statusCode);
+            res.json({Error: "Something went wrong. Please go back and try again"})
+        } else {
+               
+            recSource = JSON.parse(body).source.sourceRecipeUrl
+
+            request({
+                "url": spoon + encodeURI(recSource),
+                "headers": {
+                    "X-Mashape-Key": process.env.RECIPE_API_KEY,
+                    "Content-Type": "application/json",
+                }
+            }, function (error, resp, data) {
+                if (resp.statusCode === 404) {
+                    console.log(error)
+                    console.log("Status Code:", resp && resp.statusCode);
+                    res.json({Error: "Something went wrong. Please go back and try again"})
+                }
+
+                let info = {
+                    YummlyRecipe: JSON.parse(body),
+                    Spoonacular: JSON.parse(data)
+                }
+                res.json(info)
+            })
+        }
     })
 })
 
-router.get("/search/:recipe_id/details", function(req, res){
-    console.log(spoon + encodeURI(recSource))
-    request({
-        "url": spoon + encodeURI(recSource),
-        "headers": {
-            "X-Mashape-Key": process.env.RECIPE_API_KEY,
-            "Content-Type": "application/json",
+router.get("/search/:recipe_id/nutrition", function(req, res){
+    recipeId = req.params.recipe_id
+    
+    let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
+    
+    request(yumRecURL, function(err, response, body){
+        if (response.statusCode === 404) {
+            console.log(err)
+            console.log("Status Code:", response && response.statusCode);
+            res.json({Error: "Something went wrong. Please go back and try again"})
         }
-    }, function (error, resp, data) {
-        console.log("Error:", error);
-        console.log("Status Code:", resp && resp.statusCode);
-        res.json(JSON.parse(data))
+        let json = JSON.parse(body).nutritionEstimates
+        if (json.length === 0) {
+            res.json({nutrition: "No nutrition estimates found, please visit " + JSON.parse(body).source.sourceRecipeUrl + " for more details"})
+        } else {
+            let info = {
+                servings: JSON.parse(body).numberOfServings,
+                calories: null,
+                fat: null,
+                carbs: null,
+                protein: null,
+                additionalInfo: JSON.parse(body).source.sourceRecipeUrl
+            }
+            
+            for (var i = 0; i < json.length; i++) {
+                if (json[i].attribute === "FAMS") {
+                    info.fat = json[i].value
+                }
+                if (json[i].attribute === "PROCNT") {
+                    info.protein = json[i].value
+                }
+                if (json[i].attribute === "CHOCDF") {
+                    info.carbs = json[i].value
+                }
+                if (info.fat != null && info.carbs != null && info.protein != null) {
+                    info.calories = (Math.ceil(info.fat) * 9) + (Math.ceil(info.carbs) * 4) + (Math.ceil(info.protein) * 4)
+
+                    break;
+                }
+            }
+
+            res.json(info)
+        }
     })
 })
 
@@ -167,7 +230,13 @@ router.get("/search/:recipe_id/details", function(req, res){
             
 //         }) 
 
-        
+//             user.findOneAndUpdate({user_id: "testing"}, { $set: {favorites: setFavs} }, function(err, data){
+//                 if (error) {
+//                     console.log(err)
+//                 } else {
+//                     res.json(data)
+//                 }
+//             })
 
 //         })
 //     })
