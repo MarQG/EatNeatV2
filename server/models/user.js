@@ -8,22 +8,15 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     },
-    favorites: {
-        type: Array
+    favorites: Array,
 
-    },
-    // recent_searches: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: "recipeSearch"
-    // }],
-    my_week: {
-        type: String
-        }
+    recent_searches: Array,
 
-    // },
-    // grocery_list: {
-    //     type: Array
-    // }
+    my_week: Object,
+
+    grocery_list: Array
+
+
 });
 
 var user = mongoose.model("User", UserSchema);
