@@ -1,6 +1,6 @@
 
 const defaultUserState = {
-    userid: '',
+    user_id: '',
     favorites: [],
     my_week: {
         monday: ''

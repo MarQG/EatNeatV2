@@ -5,7 +5,8 @@ export default {
         return axios.get("/api/search", search);
     },
     getUser: (uid) => {
-        return axios.get("/api/user", uid);
+        console.log(uid);
+        return axios.post("/api/user", uid);
     },
     updateUser: (uid, user) => {
         return axios.put("/api/user", { userid: uid, user: user} );

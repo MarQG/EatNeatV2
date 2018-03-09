@@ -65,5 +65,5 @@
     "react-test-renderer": "^16.2.0",
     "webpack-dev-server": "^2.9.5"
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4000/"
 }

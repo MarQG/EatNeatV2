@@ -164,15 +164,17 @@ router.get("/search/:recipe_id/nutrition", function(req, res){
     })
 })
 
-router.get("/user", function(req, res){
-
-    user.find({user_id: "testing"}, function(error, data){
+router.post("/user", function(req, res){
+    user.find({user_id: req.body.uid}, function(error, data){
+        console.log("Searching for user");
         if (error) {
-            console.log(error)
+            console.log(error),
+            res.json({"Error": "Something went wrong finding " + req.body.uid });
         } else {
             if (data.length === 0) {
+                console.log("reached user creation because it didnt exist")
                 user.create({
-                    user_id: "testing",
+                    user_id: req.body.uid,
                     favorites: [],
                     recent_searches: [],
                     my_week: {
