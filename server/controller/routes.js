@@ -118,4 +118,4 @@ router.delete("/api/blogs/:id/comments/:comment_id", function(req, res){
 })
 
 
-
+module.exports = router;

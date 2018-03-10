@@ -14,6 +14,7 @@
     "heroku-postbuild": "yarn run build:prod"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "6.24.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -64,5 +65,5 @@
     "react-test-renderer": "^16.2.0",
     "webpack-dev-server": "^2.9.5"
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4000/"
 }
