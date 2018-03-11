@@ -1,9 +1,11 @@
 const request = require("request");
 const express = require("express");
 const router = express.Router();
-if(process.env.NODE_ENV === 'development'){
+console.log("This is process.env.NODE_ENV: " + process.env.NODE_ENV)
+if(process.env.NODE_ENV === undefined){
     require('dotenv').config({ path: './.env.development' });
 }
+
 
 
 const mongoose = require("mongoose");
@@ -27,36 +29,37 @@ const spoon = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipe
 
 // Replace "chicken" in yummly request with userSearch variable once route has been identified for a search"
 //Searches for multiple recipes
-router.get("/search", function(req, res){
-    db.find({userSearch: "steak"}, function (err, data) {
+router.post("/search", function(req, res){
+    console.log(req.body.query);
+    db.find({userSearch: req.body.query}, function (err, data) {
         if (err) {
             console.log(err)
-            res.json({Error: "Something went wrong. Please go back and try again"})
+            res.json({ Error: "Something went wrong. Please go back and try again" })
         } else {
             if (data.length === 0) {
-                request(`${yumListURL}steak`, function (err, response, body) {
+                request(yumListURL + req.body.query + "&excludedAllergy[]=393^Gluten-Free", function (err, response, body) {
                     if (response.statusCode === 404) {
                         console.log(err)
                         console.log("Status Code:", response && response.statusCode);
-                        res.json({Error: "Something went wrong. Please go back and try again"})
+                        res.json({ Error: "Something went wrong. Please go back and try again" })
                     }
-                    
-                    
+
+
                     function EachMatch(recipe_id, imageUrlBySize, recipe_name, totalTimeInSeconds, attributes, rating) {
                         this.recipe_id = recipe_id,
-                        this.imageUrlBySize = imageUrlBySize,
-                        this.recipe_name = recipe_name,
-                        this.totalTimeInSeconds = totalTimeInSeconds,
-                        this.attributes = attributes,
-                        this.rating = rating
+                            this.imageUrlBySize = imageUrlBySize,
+                            this.recipe_name = recipe_name,
+                            this.totalTimeInSeconds = totalTimeInSeconds,
+                            this.attributes = attributes,
+                            this.rating = rating
                     }
-                    
+
                     let currentMatches = [];
-                    
-                    
+
+
                     for (let i = 0; i < JSON.parse(body).matches.length; i++) {
                         let json = JSON.parse(body).matches[i];
-                        currentMatches.push(new EachMatch (json.id, json.imageUrlsBySize, json.recipeName, json.totalTimeInSeconds, json.attributes, json.rating))
+                        currentMatches.push(new EachMatch(json.id, json.imageUrlsBySize, json.recipeName, json.totalTimeInSeconds, json.attributes, json.rating))
                     }
 
                     db.create({
@@ -65,7 +68,7 @@ router.get("/search", function(req, res){
                     }, function (err, data) {
                         if (err) {
                             console.log(err)
-                            res.json({Error: "Something went wrong. Please go back and try again"})
+                            res.json({ Error: "Something went wrong. Please go back and try again" })
                         } else {
                             res.json(data)
                         }
@@ -80,19 +83,19 @@ router.get("/search", function(req, res){
 })
 
 //Gets a single recipe
-router.get("/search/:recipe_id", function(req, res){
+router.get("/search/:recipe_id", function (req, res) {
     recipeId = req.params.recipe_id
-    
+
     let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
-    
+    console.log(yumRecURL)
     request(yumRecURL, function(err, response, body){
         console.log("Status Code:", response.statusCode);
         if (response.statusCode === 404) {
             console.log(err)
             console.log("Status Code:", response && response.statusCode);
-            res.json({Error: "Something went wrong. Please go back and try again"})
+            res.json({ Error: "Something went wrong. Please go back and try again" })
         } else {
-               
+
             recSource = JSON.parse(body).source.sourceRecipeUrl
 
             request({
@@ -105,7 +108,7 @@ router.get("/search/:recipe_id", function(req, res){
                 if (resp.statusCode === 404) {
                     console.log(error)
                     console.log("Status Code:", resp && resp.statusCode);
-                    res.json({Error: "Something went wrong. Please go back and try again"})
+                    res.json({ Error: "Something went wrong. Please go back and try again" })
                 }
 
                 let info = {
@@ -118,20 +121,20 @@ router.get("/search/:recipe_id", function(req, res){
     })
 })
 
-router.get("/search/:recipe_id/nutrition", function(req, res){
+router.get("/search/:recipe_id/nutrition", function (req, res) {
     recipeId = req.params.recipe_id
-    
+
     let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
-    
-    request(yumRecURL, function(err, response, body){
+
+    request(yumRecURL, function (err, response, body) {
         if (response.statusCode === 404) {
             console.log(err)
             console.log("Status Code:", response && response.statusCode);
-            res.json({Error: "Something went wrong. Please go back and try again"})
+            res.json({ Error: "Something went wrong. Please go back and try again" })
         }
         let json = JSON.parse(body).nutritionEstimates
         if (json.length === 0) {
-            res.json({nutrition: "No nutrition estimates found, please visit " + JSON.parse(body).source.sourceRecipeUrl + " for more details"})
+            res.json({ nutrition: "No nutrition estimates found, please visit " + JSON.parse(body).source.sourceRecipeUrl + " for more details" })
         } else {
             let info = {
                 servings: JSON.parse(body).numberOfServings,
@@ -141,7 +144,7 @@ router.get("/search/:recipe_id/nutrition", function(req, res){
                 protein: null,
                 additionalInfo: JSON.parse(body).source.sourceRecipeUrl
             }
-            
+
             for (var i = 0; i < json.length; i++) {
                 if (json[i].attribute === "FAMS") {
                     info.fat = json[i].value
@@ -164,12 +167,12 @@ router.get("/search/:recipe_id/nutrition", function(req, res){
     })
 })
 
-router.post("/user", function(req, res){
-    user.find({user_id: req.body.uid}, function(error, data){
+router.post("/user", function (req, res) {
+    user.find({ user_id: req.body.uid }, function (error, data) {
         console.log("Searching for user");
         if (error) {
             console.log(error),
-            res.json({"Error": "Something went wrong finding " + req.body.uid });
+                res.json({ "Error": "Something went wrong finding " + req.body.uid });
         } else {
             if (data.length === 0) {
                 console.log("reached user creation because it didnt exist")
@@ -181,7 +184,7 @@ router.post("/user", function(req, res){
                         monday: ''
                     },
                     grocery_list: []
-                }, function(err, body){
+                }, function (err, body) {
                     if (err) {
                         console.log(err)
                     } else {
@@ -190,14 +193,14 @@ router.post("/user", function(req, res){
 
                 })
             } else {
-            res.json(data)
+                res.json(data)
             }
         }
     })
 })
 
-router.put("/user", function(req, res){
-    user.findOneAndUpdate({user_id: "testing"}, req.body.user, function(err, data){
+router.put("/user", function (req, res) {
+    user.findOneAndUpdate({ user_id: "testing" }, req.body.user, function (err, data) {
         if (err) {
             console.log(err)
         } else {
@@ -234,7 +237,7 @@ router.put("/user", function(req, res){
 //                 console.log("Status Code:", resp && resp.statusCode);
 //                 res.json({Error: "Something went wrong. Please go back and try again"})
 //             }
-          
+
 //             function EachFav(recipe_id, imageUrlBySize, recipe_name, totalTime, servings, recipe_url, ingredients, instructions, analyzedInstructions) {
 //                     this.recipe_id = recipe_id,
 //                     this.imageUrlBySize = imageUrlBySize,
@@ -248,7 +251,7 @@ router.put("/user", function(req, res){
 //             }
 //             let json = JSON.parse(body)
 //             let newFav= new EachFav(json.id, json.images[0].imageUrlsBySize["360"], json.name, json.totalTime, json.numberOfServings, json.source.sourceRecipeUrl, json.ingredientLines, JSON.parse(data).instructions, JSON.parse(data).analyzedInstructions)
-            
+
 //             user.find({user_id: "testing"}, function (error, response) {
 //                 if(error){
 //                     console.log(error);
@@ -270,9 +273,9 @@ router.put("/user", function(req, res){
 //                                 console.log(e);
 //                             } else {
 //                                 res.json(r);
-                                
+
 //                             }
-                        
+
 //                         });
 //                     }
 //                 }              
@@ -291,14 +294,14 @@ router.put("/user", function(req, res){
 
 //         } else {
 //             let setFavs = response[0].favorites
-            
+
 //             for (var i = 0; i < setFavs.length; i++) {   
 //                 if (recipeId === setFavs[i].recipe_id) {
 //                     setFavs.splice(i, 1)
 //                     break;
 //                 }
 //             }
-            
+
 
 //             user.findOneAndUpdate({user_id: "testing"}, { $set: {favorites: setFavs} }, function(err, data){
 //                 if (error) {
@@ -323,7 +326,7 @@ router.put("/user", function(req, res){
 // })
 
 // router.put("/myweek", function(req, res){
-    
+
 //     let newMealDay = "myWeek.monday.breakfast";
 //     console.log(newMealDay)
 //     let newMeal = "Oatmeal"
@@ -339,6 +342,3 @@ router.put("/user", function(req, res){
 // })
 
 module.exports = router;
-
-
-
