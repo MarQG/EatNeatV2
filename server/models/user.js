@@ -9,14 +9,14 @@ const UserSchema = new Schema({
         unique: true
     },
     favorites: Array,
-
+        
     recent_searches: Array,
-
+    
     my_week: Object,
-
+    
     grocery_list: Array
-
-
+       
+    
 });
 
 var user = mongoose.model("User", UserSchema);
