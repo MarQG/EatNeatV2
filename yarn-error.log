@@ -1,17 +1,17 @@
 Arguments: 
-  /usr/local/Cellar/node/9.4.0/bin/node /Users/fguti/.yarn/bin/yarn.js run webpack dev-server
+  C:\Program Files\nodejs\node.exe C:\Users\Megan\EatNeat\EatNeatV2\node_modules\yarn\bin\yarn.js start-dev
 
 PATH: 
-  /Users/fguti/.yarn/bin:/Users/fguti/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/opt/X11/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin:/Users/fguti/.yarn/bin:/Users/fguti/.config/yarn/global/node_modules/.bin:/Users/fguti/Library/Android/sdk/tools:/Users/fguti/Library/Android/sdk/platform-tools:/Users/fguti/Library/Android/sdk/tools:/Users/fguti/Library/Android/sdk/platform-tools
+  C:\Users\Megan\EatNeat\EatNeatV2\node_modules\.bin;C:\Users\Megan\AppData\Local\Yarn\config\link\node_modules\.bin;C:\Users\Megan\EatNeat\EatNeatV2\node_modules\.bin;C:\Users\Megan\AppData\Local\Yarn\config\link\node_modules\.bin;C:\Users\Megan\AppData\Local\Yarn\bin;C:\Program Files\lib\node_modules\npm\bin\node-gyp-bin;C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Megan\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Program Files\MySQL\MySql Server 5.7\bin;C:\Program Files\MongoDB\Server\3.6\bin;C:\Program Files\dotnet;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Users\Megan\AppData\Local\Programs\Python\Python36-32\Scripts;C:\Users\Megan\AppData\Local\Programs\Python\Python36-32;C:\Users\Megan\AppData\Local\Microsoft\WindowsApps;D:\Microsoft VS Code\bin;C:\Program Files\Heroku\bin;C:\Users\Megan\AppData\Roaming\npm
 
 Yarn version: 
   1.5.1
 
 Node version: 
-  9.4.0
+  6.11.2
 
 Platform: 
-  darwin x64
+  win32 x64
 
 npm manifest: 
   {
@@ -81,7 +81,7 @@ npm manifest:
       "react-test-renderer": "^16.2.0",
       "webpack-dev-server": "^2.9.5"
     },
-    "proxy": "http://localhost:4000"
+    "proxy": "http://localhost:4000/"
   }
 
 yarn manifest: 
@@ -10085,15 +10085,17 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 2
-  Command: sh
-  Arguments: -c /Users/fguti/class/Project-3/EatNeatV2/node_modules/.bin/webpack dev-server
-  Directory: /Users/fguti/class/Project-3/EatNeatV2
+  Exit code: 3221225786
+  Command: C:\WINDOWS\system32\cmd.exe
+  Arguments: /d /s /c nodemon server/server.js
+  Directory: C:\Users\Megan\EatNeat\EatNeatV2
   Output:
   
-      at ProcessTermError.MessageError (/Users/fguti/.yarn/lib/cli.js:186:110)
-      at new ProcessTermError (/Users/fguti/.yarn/lib/cli.js:226:113)
-      at ChildProcess.<anonymous> (/Users/fguti/.yarn/lib/cli.js:30281:17)
-      at ChildProcess.emit (events.js:160:13)
-      at maybeClose (internal/child_process.js:943:16)
-      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)
+      at ProcessTermError.Error (native)
+      at ProcessTermError.MessageError (C:\Users\Megan\EatNeat\EatNeatV2\node_modules\yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Users\Megan\EatNeat\EatNeatV2\node_modules\yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Users\Megan\EatNeat\EatNeatV2\node_modules\yarn\lib\cli.js:30281:17)
+      at emitTwo (events.js:106:13)
+      at ChildProcess.emit (events.js:191:7)
+      at maybeClose (internal/child_process.js:891:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)

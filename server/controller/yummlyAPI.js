@@ -24,20 +24,44 @@ db.on("error", function (error) {
 
 let recipeId;
 let recSource;
-const yumListURL = "https://api.yummly.com/v1/api/recipes?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY + "&q=";
+let yumListURL = "https://api.yummly.com/v1/api/recipes?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
 const spoon = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/extract?forceExtraction=true&url=";
 
-// Replace "chicken" in yummly request with userSearch variable once route has been identified for a search"
+
 //Searches for multiple recipes
 router.post("/search", function(req, res){
-    console.log(req.body.query);
-    db.find({userSearch: req.body.query}, function (err, data) {
+    req.body.filters = [{
+        "id": "393",
+        "shortDescription": "Gluten-Free",
+        "longDescription": "Gluten-Free",
+        "searchValue": "393^Gluten-Free",
+        "type": "allergy",
+        "localesAvailableIn": [
+            "en-US"
+        ]
+    }]
+    db.find({ search: req.body.query, filters: req.body.filters }, function (err, data) {
         if (err) {
             console.log(err)
             res.json({Error: "Something went wrong. Please go back and try again"})
         } else {
             if (data.length === 0) {
-                request(yumListURL + req.body.query + "&excludedAllergy[]=393^Gluten-Free", function (err, response, body) {
+                if (req.body.filters) {
+                    
+                    for (var i = 0; i < req.body.filters.length; i++) {
+        
+                        if (req.body.filters[i].type === "allergy") {
+                            
+                            yumListURL += `&allowedAllergy[]=${req.body.filters[i].searchValue}`
+                            
+                        }
+                        if (req.body.filters[i].type === "diet") {
+                            yumListURL += `&allowedDiet[]=${req.body.filters[i].searchValue}`
+                        }
+                    }
+                }
+                
+                request(yumListURL + "&q=" + req.body.query, function (err, response, body) {
                     if (response.statusCode === 404) {
                         console.log(err)
                         console.log("Status Code:", response && response.statusCode);
@@ -63,7 +87,8 @@ router.post("/search", function(req, res){
                     }
 
                     db.create({
-                        userSearch: JSON.parse(body).criteria.q,
+                        search: JSON.parse(body).criteria.q,
+                        filters: req.body.filters,
                         matches: currentMatches
                     }, function (err, data) {
                         if (err) {
