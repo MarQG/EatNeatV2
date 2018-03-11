@@ -1,9 +1,11 @@
 const request = require("request");
 const express = require("express");
 const router = express.Router();
-if(process.env.NODE_ENV === 'development'){
+console.log("This is process.env.NODE_ENV: " + process.env.NODE_ENV)
+if(process.env.NODE_ENV === undefined){
     require('dotenv').config({ path: './.env.development' });
 }
+
 
 
 const mongoose = require("mongoose");
@@ -27,14 +29,15 @@ const spoon = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipe
 
 // Replace "chicken" in yummly request with userSearch variable once route has been identified for a search"
 //Searches for multiple recipes
-router.get("/search", function(req, res){
-    db.find({userSearch: "steak"}, function (err, data) {
+router.post("/search", function(req, res){
+    console.log(req.body.query);
+    db.find({userSearch: req.body.query}, function (err, data) {
         if (err) {
             console.log(err)
             res.json({Error: "Something went wrong. Please go back and try again"})
         } else {
             if (data.length === 0) {
-                request(`${yumListURL}steak`, function (err, response, body) {
+                request(yumListURL + req.body.query + "&excludedAllergy[]=393^Gluten-Free", function (err, response, body) {
                     if (response.statusCode === 404) {
                         console.log(err)
                         console.log("Status Code:", response && response.statusCode);
@@ -84,7 +87,7 @@ router.get("/search/:recipe_id", function(req, res){
     recipeId = req.params.recipe_id
     
     let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
-    
+    console.log(yumRecURL)
     request(yumRecURL, function(err, response, body){
         console.log("Status Code:", response.statusCode);
         if (response.statusCode === 404) {

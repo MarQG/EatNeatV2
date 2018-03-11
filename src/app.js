@@ -33,19 +33,16 @@ ReactDOM.render(<LoadingPage />, document.getElementById("app"));
 firebase.auth().onAuthStateChanged((user) => {
     if(user){
         store.dispatch(login(user.uid));
-        console.log(user);
+        
 
         API.getUser({ uid: user.uid}).then((response) => {
-            console.log("Successful");
-            console.log(response);
+            
             store.dispatch(getUser(response.data[0]))
             renderApp();
             if(history.location.pathname === "/"){
                 history.push('/dashboard'); 
             }
-        }).catch((err, data) => {
-            console.log("Fail")
-            console.log(data);
+        }).catch((err) => {
             console.log(err);
         })
         
