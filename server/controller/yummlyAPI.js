@@ -71,11 +71,11 @@ router.post("/search", function(req, res){
 
                     function EachMatch(recipe_id, imageUrlBySize, recipe_name, totalTimeInSeconds, attributes, rating) {
                         this.recipe_id = recipe_id,
-                            this.imageUrlBySize = imageUrlBySize,
-                            this.recipe_name = recipe_name,
-                            this.totalTimeInSeconds = totalTimeInSeconds,
-                            this.attributes = attributes,
-                            this.rating = rating
+                        this.imageUrlBySize = imageUrlBySize,
+                        this.recipe_name = recipe_name,
+                        this.totalTimeInSeconds = totalTimeInSeconds,
+                        this.attributes = attributes,
+                        this.rating = rating
                     }
 
                     let currentMatches = [];
