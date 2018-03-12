@@ -1,6 +1,6 @@
 .box-layout {
     align-items: center;
-    background: url("/images/bg.jpg");
+    background: url("/images/blueberry.jpg");
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -9,14 +9,18 @@
 }
 
 .box-layout__box {
-    background: fade-out($color: white, $amount: 0.15);
+    background: fade-out($color: black, $amount: 0.15);
     border-radius: 3px;
-    padding: $l-size $m-size;
+    padding: $l-size $l-size;
     text-align: center;
-    width: 25rem;
+}
+
+.box_layout__logo{
+    height: 20rem;
 }
 
 .box-layout__title {
+    color: $off-white;
     margin: 0 0 $m-size 0;
     line-height: 1;
 }
