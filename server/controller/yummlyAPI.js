@@ -28,40 +28,89 @@ let yumListURL = "https://api.yummly.com/v1/api/recipes?_app_id=" + process.env.
 const spoon = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/extract?forceExtraction=true&url=";
 
 
+filtersBuilder = (filters) => {
+    let filtersString = "";
+    if(filters.allergies > 0){
+        filters.allergies.forEach(allergy => {
+            switch(allergy){
+                case "gluten-free":
+                    filtersString += "&allowedAllergy[]=393^Gluten-Free";
+                    break;
+                case "soy-free":
+                    filtersString += "&allowedAllergy[]=400^Soy-Free";
+                    break;
+                case "peanut-free":
+                    filtersString += "&allowedAllergy[]=394^Peanut-Free";
+                    break;
+                case "dairy-free":
+                    filtersString += "&allowedAllergy[]=396^Dairy-Free";
+                    break;
+                case "seafood-free":
+                    filtersString += "&allowedAllergy[]=398^Seafood-Free";
+                    break;
+                case "sesame-free":
+                    filtersString += "&allowedAllergy[]=399^Sesame-Free";
+                    break;
+                case "egg-free":
+                    filtersString += "&allowedAllergy[]=397^Egg-Free";
+                    break;
+                case "sulfite-free":
+                    filtersString += "&allowedAllergy[]=401^Sulfite-Free";
+                    break;
+                case "tree-nut-free":
+                    filtersString += "&allowedAllergy[]=395^Tree Nut-Free";
+                    break;
+                case "wheat-free":
+                    filtersString += "&allowedAllergy[]=392^Wheat-Free";
+                    break;
+                default:
+                    break;
+
+            }
+        });
+    }
+    if(filters.diet > 0){
+        filters.diet.forEach(diet => {
+            switch(diet){
+                case "lacto-veg":
+                    filtersString += "&allowedDiet[]=388^Lacto vegetarian";
+                    break;
+                case "ovo-veg":
+                    filtersString += "&allowedDiet[]=389^Ovo vegetarian";
+                    break;
+                case "pescetarian":
+                    filtersString += "&allowedDiet[]=390^Pescetarian";
+                    break;
+                case "vegan":
+                    filtersString += "&allowedDiet[]=386^Vegan";
+                    break;
+                case "lacto-ovo-veg":
+                    filtersString += "&allowedDiet[]=387^Lacto-ovo vegetarian";
+                    break;
+                case "paleo":
+                    filtersString += "&allowedDiet[]=403^Paleo";
+                    break;
+                default:
+                    break;
+            }
+        });
+    }
+    return filtersString;
+}
+
 //Searches for multiple recipes
 router.post("/search", function(req, res){
-    req.body.filters = [{
-        "id": "393",
-        "shortDescription": "Gluten-Free",
-        "longDescription": "Gluten-Free",
-        "searchValue": "393^Gluten-Free",
-        "type": "allergy",
-        "localesAvailableIn": [
-            "en-US"
-        ]
-    }]
+    console.log(req.body);
     db.find({ search: req.body.query, filters: req.body.filters }, function (err, data) {
         if (err) {
             console.log(err)
             res.json({ Error: "Something went wrong. Please go back and try again" })
         } else {
             if (data.length === 0) {
-                if (req.body.filters) {
-                    
-                    for (var i = 0; i < req.body.filters.length; i++) {
-        
-                        if (req.body.filters[i].type === "allergy") {
-                            
-                            yumListURL += `&allowedAllergy[]=${req.body.filters[i].searchValue}`
-                            
-                        }
-                        if (req.body.filters[i].type === "diet") {
-                            yumListURL += `&allowedDiet[]=${req.body.filters[i].searchValue}`
-                        }
-                    }
-                }
                 
-                request(yumListURL + "&q=" + req.body.query, function (err, response, body) {
+                let filterString = filtersBuilder(req.body.filters);
+                
+                request(yumListURL + "&q=" + req.body.query + filterString, function (err, response, body) {
                     if (response.statusCode === 404) {
                         console.log(err)
                         console.log("Status Code:", response && response.statusCode);
