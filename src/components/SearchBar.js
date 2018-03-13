@@ -5,6 +5,7 @@ import { setCurrentSearch } from '../actions/search';
 import { getUser } from "../actions/user"
 import SearchPage from "./SearchPage"
 import FavoritesPage from "./FavoritesPage"
+import GroceryListPage from "./GroceryListPage"
 
 export class SearchBar extends React.Component {
 
@@ -120,6 +121,8 @@ export class SearchBar extends React.Component {
                <SearchPage />
                <h2>Favorites... </h2>
                <FavoritesPage />
+               <h2>Grocery List... </h2>
+               <GroceryListPage />
             </div>
         )
     }
