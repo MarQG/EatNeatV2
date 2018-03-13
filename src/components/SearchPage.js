@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setCurrentSearch } from '../actions/search';
-import { getUser } from "../actions/user";
+import { getUser, saveUser } from "../actions/user";
 import API from "../utils/api";
 
 // for loading detailed recipe if you want to put a loader GIF
@@ -28,7 +28,8 @@ export class SearchPage extends React.Component {
             user_id,
             recent_searches,
             my_week,
-            grocery_list
+            grocery_list,
+            _id
         } = this.props.user;
     
         const newFav = { recipe_id: id, recipe_name: name, imageUrlBySize: image, totalTimeInSeconds: timeSeconds, attributes: attributes, rating: rating };
@@ -40,13 +41,16 @@ export class SearchPage extends React.Component {
         // else if (favorites.some(favorite => favorite.recipe_id === newFav.recipe_id)) {
         //     favorites.filter()
         // }
-        this.props.getUser({
+        const updatedUser = {
             favorites,
             user_id,
             recent_searches,
             my_week,
-            grocery_list
-        });
+            grocery_list,
+            _id
+        }
+
+        this.props.saveUser(updatedUser);
     }
 
 
@@ -69,7 +73,8 @@ export class SearchPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     setCurrentSearch: (search) => dispatch(setCurrentSearch(search)),
-    getUser: () => dispatch(getUser())
+    getUser: () => dispatch(getUser()),
+    saveUser: (user) => dispatch(saveUser(user))
 })
 
 const mapStateToProps = (state) => ({

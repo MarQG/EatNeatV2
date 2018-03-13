@@ -274,10 +274,12 @@ router.post("/user", function (req, res) {
 })
 
 router.put("/user", function (req, res) {
-    user.findOneAndUpdate({ user_id: "testing" }, req.body.user, function (err, data) {
+    console.log("Updated this user", req.body.user);
+    user.findOneAndUpdate({ _id: req.body.user._id }, req.body.user, function (err, data) {
         if (err) {
             console.log(err)
         } else {
+            console.log("User Data Updated", data);
             res.json(data);
         }
     })
