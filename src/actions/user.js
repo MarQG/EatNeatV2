@@ -18,8 +18,8 @@ export const saveUser = (user = {}) => {
         } = user;
 
         const updatedUser = { user_id, favorites, my_week, grocery_list, recent_searches, _id };
-        API.updateUser(updatedUser).then(user => {
-            dispatch(getUser(user));
+        API.updateUser(updatedUser).then(response => {
+            dispatch(getUser(response.data));
         }).catch(err => {
             console.log(err);
         });
