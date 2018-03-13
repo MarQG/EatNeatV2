@@ -46,7 +46,31 @@ export class SearchBar extends React.Component {
         } else {
             this.setState({ filters: { ...this.state.filters, diet: [ ...this.state.filters.diet, e.target.name ]}})
         }
+<<<<<<< Updated upstream
+    }
         
+    onHandleQueryChange = (e) => {
+
+        let newValue = e.target.value;
+        this.props.setQuery(newValue);
+        this.setState({search: {query: newValue}})
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+        
+=======
+>>>>>>> Stashed changes
+    }
+
+    onHandleSubmit = (e) => {
+        e.preventDefault();
+        API.getRecipe(this.state.search.query).then((response) => {
+            console.log(response);
+            this.setState({ search: { query: "" } })
+        }).catch(err => {
+            console.log(err);
+        })
+
     }
 
     onHandleSubmit = (e) => {
@@ -59,7 +83,7 @@ export class SearchBar extends React.Component {
                 console.log(response)
                 this.setState({ query: "" });
                 this.props.setCurrentSearch(response.data);
-                
+                this.props.history.push("/search");
             }).catch(err => {
                 console.log(err);
             })
@@ -70,7 +94,7 @@ export class SearchBar extends React.Component {
 
     render(){
         return(
-            <div>
+            <div className="searchbar">
                 { this.state.error != "" ? <p>{this.state.error}</p> : <p></p> }
                 <form onSubmit={this.onHandleSubmit}>
                    <label htmlFor="query">Search: </label>
@@ -117,12 +141,6 @@ export class SearchBar extends React.Component {
 
                    <button type="submit">Search</button>
                </form> 
-               <h2>Searches... </h2>
-               <SearchPage />
-               <h2>Favorites... </h2>
-               <FavoritesPage />
-               <h2>Grocery List... </h2>
-               <GroceryListPage />
             </div>
         )
     }
