@@ -1,7 +1,10 @@
 import React from 'react';
 import API from '../utils/api.js';
+import { connect } from 'react-redux';
+import { setCurrentSearch } from '../actions/search';
+import { getUser } from "../actions/user"
 
-export default class SearchBar extends React.Component {
+export class SearchBar extends React.Component {
 
     constructor(props){
         super(props);
@@ -52,7 +55,9 @@ export default class SearchBar extends React.Component {
         } else {
             this.setState({ error: ""});
             API.getRecipe(this.state).then((response) => {
-                this.setState({ query: "" , newRecipes: response.data[0].matches});
+                this.setState({ query: "" });
+                this.props.setCurrentSearch(response.data);
+                
             }).catch(err => {
                 console.log(err);
             })
@@ -64,18 +69,35 @@ export default class SearchBar extends React.Component {
 
     onHandleFavorites = (id, name) => {
         console.log(id)
+        console.log(this.props.user)
         let currentFav = false;
-        for (let i = 0; i < this.state.userFavs.length; i++) {
-            if (id === this.state.userFavs[i].recipe_id) {
-                console.log("That item has already been favorited")
-                currentFav = true;
-            }
-        }
 
-        if (currentFav === false) {
-            console.log("Adding to favs..")
-            this.state.userFavs.push({recipe_id: id, recipe_name: name})
+        const {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list
+        } = this.props.user;
+
+        const newFav = { id: id, recipe_name: name };
+        if(!favorites.some(favorite => favorite.id === newFav.id)){
+            favorites.push(newFav);
+        } else if (favorites.some(favorite => favorite.id === newFav.id)){
+            // console.log(favorites.indexOf(newFav.id))
+            // favorites.splice(newFav, 1)
+            //use a dang filter here.
+        } else {
+            console.log("Nothing")
         }
+        this.props.getUser({
+            favorites,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list
+        });
+
     }
 
     render(){
@@ -126,18 +148,31 @@ export default class SearchBar extends React.Component {
                     </div>                   
 
                    <button type="submit">Search</button>
-               </form>
-               {this.state.newRecipes.map(newRecipes => (
+               </form> 
+                {console.log(this.props.search)}
+               {this.props.search.search != "" ? this.props.search.matches.map(newRecipes => (
                    <div>
                         <img src={newRecipes.imageUrlBySize["90"]} href={"api/search/" + newRecipes.recipe_id}/>
                         <div>{newRecipes.recipe_name}</div>
                         <button id={newRecipes.recipe_id}  onClick={() => this.onHandleFavorites(newRecipes.recipe_id, newRecipes.recipe_name, newRecipes.imageUrlBySize, newRecipes.totalTimeInSeconds, newRecipes.attributes, newRecipes.rating)}>Add To Favs</button>
                    </div>
-               )) }
+               )) : <div></div> }
             </div>
         )
     }
 }
 
+
+const mapDispatchToProps = (dispatch) => ({
+    setCurrentSearch: (search) => dispatch(setCurrentSearch(search)),
+    getUser: () => dispatch(getUser())
+})
+
+const mapStateToProps = (state) => ({
+    user: state.user,
+    search: state.search
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
 
 

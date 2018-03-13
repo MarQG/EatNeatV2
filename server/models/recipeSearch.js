@@ -13,7 +13,7 @@ const RecipeSchema = new Schema({
     matches: {
         type: Array,
         required: true
-    }
+    },
 });
 
 var recipeSearch = mongoose.model("recipeSearch", RecipeSchema);
