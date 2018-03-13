@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Megan\EatNeat\EatNeatV2\node_modules\yarn\bin\yarn.js start-dev
+  C:\Program Files\nodejs\node.exe C:\Users\michael.morfessis\EatNeatV2\node_modules\yarn\bin\yarn.js start-dev
 
 PATH: 
-  /Users/fguti/.yarn/bin:/Users/fguti/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/opt/X11/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin:/Users/fguti/.yarn/bin:/Users/fguti/.config/yarn/global/node_modules/.bin:/Users/fguti/Library/Android/sdk/tools:/Users/fguti/Library/Android/sdk/platform-tools:/Users/fguti/Library/Android/sdk/tools:/Users/fguti/Library/Android/sdk/platform-tools
+  C:\Users\michael.morfessis\EatNeatV2\node_modules\.bin;C:\Users\michael.morfessis\AppData\Local\Yarn\.link\node_modules\.bin;C:\Users\michael.morfessis\EatNeatV2\node_modules\.bin;C:\Users\michael.morfessis\AppData\Local\Yarn\.link\node_modules\.bin;C:\Users\michael.morfessis\EatNeatV2\bower_components\.bin;C:\Users\michael.morfessis\AppData\Local\Yarn\.link\bower_components\.bin;C:\Users\michael.morfessis\AppData\Roaming\npm\node_modules\yarnpkg\bin\node-gyp-bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\michael.morfessis\bin;C:\ProgramData\Oracle\Java\javapath;C:\app\cedric.norman\product\11.2.0\client_1\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Windows\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm;C:\Program Files\Microsoft SQL Server\120\DTS\Binn;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Program Files\dotnet;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Users\michael.morfessis\AppData\Local\Programs\Python\Python36-32\Scripts;C:\Users\michael.morfessis\AppData\Local\Programs\Python\Python36-32;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Program Files\Heroku\bin;C:\Users\michael.morfessis\AppData\Roaming\npm
 
 Yarn version: 
   1.5.1
@@ -656,15 +656,12 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
   
-<<<<<<< HEAD
-=======
   async@2.1.4:
     version "2.1.4"
     resolved "https://registry.yarnpkg.com/async/-/async-2.1.4.tgz#2d2160c7788032e4dd6cbe2502f1f9a2c8f6cde4"
     dependencies:
       lodash "^4.14.0"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   async@^1.4.0, async@^1.5.2:
     version "1.5.2"
     resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
@@ -706,8 +703,6 @@ Lockfile:
     version "1.6.0"
     resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
   
-<<<<<<< HEAD
-=======
   axios@^0.18.0:
     version "0.18.0"
     resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
@@ -715,7 +710,6 @@ Lockfile:
       follow-redirects "^1.3.0"
       is-buffer "^1.1.5"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   babel-cli@6.24.1:
     version "6.24.1"
     resolved "https://registry.yarnpkg.com/babel-cli/-/babel-cli-6.24.1.tgz#207cd705bba61489b2ea41b5312341cf6aca2283"
@@ -1541,13 +1535,10 @@ Lockfile:
     dependencies:
       inherits "~2.0.0"
   
-<<<<<<< HEAD
-=======
   bluebird@3.5.0:
     version "3.5.0"
     resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   bluebird@^2.9.21, bluebird@^2.9.33:
     version "2.11.0"
     resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
@@ -1730,13 +1721,10 @@ Lockfile:
     dependencies:
       node-int64 "^0.4.0"
   
-<<<<<<< HEAD
-=======
   bson@~1.0.4:
     version "1.0.5"
     resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.5.tgz#34563b73ff1fde9387c1b9fb5afd845ecc4ba623"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   buffer-indexof@^1.0.0:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/buffer-indexof/-/buffer-indexof-1.1.1.tgz#52fabcc6a606d1a00302802648ef68f639da268c"
@@ -3579,15 +3567,12 @@ Lockfile:
     version "0.0.6"
     resolved "https://registry.yarnpkg.com/flexbuffer/-/flexbuffer-0.0.6.tgz#039fdf23f8823e440c38f3277e6fef1174215b30"
   
-<<<<<<< HEAD
-=======
   follow-redirects@^1.3.0:
     version "1.4.1"
     resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.4.1.tgz#d8120f4518190f55aac65bb6fc7b85fcd666d6aa"
     dependencies:
       debug "^3.1.0"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   for-in@^0.1.3:
     version "0.1.8"
     resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
@@ -5785,13 +5770,10 @@ Lockfile:
       json-schema "0.2.3"
       verror "1.10.0"
   
-<<<<<<< HEAD
-=======
   kareem@2.0.5:
     version "2.0.5"
     resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.0.5.tgz#437e1e40f1be304ee21b3e4790eb3a05418b35ca"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   keypair@1.0.1:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/keypair/-/keypair-1.0.1.tgz#7603719270afb6564ed38a22087a06fc9aa4ea1b"
@@ -6446,8 +6428,6 @@ Lockfile:
       timezones.json "^1.0.1"
       update-notifier "^0.5.0"
   
-<<<<<<< HEAD
-=======
   mongodb-core@3.0.4:
     version "3.0.4"
     resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.4.tgz#a3fdf466e697a2f1df87e458e5e2df1c26cc654b"
@@ -6494,7 +6474,6 @@ Lockfile:
       regexp-clone "0.0.1"
       sliced "0.0.5"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   ms@0.7.1:
     version "0.7.1"
     resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -8075,13 +8054,10 @@ Lockfile:
       extend-shallow "^3.0.2"
       safe-regex "^1.1.0"
   
-<<<<<<< HEAD
-=======
   regexp-clone@0.0.1:
     version "0.0.1"
     resolved "https://registry.yarnpkg.com/regexp-clone/-/regexp-clone-0.0.1.tgz#a7c2e09891fdbf38fbb10d376fb73003e68ac589"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   regexpu-core@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-1.0.0.tgz#86a763f58ee4d7c2f6b102e4764050de7ed90c6b"
@@ -8257,8 +8233,6 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-1.0.1.tgz#97f717b69d48784f5f526a6c5aa8ffdda055a4d1"
   
-<<<<<<< HEAD
-=======
   require_optional@^1.0.1:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/require_optional/-/require_optional-1.0.1.tgz#4cf35a4247f64ca3df8c2ef208cc494b1ca8fc2e"
@@ -8266,7 +8240,6 @@ Lockfile:
       resolve-from "^2.0.0"
       semver "^5.1.0"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   requires-port@1.0.x, requires-port@1.x.x, requires-port@~1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
@@ -8277,13 +8250,10 @@ Lockfile:
     dependencies:
       resolve-from "^3.0.0"
   
-<<<<<<< HEAD
-=======
   resolve-from@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-2.0.0.tgz#9480ab20e94ffa1d9e80a804c7ea147611966b57"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   resolve-from@^3.0.0:
     version "3.0.0"
     resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-3.0.0.tgz#b22c7af7d9d6881bc8b6e653335eebcb0a188748"
@@ -8638,8 +8608,6 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
   
-<<<<<<< HEAD
-=======
   sliced@0.0.5:
     version "0.0.5"
     resolved "https://registry.yarnpkg.com/sliced/-/sliced-0.0.5.tgz#5edc044ca4eb6f7816d50ba2fc63e25d8fe4707f"
@@ -8648,7 +8616,6 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/sliced/-/sliced-1.0.1.tgz#0b3a662b5d04c3177b1926bea82b03f837a2ef41"
   
->>>>>>> 0c4f08836809c2fcbd9df91cf7287eb2298bce29
   slide@^1.1.5:
     version "1.1.6"
     resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
@@ -10118,16 +10085,16 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 2
-  Command: sh
-  Arguments: -c /Users/fguti/class/Project-3/EatNeatV2/node_modules/.bin/webpack dev-server
-  Directory: /Users/fguti/class/Project-3/EatNeatV2
+  Exit code: 3221225786
+  Command: C:\Windows\system32\cmd.exe
+  Arguments: /d /s /c nodemon server/server.js
+  Directory: C:\Users\michael.morfessis\EatNeatV2
   Output:
   
       at ProcessTermError.Error (native)
-      at ProcessTermError.MessageError (C:\Users\Megan\EatNeat\EatNeatV2\node_modules\yarn\lib\cli.js:186:110)
-      at new ProcessTermError (C:\Users\Megan\EatNeat\EatNeatV2\node_modules\yarn\lib\cli.js:226:113)
-      at ChildProcess.<anonymous> (C:\Users\Megan\EatNeat\EatNeatV2\node_modules\yarn\lib\cli.js:30281:17)
+      at ProcessTermError.MessageError (C:\Users\michael.morfessis\EatNeatV2\node_modules\yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Users\michael.morfessis\EatNeatV2\node_modules\yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Users\michael.morfessis\EatNeatV2\node_modules\yarn\lib\cli.js:30281:17)
       at emitTwo (events.js:106:13)
       at ChildProcess.emit (events.js:191:7)
       at maybeClose (internal/child_process.js:891:16)
