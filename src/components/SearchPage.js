@@ -38,9 +38,15 @@ export class SearchPage extends React.Component {
         if(!favorites.some(favorite => favorite.recipe_id === newFav.recipe_id)){
             favorites.push(newFav);
         } 
-        // else if (favorites.some(favorite => favorite.recipe_id === newFav.recipe_id)) {
-        //     favorites.filter()
-        // }
+        else if (favorites.some(favorite => favorite.recipe_id === newFav.recipe_id)) {
+            for (var i = 0; i < this.props.user.favorites.length; i++) {
+                if (this.props.user.favorites[i].recipe_id === id) {
+                    this.props.user.favorites.splice(i, 1);
+                }
+            }
+        } else {
+            // do nothing
+        }
         const updatedUser = {
             favorites,
             user_id,
