@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCurrentSearch } from '../actions/search';
-import { getUser } from "../actions/user";
+import { saveUser } from "../actions/user";
 
 
 export class GroceryListPage extends React.Component {
@@ -17,22 +16,19 @@ export class GroceryListPage extends React.Component {
                             { grocery.ingredients.length > 0 ? grocery.ingredients.map((ingredient, i) => <li key={i}>{ingredient}</li>) : <li>Sorry no ingredients found</li>}
                         </ul>
                     </div>
-            )) : <div></div> }
+            )) : <div>Please Add Something into your Grocery List</div> }
         </div>
         );
     }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    setCurrentSearch: (search) => dispatch(setCurrentSearch(search)),
-    getUser: () => dispatch(getUser()),
     saveUser: (user) => dispatch(saveUser(user))
 })
 
 const mapStateToProps = (state) => ({
-    user: state.user,
-    search: state.search
-})
+    user: state.user
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroceryListPage);
 
