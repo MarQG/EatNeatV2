@@ -3,9 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const RecipeSchema = new Schema({
-    userSearch:{
+    search: {
         type: String,
         required: true
+    },
+    filters: {
+        type: Array,
     },
     matches: {
         type: Array,
