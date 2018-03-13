@@ -19,53 +19,56 @@ export class SearchPage extends React.Component {
         })
     }
 
-    onHandleFavorites = (id, name, image, timeSeconds, attributes, rating) => {
+    onHandleFavorites = (id) => {
         console.log(id)
         console.log(this.props.user)
         let currentFav = false;
-    
-        const {
-            favorites,
-            user_id,
-            recent_searches,
-            my_week,
-            grocery_list,
-            _id
-        } = this.props.user;
-    
-        const newFav = { recipe_id: id, recipe_name: name, imageUrlBySize: image, totalTimeInSeconds: timeSeconds, attributes: attributes, rating: rating };
+        API.getDetailRecipe(id).then(response => {
+            console.log(response.data);
 
-        
-        if(!favorites.some(favorite => favorite.recipe_id === newFav.recipe_id)){
-            favorites.push(newFav);
-        } 
-        else if (favorites.some(favorite => favorite.recipe_id === newFav.recipe_id)) {
-            for (var i = 0; i < this.props.user.favorites.length; i++) {
-                if (this.props.user.favorites[i].recipe_id === id) {
-                    this.props.user.favorites.splice(i, 1);
-                }
+            const {
+                favorites,
+                user_id,
+                recent_searches,
+                my_week,
+                grocery_list,
+                _id
+            } = this.props.user;
+
+            const newFav = response.data;
+            
+            if(!favorites.some(favorite => favorite.id === newFav.id)){
+                console.log("Saving a favorite");
+                favorites.push(newFav);
+            } 
+            else if (favorites.some(favorite => favorite.id === newFav.id)) {
+                console.log("Checing and removing a favorite");
+                favorites.filter(favorite => favorite.id != newFav.id);
             }
-        } else {
-            // do nothing
-        }
-        const updatedUser = {
-            favorites,
-            user_id,
-            recent_searches,
-            my_week,
-            grocery_list,
-            _id
-        }
 
-        this.props.saveUser(updatedUser);
+            const updatedUser = {
+                favorites,
+                user_id,
+                recent_searches,
+                my_week,
+                grocery_list,
+                _id
+            }
+    
+            this.props.saveUser(updatedUser);
+        }).catch(err => {
+            console.log(err);
+        });
+       
+        
     }
 
 
     render(){
         return(    
         <div>
-            {this.props.search.search != "" ? this.props.search.matches.map(newRecipes => (
-                <div key={newRecipes.attributes}>
+            {this.props.search.search != "" ? this.props.search.matches.map((newRecipes,i) => (
+                <div key={i}>
                     <img src={newRecipes.imageUrlBySize["90"]} onClick={() => this.onHandleDetailFavorites(newRecipes.recipe_id)} />
                     <div>Name: {newRecipes.recipe_name}</div>
                     <div>Rating: {newRecipes.rating}</div>

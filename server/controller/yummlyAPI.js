@@ -180,11 +180,38 @@ router.get("/search/:recipe_id", function (req, res) {
                     res.json({ Error: "Something went wrong. Please go back and try again" })
                 }
 
-                let info = {
-                    YummlyRecipe: JSON.parse(body),
-                    Spoonacular: JSON.parse(data)
-                }
-                res.json(info)
+                const {
+                    source,
+                    ingredientLines,
+                    images,
+                    attribution,
+                    numberOfServings,
+                    totalTime,
+                    name,
+                    id
+                } = JSON.parse(body);
+
+                const { 
+                    dishTypes,
+                    instructions,
+                    image
+                } = JSON.parse(data);
+
+                const detailedRecipe = {
+                    source,
+                    ingredientLines,
+                    images,
+                    attribution,
+                    numberOfServings,
+                    totalTime,
+                    dishTypes,
+                    instructions,
+                    image,
+                    name,
+                    id 
+                };
+
+                res.json(detailedRecipe);
             })
         }
     })
