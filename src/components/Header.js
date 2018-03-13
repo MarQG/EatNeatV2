@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth.js';
 import SearchBar from "./SearchBar";
+import NavBar from "./NavBar";
 
 export class Header extends React.Component{
     
@@ -14,12 +15,12 @@ export class Header extends React.Component{
                         <Link className="header__title" to="/dashboard" >
                             <img src="./images/eat_neat_logo_wht.png" alt="EAT NEAT"/>
                         </Link>
-                        <button className="button button--link" onClick={startLogout}>Logout</button>
+                        <button className="button button--link" onClick={this.props.startLogout}>Logout</button>
                     </div>
-                </div>
-                <div>
+                    <NavBar />
                     <SearchBar history={this.props.history}/>
                 </div>
+                
             </header>
         );
     }
