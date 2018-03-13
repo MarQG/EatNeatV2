@@ -68,7 +68,8 @@ export class FavoritesPage extends React.Component {
             const newList = [response.data.YummlyRecipe.ingredientLines];
 
             
-            grocery_list.push(newList)
+            grocery_list.push(newList);
+            console.log(grocery_list);
             // else if (favorites.some(favorite => favorite.recipe_id === newFav.recipe_id)) {
             //     favorites.filter()
             // }
@@ -80,7 +81,7 @@ export class FavoritesPage extends React.Component {
                 grocery_list,
                 _id
             }
-    
+            console.log(updatedUser);
             this.props.saveUser(updatedUser);
         })
     }
