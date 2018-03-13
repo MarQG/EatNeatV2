@@ -1,11 +1,16 @@
 import React from 'react';
 import API from '../utils/api.js';
 import { connect } from 'react-redux';
+<<<<<<< Updated upstream
 import { setCurrentSearch } from '../actions/search';
 import { getUser } from "../actions/user"
 import SearchPage from "./SearchPage"
 import FavoritesPage from "./FavoritesPage"
 import GroceryListPage from "./GroceryListPage"
+=======
+import { setSearchFilters, setQuery } from '../actions/search';
+import API from '../utils/api.js';
+>>>>>>> Stashed changes
 
 export class SearchBar extends React.Component {
 
@@ -38,6 +43,7 @@ export class SearchBar extends React.Component {
         
     }
 
+<<<<<<< Updated upstream
     onHandleDietCheckedChange = (e) => {
 
         if(this.state.filters.diet.indexOf(e.target.name) > -1){
@@ -47,6 +53,25 @@ export class SearchBar extends React.Component {
             this.setState({ filters: { ...this.state.filters, diet: [ ...this.state.filters.diet, e.target.name ]}})
         }
         
+=======
+    onHandleQueryChange = (e) => {
+
+        let newValue = e.target.value;
+        this.props.setQuery(newValue);
+        this.setState({search: {query: newValue}})
+        
+    }
+
+    onHandleSubmit = (e) => {
+        e.preventDefault();
+        API.getRecipe(this.state.search.query).then((response) => {
+            console.log(response);
+            this.setState({ search: { query: "" } })
+        }).catch(err => {
+            console.log(err);
+        })
+
+>>>>>>> Stashed changes
     }
 
     onHandleSubmit = (e) => {
@@ -70,6 +95,7 @@ export class SearchBar extends React.Component {
 
     render(){
         return(
+<<<<<<< Updated upstream
             <div className="searchbar">
                 { this.state.error != "" ? <p>{this.state.error}</p> : <p></p> }
                 <form onSubmit={this.onHandleSubmit}>
@@ -115,6 +141,12 @@ export class SearchBar extends React.Component {
 
                     </div>                   
 
+=======
+            <div>
+                <form onSubmit={this.onHandleSubmit}>
+                   <label htmlFor="query">Search: </label>
+                   <input onChange={this.onHandleQueryChange} name="query" type="text"/>
+>>>>>>> Stashed changes
                    <button type="submit">Search</button>
                </form> 
             </div>
