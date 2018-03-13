@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { setCurrentSearch } from '../actions/search';
 import { getUser, saveUser } from "../actions/user";
 import API from "../utils/api";
+import SearchBar from './SearchBar';
 
 // for loading detailed recipe if you want to put a loader GIF
 let loading = false;

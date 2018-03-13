@@ -142,14 +142,11 @@ router.post("/search", function(req, res){
                             console.log(err)
                             res.json({ Error: "Something went wrong. Please go back and try again" })
                         } else {
-                            console.log(data);
                             res.json(data)
                         }
                     })
                 })
             } else {
-                console.log("Testing");
-                console.log(data);
                 res.json(data[0])
             }
         }
