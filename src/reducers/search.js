@@ -1,20 +1,16 @@
 
 const searchDefaultState = {
-    query: '',
-    filters: []
+    search: '',
+    filters: [],
+    matches: []
 }
 
 export default (state = searchDefaultState, action) => {
     switch(action.type){
-        case "SET_SEARCH_FILTERS" :
+        case 'SET_CURRENT_SEARCH':
             return {
                 ...state,
-                filters: action.filters
-            }
-        case "SET_QUERY":
-            return {
-                ...state,
-                query: action.query
+                ...action.search
             }
         default: 
             return state;

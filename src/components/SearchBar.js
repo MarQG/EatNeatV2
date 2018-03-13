@@ -1,7 +1,9 @@
 import React from 'react';
 import API from '../utils/api.js';
+import { connect } from 'react-redux';
+import { setCurrentSearch } from '../actions/search';
 
-export default class SearchBar extends React.Component {
+export class SearchBar extends React.Component {
 
     constructor(props){
         super(props);
@@ -50,8 +52,9 @@ export default class SearchBar extends React.Component {
         } else {
             this.setState({ error: ""});
             API.getRecipe(this.state).then((response) => {
-                console.log(response);
                 this.setState({ query: "" });
+                console.log(response.data);
+                this.props.setCurrentSearch(response.data);
             }).catch(err => {
                 console.log(err);
             })
@@ -115,5 +118,11 @@ export default class SearchBar extends React.Component {
     }
 }
 
+
+const mapDispatchToProps = (dispatch) => ({
+    setCurrentSearch: (search) => dispatch(setCurrentSearch(search))
+})
+
+export default connect(undefined, mapDispatchToProps)(SearchBar);
 
 
