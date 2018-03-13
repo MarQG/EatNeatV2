@@ -28,9 +28,9 @@ let yumListURL = "https://api.yummly.com/v1/api/recipes?_app_id=" + process.env.
 const spoon = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/extract?forceExtraction=true&url=";
 
 
-filtersBuilder = (filters) => {
+const filtersBuilder = (filters) => {
     let filtersString = "";
-    if(filters.allergies > 0){
+    if(filters.allergies.length > 0){
         filters.allergies.forEach(allergy => {
             switch(allergy){
                 case "gluten-free":
@@ -69,7 +69,7 @@ filtersBuilder = (filters) => {
             }
         });
     }
-    if(filters.diet > 0){
+    if(filters.diet.length > 0){
         filters.diet.forEach(diet => {
             switch(diet){
                 case "lacto-veg":
@@ -100,17 +100,15 @@ filtersBuilder = (filters) => {
 
 //Searches for multiple recipes
 router.post("/search", function(req, res){
-    console.log(req.body);
+    
     db.find({ search: req.body.query, filters: req.body.filters }, function (err, data) {
         if (err) {
             console.log(err)
             res.json({ Error: "Something went wrong. Please go back and try again" })
         } else {
             if (data.length === 0) {
-                
-                let filterString = filtersBuilder(req.body.filters);
-                
-                request(yumListURL + "&q=" + req.body.query + filterString, function (err, response, body) {
+                let filtersURLString = filtersBuilder(req.body.filters);
+                request(yumListURL + "&q=" + req.body.query + filtersURLString, function (err, response, body) {
                     if (response.statusCode === 404) {
                         console.log(err)
                         console.log("Status Code:", response && response.statusCode);
@@ -120,11 +118,11 @@ router.post("/search", function(req, res){
 
                     function EachMatch(recipe_id, imageUrlBySize, recipe_name, totalTimeInSeconds, attributes, rating) {
                         this.recipe_id = recipe_id,
-                            this.imageUrlBySize = imageUrlBySize,
-                            this.recipe_name = recipe_name,
-                            this.totalTimeInSeconds = totalTimeInSeconds,
-                            this.attributes = attributes,
-                            this.rating = rating
+                        this.imageUrlBySize = imageUrlBySize,
+                        this.recipe_name = recipe_name,
+                        this.totalTimeInSeconds = totalTimeInSeconds,
+                        this.attributes = attributes,
+                        this.rating = rating
                     }
 
                     let currentMatches = [];
@@ -138,19 +136,21 @@ router.post("/search", function(req, res){
                     db.create({
                         search: JSON.parse(body).criteria.q,
                         filters: req.body.filters,
-                        matches: currentMatches
+                        matches: currentMatches,
                     }, function (err, data) {
                         if (err) {
                             console.log(err)
                             res.json({ Error: "Something went wrong. Please go back and try again" })
                         } else {
+                            console.log(data);
                             res.json(data)
                         }
                     })
                 })
             } else {
-                console.log("Testing")
-                res.json(data)
+                console.log("Testing");
+                console.log(data);
+                res.json(data[0])
             }
         }
     })

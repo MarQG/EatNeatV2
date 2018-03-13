@@ -1,7 +1,13 @@
 import React from 'react';
 import API from '../utils/api.js';
+import { connect } from 'react-redux';
+import { setCurrentSearch } from '../actions/search';
+import { getUser } from "../actions/user"
+import SearchPage from "./SearchPage"
+import FavoritesPage from "./FavoritesPage"
+import GroceryListPage from "./GroceryListPage"
 
-export default class SearchBar extends React.Component {
+export class SearchBar extends React.Component {
 
     constructor(props){
         super(props);
@@ -50,16 +56,17 @@ export default class SearchBar extends React.Component {
         } else {
             this.setState({ error: ""});
             API.getRecipe(this.state).then((response) => {
-                console.log(response);
+                console.log(response)
                 this.setState({ query: "" });
+                this.props.setCurrentSearch(response.data);
+                
             }).catch(err => {
                 console.log(err);
             })
         }
-
-       
-
     }
+
+    
 
     render(){
         return(
@@ -109,11 +116,29 @@ export default class SearchBar extends React.Component {
                     </div>                   
 
                    <button type="submit">Search</button>
-               </form>
+               </form> 
+               <h2>Searches... </h2>
+               <SearchPage />
+               <h2>Favorites... </h2>
+               <FavoritesPage />
+               <h2>Grocery List... </h2>
+               <GroceryListPage />
             </div>
         )
     }
 }
 
+
+const mapDispatchToProps = (dispatch) => ({
+    setCurrentSearch: (search) => dispatch(setCurrentSearch(search)),
+    getUser: () => dispatch(getUser())
+})
+
+const mapStateToProps = (state) => ({
+    user: state.user,
+    search: state.search
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
 
 
