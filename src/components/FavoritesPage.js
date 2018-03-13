@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setCurrentSearch } from '../actions/search';
-import { getUser } from "../actions/user";
+import { getUser, saveUser } from "../actions/user";
 import API from "../utils/api";
 
 let loading = false;
@@ -14,6 +14,35 @@ export class FavoritesPage extends React.Component {
             console.log(response)
             loading = false;
         })
+    }
+
+    onHandleRemoveFavorite = id => {
+        const {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list,
+            _id
+        } = this.props.user;
+        
+            for (var i = 0; i < this.props.user.favorites.length; i++) {
+                if (this.props.user.favorites[i].recipe_id === id) {
+                    this.props.user.favorites.splice(i, 1)
+                }
+            }
+            console.log(this.props.user)
+            console.log(id)
+            const updatedUser = {
+                favorites,
+                user_id,
+                recent_searches,
+                my_week,
+                grocery_list,
+                _id
+            }
+    
+            this.props.saveUser(updatedUser);
     }
 
     onHandleGroceryList = id => {
@@ -32,7 +61,8 @@ export class FavoritesPage extends React.Component {
                 user_id,
                 recent_searches,
                 my_week,
-                grocery_list
+                grocery_list,
+                _id
             } = this.props.user;
         
             const newList = [response.data.YummlyRecipe.ingredientLines];
@@ -42,13 +72,16 @@ export class FavoritesPage extends React.Component {
             // else if (favorites.some(favorite => favorite.recipe_id === newFav.recipe_id)) {
             //     favorites.filter()
             // }
-            this.props.getUser({
+            const updatedUser = {
                 favorites,
                 user_id,
                 recent_searches,
                 my_week,
-                grocery_list
-            });
+                grocery_list,
+                _id
+            }
+    
+            this.props.saveUser(updatedUser);
         })
     }
 
@@ -61,6 +94,7 @@ export class FavoritesPage extends React.Component {
                     <div>Name: {favorites.recipe_name}</div>
                     <div>Rating: {favorites.rating}</div>
                     <div>Time To Make: {favorites.totalTimeInSeconds / 60} minutes.</div>
+                    <button onClick={() => this.onHandleRemoveFavorite(favorites.recipe_id)}> Remove from Favorites </button>
                     <button> Add to my week </button>
                     <button onClick={() => this.onHandleGroceryList(favorites.recipe_id)}> Add to grocery list </button>
                 </div>
@@ -72,7 +106,8 @@ export class FavoritesPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     setCurrentSearch: (search) => dispatch(setCurrentSearch(search)),
-    getUser: () => dispatch(getUser())
+    getUser: () => dispatch(getUser()),
+    saveUser: (user) => dispatch(saveUser(user))
 })
 
 const mapStateToProps = (state) => ({
