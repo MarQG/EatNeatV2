@@ -40,8 +40,8 @@ export class FavoritesPage extends React.Component {
             this.props.saveUser(updatedUser);
     }
 
-    onHandleGroceryList = ingredients => {
-        console.log(ingredients);
+    onHandleGroceryList = groceryItem => {
+        console.log(groceryItem);
         const {
             favorites,
             user_id,
@@ -51,7 +51,7 @@ export class FavoritesPage extends React.Component {
             _id
         } = this.props.user;
         
-        grocery_list.push(ingredients);
+        grocery_list.push(groceryItem);
 
         const updatedUser = {
             favorites,
@@ -80,7 +80,7 @@ export class FavoritesPage extends React.Component {
                     <div>Time To Make: {favorites.totalTime}</div>
                     <button onClick={() => this.onHandleRemoveFavorite(favorites.id)}> Remove from Favorites </button>
                     <button> Add to my week </button>
-                    <button onClick={() => this.onHandleGroceryList(favorites.ingredientLines)}> Add to grocery list </button>
+                    <button onClick={() => this.onHandleGroceryList({ name: favorites.name, servings: favorites.numberOfServings ,ingredients: favorites.ingredientLines })}> Add to grocery list </button>
                 </div>
             )) : <div></div> }
         </div>

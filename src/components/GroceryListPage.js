@@ -10,7 +10,13 @@ export class GroceryListPage extends React.Component {
         return(    
         <div>
             {this.props.user.grocery_list.length > 0 ? this.props.user.grocery_list.map((grocery, i) => (
-                    <div key={i}>{grocery}</div>
+                    <div key={i}>
+                        <p> Name: {grocery.name}</p>
+                        <p>Serving Size: {grocery.servings} People</p>
+                        <ul>
+                            { grocery.ingredients.length > 0 ? grocery.ingredients.map((ingredient, i) => <li key={i}>{ingredient}</li>) : <li>Sorry no ingredients found</li>}
+                        </ul>
+                    </div>
             )) : <div></div> }
         </div>
         );
