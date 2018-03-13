@@ -1,0 +1,23 @@
+.navbar__list{
+    color: $off-white;
+    list-style: none;
+    padding: 0;
+
+    li{
+        display: inline-block;
+    }
+}
+
+.navbar__item{
+    font-size: $m-size;
+    
+    text-decoration: none;
+    padding: 0 $s-size;
+}
+
+.navbar__item:visited{
+    color: $off-white;
+}
+.navbar__item:hover{
+    color: $dark-grey;
+}
