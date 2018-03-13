@@ -1,7 +1,7 @@
 const request = require("request");
 const express = require("express");
 const router = express.Router();
-console.log("This is process.env.NODE_ENV: " + process.env.NODE_ENV)
+
 if(process.env.NODE_ENV === undefined){
     require('dotenv').config({ path: './.env.development' });
 }
@@ -100,15 +100,14 @@ const filtersBuilder = (filters) => {
 
 //Searches for multiple recipes
 router.post("/search", function(req, res){
-    
-    db.find({ search: req.body.query, filters: req.body.filters }, function (err, data) {
+    db.find({userSearch: "steak"}, function (err, data) {
         if (err) {
             console.log(err)
             res.json({ Error: "Something went wrong. Please go back and try again" })
         } else {
+            console.log(req.body)
             if (data.length === 0) {
-                let filtersURLString = filtersBuilder(req.body.filters);
-                request(yumListURL + "&q=" + req.body.query + filtersURLString, function (err, response, body) {
+                request(yumListURL + req.body.query + "&excludedAllergy[]=393^Gluten-Free", function (err, response, body) {
                     if (response.statusCode === 404) {
                         console.log(err)
                         console.log("Status Code:", response && response.statusCode);
@@ -158,7 +157,7 @@ router.get("/search/:recipe_id", function (req, res) {
     recipeId = req.params.recipe_id
 
     let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
-    console.log(yumRecURL)
+    
     request(yumRecURL, function(err, response, body){
         console.log("Status Code:", response.statusCode);
         if (response.statusCode === 404) {
@@ -240,7 +239,6 @@ router.get("/search/:recipe_id/nutrition", function (req, res) {
 
 router.post("/user", function (req, res) {
     user.find({ user_id: req.body.uid }, function (error, data) {
-        console.log("Searching for user");
         if (error) {
             console.log(error),
                 res.json({ "Error": "Something went wrong finding " + req.body.uid });
