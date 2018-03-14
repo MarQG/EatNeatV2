@@ -2,6 +2,10 @@ import React from 'react';
 import API from '../utils/api.js';
 import { connect } from 'react-redux';
 import { setCurrentSearch } from '../actions/search';
+import { getUser } from "../actions/user"
+import SearchPage from "./SearchPage"
+import FavoritesPage from "./FavoritesPage"
+import GroceryListPage from "./GroceryListPage"
 
 export class SearchBar extends React.Component {
 
@@ -42,7 +46,6 @@ export class SearchBar extends React.Component {
         } else {
             this.setState({ filters: { ...this.state.filters, diet: [ ...this.state.filters.diet, e.target.name ]}})
         }
-        
     }
 
     onHandleSubmit = (e) => {
@@ -52,21 +55,21 @@ export class SearchBar extends React.Component {
         } else {
             this.setState({ error: ""});
             API.getRecipe(this.state).then((response) => {
+                console.log(response)
                 this.setState({ query: "" });
-                console.log(response.data);
                 this.props.setCurrentSearch(response.data);
+                this.props.history.push("/search");
             }).catch(err => {
                 console.log(err);
             })
         }
-
-       
-
     }
+
+    
 
     render(){
         return(
-            <div>
+            <div className="searchbar">
                 { this.state.error != "" ? <p>{this.state.error}</p> : <p></p> }
                 <form onSubmit={this.onHandleSubmit}>
                    <label htmlFor="query">Search: </label>
@@ -112,7 +115,7 @@ export class SearchBar extends React.Component {
                     </div>                   
 
                    <button type="submit">Search</button>
-               </form>
+               </form> 
             </div>
         )
     }
@@ -120,9 +123,15 @@ export class SearchBar extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => ({
-    setCurrentSearch: (search) => dispatch(setCurrentSearch(search))
+    setCurrentSearch: (search) => dispatch(setCurrentSearch(search)),
+    getUser: () => dispatch(getUser())
 })
 
-export default connect(undefined, mapDispatchToProps)(SearchBar);
+const mapStateToProps = (state) => ({
+    user: state.user,
+    search: state.search
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
 
 

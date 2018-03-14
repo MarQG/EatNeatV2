@@ -8,10 +8,7 @@ const searchDefaultState = {
 export default (state = searchDefaultState, action) => {
     switch(action.type){
         case 'SET_CURRENT_SEARCH':
-            return {
-                ...state,
-                ...action.search
-            }
+            return action.search
         default: 
             return state;
     }
