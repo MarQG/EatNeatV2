@@ -1,5 +1,4 @@
 import React from 'react';
-import RecipeModal from './RecipeModal';
 import API from '../utils/api';
 import Modal from 'react-modal';
 
@@ -71,8 +70,10 @@ class RecipeCard extends React.Component{
                     <img src={this.state.recipe.image} />
                     <div>Servings: {this.state.recipe.numberOfServings}</div>
                     <div>Total Time: {this.state.recipe.totalTime}</div>
-                    <div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div>
-                    <div>Ingredients: {this.state.recipe.ingredientLines}</div> 
+                    <div>Ingredients: {this.state.recipe.ingredientLines.map((element, i) => (
+                      <div key={i}>{element}</div>
+                    ))}</div>
+                    {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
                   </div>}
                   
                   <button onClick={this.closeModal}>close</button>
