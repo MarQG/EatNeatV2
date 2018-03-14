@@ -1,22 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { saveUser } from "../actions/user";
+import { setCurrentSearch } from '../actions/search';
+import { getUser } from "../actions/user";
+import GroceryCard from './GroceryCard';
 
 
 export class GroceryListPage extends React.Component {
 
     render(){
-        return(    
+        return(   
         <div>
-            {this.props.user.grocery_list.length > 0 ? this.props.user.grocery_list.map((grocery, i) => (
-                    <div key={i}>
-                        <p> Name: {grocery.name}</p>
-                        <p>Serving Size: {grocery.servings} People</p>
-                        <ul>
-                            { grocery.ingredients.length > 0 ? grocery.ingredients.map((ingredient, i) => <li key={i}>{ingredient}</li>) : <li>Sorry no ingredients found</li>}
-                        </ul>
-                    </div>
-            )) : <div>Please Add Something into your Grocery List</div> }
+            {this.props.user.grocery_list.length > 0 ? this.props.user.grocery_list.map(grocery => (
+                    <GroceryCard grocery={grocery} key={grocery.name} />
+            )) : <div></div> }
         </div>
         );
     }
