@@ -1,5 +1,5 @@
 .header{
-    background: $off_black;
+    background: $light-grey;
 }
 .header__content{
     align-items: center;
@@ -9,7 +9,6 @@
 }
 
 .header__title{
-    color:white;
     text-decoration: none;
     h1 {
         margin: 0;

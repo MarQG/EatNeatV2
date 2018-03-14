@@ -2,7 +2,7 @@ import React from 'react';
 import API from '../utils/api';
 import Modal from 'react-modal';
 
-export default class RecipeCard extends React.Component{
+export default class FavoriteCard extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -24,7 +24,7 @@ export default class RecipeCard extends React.Component{
   };
 
   wrapperStyles = {
-    backgroundImage: 'url(' + this.props.recipe.imageUrlBySize[90] + ')',
+    backgroundImage: 'url(' + this.props.recipe.images[0].hostedLargeUrl + ')',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center'
@@ -53,21 +53,21 @@ export default class RecipeCard extends React.Component{
         <div className="wrapper" style={this.wrapperStyles}>      
           <div className="header__card">
             <ul className="menu-content">
-              <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.recipe_id)} className="fa fa-heart-o"></a></li>
-              <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTimeInSeconds / 60} minutes</span></a></li>
-              <li><a className="fa fa-star"><span>{this.props.recipe.rating}</span></a></li>
+              <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.id)} className="fa fa-heart"></a></li>
+              <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTime}</span></a></li>
+              <li><a className="fa fa-users"><span>{this.props.recipe.numberOfServings}</span></a></li>
             </ul>
           </div>
           <div className="data">
             <div className="content">
-              <span className="author">information powered by <img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></span>
-              <h1 className="title">{this.props.recipe.recipe_name}</h1>
-              <a onClick={() => this.onHandleRecipePreview(this.props.recipe.recipe_id)} className="button__card">Preview Recipe</a>
+              <span className="author"><a href={this.props.recipe.source.sourceRecipeUrl} target="_blank" >{this.props.recipe.source.sourceDisplayName}</a></span>
+              <h1 className="title"><a href="#">{this.props.recipe.name}</a></h1>
+              <a onClick={() => this.onHandleRecipePreview(this.props.recipe.id)} className="button__card">Preview Recipe</a>
               <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
                 <div>
                   {this.state.recipe.name === undefined ? <img src="./images/loader.gif"/> : <div>
                     <h2>{this.state.recipe.name}</h2>
-                    <img src={this.state.recipe.images[0].hostedLargeUrl} />
+                    <img src={this.state.recipe.image} />
                     <div>Servings: {this.state.recipe.numberOfServings}</div>
                     <div>Total Time: {this.state.recipe.totalTime}</div>
                     <div>Ingredients: {this.state.recipe.ingredientLines.map((element, i) => (
@@ -75,12 +75,9 @@ export default class RecipeCard extends React.Component{
                     ))}</div>
                     {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
                   </div>}
-                  
                   <button onClick={this.closeModal}>close</button>
                 </div>  
-        
               </Modal>
-              
             </div>
           </div>
         </div>

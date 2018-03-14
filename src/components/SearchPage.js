@@ -4,11 +4,25 @@ import { setCurrentSearch } from '../actions/search';
 import { getUser, saveUser } from "../actions/user";
 import API from "../utils/api";
 import SearchBar from './SearchBar';
+import RecipeCard from './RecipeCard';
 
 // for loading detailed recipe if you want to put a loader GIF
 let loading = false;
 
 export class SearchPage extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            filteredSearch: []
+        }
+    }
+
+    componentDidMount = () => {
+        const filteredSearch = this.props.search.matches.filter(match => {
+            return (this.props.user.favorites.filter(favorite => favorite.id === match.recipe_id).length === 0);
+        });
+        this.setState({ filteredSearch: filteredSearch});
+    }
 
     onHandleDetailFavorites = id => {
         loading = true;
@@ -20,9 +34,6 @@ export class SearchPage extends React.Component {
     }
 
     onHandleFavorites = (id) => {
-        console.log(id)
-        console.log(this.props.user)
-        let currentFav = false;
         API.getDetailRecipe(id).then(response => {
             console.log(response.data);
 
@@ -56,6 +67,7 @@ export class SearchPage extends React.Component {
             }
     
             this.props.saveUser(updatedUser);
+            this.props.history.push("/search");        
         }).catch(err => {
             console.log(err);
         });
@@ -66,24 +78,15 @@ export class SearchPage extends React.Component {
 
     render(){
         return(    
-        <div>
-            {this.props.search.search != "" ? this.props.search.matches.map((newRecipes,i) => (
-                <div key={i}>
-                    <img src={newRecipes.imageUrlBySize["90"]} onClick={() => this.onHandleDetailFavorites(newRecipes.recipe_id)} />
-                    <div>Name: {newRecipes.recipe_name}</div>
-                    <div>Rating: {newRecipes.rating}</div>
-                    <div>Time To Make: {newRecipes.totalTimeInSeconds / 60} minutes.</div>
-                    <button id={newRecipes.recipe_id}  onClick={() => this.onHandleFavorites(newRecipes.recipe_id, newRecipes.recipe_name, newRecipes.imageUrlBySize, newRecipes.totalTimeInSeconds, newRecipes.attributes, newRecipes.rating)}>Add To Favs</button>
-                </div>
-            )) : <div>Try Searching for Something</div> }
+        <div className="row">
+            {console.log(this.state.filteredSearch)}
+            {this.state.filteredSearch.length > 0 ? this.state.filteredSearch.map(match => <div key={match.recipe_id} className="col-md-3"><RecipeCard recipe={match} onHandleFavorites={this.onHandleFavorites}/></div> ) : <p>Try Searching for something</p>}
         </div>
         );
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    setCurrentSearch: (search) => dispatch(setCurrentSearch(search)),
-    getUser: () => dispatch(getUser()),
     saveUser: (user) => dispatch(saveUser(user))
 })
 
