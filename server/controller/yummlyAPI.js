@@ -1,4 +1,5 @@
 const request = require("request");
+const rp = require('request-promise');
 const express = require("express");
 const router = express.Router();
 if(process.env.NODE_ENV === undefined){
@@ -151,7 +152,7 @@ router.post("/search", function(req, res){
                     })
                 })
             } else {
-                console.log("It found the search in the database")
+                console.log("Search found in the database")
                 res.json(data[0])
                 saveDetailRecipe(data[0], res);
             }
@@ -172,8 +173,7 @@ router.get("/search/:recipe_id", function (req, res) {
                 getDetailRecipe(recipeId, res)
             } else {
                 console.log("Found Data")
-                console.log(data[0])
-                res.json(data[0])
+                res.json(data[0].recipe)
             }
         }
     })
@@ -228,12 +228,13 @@ const getDetailRecipe = (recipeId, res) => {
     let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
     request(yumRecURL, function(err, response, body){
         console.log("Status Code:", response.statusCode);
+        console.log(body);
         if (response.statusCode === 404) {
             console.log(err)
             console.log("Status Code:", response && response.statusCode);
             res.json({ Error: "Something went wrong. Please go back and try again" })
         } else {
-
+            console.log(body);
             recSource = JSON.parse(body).source.sourceRecipeUrl
 
             request({
@@ -248,61 +249,67 @@ const getDetailRecipe = (recipeId, res) => {
                     console.log("Status Code:", resp && resp.statusCode);
                     res.json({ Error: "Something went wrong. Please go back and try again" })
                 }
-
                 recipeDetail(body, data, res)
                 
-            })
+            });
         }
     })
 }
 
 
 const saveDetailRecipe = (theResponse, res) => {
-    for (var i = 0; i < theResponse.matches.length; i++) {
-        let recipeId = theResponse.matches[i].recipe_id
+
+    theResponse.matches.map(match => {
+        let recipeId = match.recipe_id
         detail.find({id: recipeId}, function(err, data){
             if (err) {
                 console.log(err)
             } else {
                 if (data.length === 0) {
+                    
+                    console.log("Not in database adding now...");  
                     let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
-                    request(yumRecURL, function(err, response, body){
-                        console.log("Status Code:", response.statusCode);
-                        if (response.statusCode === 404) {
-                            console.log(err)
-                            console.log("Status Code:", response && response.statusCode);
-                            
-                        } else {
-                            
-                            recSource = JSON.parse(body).source.sourceRecipeUrl
 
-                            request({
-                                "url": spoon + encodeURI(recSource),
-                                "headers": {
-                                    "X-Mashape-Key": process.env.RECIPE_API_KEY,
-                                    "Content-Type": "application/json",
-                                }
-                            }, function (error, resp, data) {
-                                if (resp.statusCode === 404) {
-                                    console.log(error)
-                                    console.log("Status Code:", resp && resp.statusCode);
-                                    
-                                }
-                                
-                                recipeDetail(body, data, res);
-                            })
-                        }
-                    })   
+                    rp({ 
+                        uri:yumRecURL,
+                        json:true 
+                    })
+                    .then((recipe) => {
+                        rp({
+                            uri: spoon + encodeURI(recipe.source.sourceRecipeUrl),
+                            headers: {
+                                "X-Mashape-Key": process.env.RECIPE_API_KEY,
+                                "Content-Type": "application/json",
+                            },
+                            json:true
+                        }).then(details => {
+                            saveBulkRecipe(recipe,details);
+                        }).catch(err => console.log(err));
+                    })
+                    .catch(err => console.log(err));
                 } else {
-                    console.log("Already in database...")
+                    console.log("Already in database...");
                 }
             }
-        })
-    }
+        });
+    });
 }
 
-const recipeDetail = (body, data, res) => {
-    let json = JSON.parse(body).nutritionEstimates
+const saveBulkRecipe = (body, data) => {
+    let recipeInfo = {}
+    if(typeof body === String){
+        recipeInfo = JSON.parse(body);
+    } else {
+        recipeInfo = body
+    }
+    
+    let recipeDetails = {};
+    if(typeof data === String){
+        recipeDetails = JSON.parse(data);
+    } else {
+        recipeDetails = data;
+    }
+    
     let info = {
         calories: null,
         fat: null,
@@ -310,19 +317,19 @@ const recipeDetail = (body, data, res) => {
         protein: null,
         nutritionFound: false 
     }
-    if (json.length === 0) {
+    if (recipeInfo.nutritionEstimates.length === 0) {
        info.nutritionFound = false
     } else {
         info.nutritionFound = true
-        for (var i = 0; i < json.length; i++) {
-            if (json[i].attribute === "FAMS") {
-                info.fat = json[i].value
+        for (var i = 0; i < recipeInfo.nutritionEstimates.length; i++) {
+            if (recipeInfo.nutritionEstimates[i].attribute === "FAMS") {
+                info.fat = recipeInfo.nutritionEstimates[i].value
             }
-            if (json[i].attribute === "PROCNT") {
-                info.protein = json[i].value
+            if (recipeInfo.nutritionEstimates[i].attribute === "PROCNT") {
+                info.protein = recipeInfo.nutritionEstimates[i].value
             }
-            if (json[i].attribute === "CHOCDF") {
-                info.carbs = json[i].value
+            if (recipeInfo.nutritionEstimates[i].attribute === "CHOCDF") {
+                info.carbs = recipeInfo.nutritionEstimates[i].value
             }
             if (info.fat != null && info.carbs != null && info.protein != null) {
                 info.calories = (Math.ceil(info.fat) * 9) + (Math.ceil(info.carbs) * 4) + (Math.ceil(info.protein) * 4)
@@ -341,16 +348,17 @@ const recipeDetail = (body, data, res) => {
         totalTime,
         name,
         id
-    } = JSON.parse(body);
+    } = recipeInfo;
 
     const { 
         dishTypes,
         instructions,
         image
-    } = JSON.parse(data);
+    } = recipeDetails;
 
 
     const detailedRecipe = {
+        info,
         source,
         ingredientLines,
         images,
@@ -365,11 +373,97 @@ const recipeDetail = (body, data, res) => {
         spoon,
         info
     };
-    detail.create({id: recipeId, recipe: detailedRecipe}, function(err, data){
+    detail.create({id: id, recipe: detailedRecipe}, function(err, data){
         if (err) {
             console.log(err)
         } else {
-            res.json(data[0])
+            console.log("Saved New Recipe: ", data.id);
+        }
+    })
+}
+
+const recipeDetail = ( body, data, res) => {
+    let recipeInfo = {}
+    if(typeof body === String){
+        recipeInfo = JSON.parse(body);
+    } else {
+        recipeInfo = body
+    }
+    let recipeDetails = {};
+    if(typeof data === String){
+        recipeDetails = JSON.parse(data);
+    } else {
+        recipeDetails = data;
+    }
+    
+    let info = {
+        calories: null,
+        fat: null,
+        carbs: null,
+        protein: null,
+        nutritionFound: false 
+    }
+    if (recipeInfo.nutritionEstimates.length === 0) {
+       info.nutritionFound = false
+    } else {
+        info.nutritionFound = true
+        for (var i = 0; i < recipeInfo.nutritionEstimates.length; i++) {
+            if (recipeInfo.nutritionEstimates[i].attribute === "FAMS") {
+                info.fat = recipeInfo.nutritionEstimates[i].value
+            }
+            if (recipeInfo.nutritionEstimates[i].attribute === "PROCNT") {
+                info.protein = recipeInfo.nutritionEstimates[i].value
+            }
+            if (recipeInfo.nutritionEstimates[i].attribute === "CHOCDF") {
+                info.carbs = recipeInfo.nutritionEstimates[i].value
+            }
+            if (info.fat != null && info.carbs != null && info.protein != null) {
+                info.calories = (Math.ceil(info.fat) * 9) + (Math.ceil(info.carbs) * 4) + (Math.ceil(info.protein) * 4)
+
+                break;
+            }
+        }
+    }
+
+    const {
+        source,
+        ingredientLines,
+        images,
+        attribution,
+        numberOfServings,
+        totalTime,
+        name,
+        id
+    } = recipeInfo;
+
+    const { 
+        dishTypes,
+        instructions,
+        image
+    } = recipeDetails;
+
+
+    const detailedRecipe = {
+        info,
+        source,
+        ingredientLines,
+        images,
+        attribution,
+        numberOfServings,
+        totalTime,
+        dishTypes,
+        instructions,
+        image,
+        name,
+        id,
+        spoon,
+        info
+    };
+    detail.create({id: id, recipe: detailedRecipe}, function(err, data){
+        if (err) {
+            console.log(err)
+        } else {
+            res.json(data.recipe)
         }
     })
 }
