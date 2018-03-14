@@ -24,7 +24,7 @@ export default class FavoriteCard extends React.Component{
   };
 
   wrapperStyles = {
-    backgroundImage: 'url(' + this.props.recipe.image + ')',
+    backgroundImage: 'url(' + this.props.recipe.images[0].hostedLargeUrl + ')',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center'
@@ -55,12 +55,12 @@ export default class FavoriteCard extends React.Component{
             <ul className="menu-content">
               <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.id)} className="fa fa-heart"></a></li>
               <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTime}</span></a></li>
-              <li><a className="fa fa-users"><span>2-4</span></a></li>
+              <li><a className="fa fa-users"><span>{this.props.recipe.numberOfServings}</span></a></li>
             </ul>
           </div>
           <div className="data">
             <div className="content">
-              <span className="author">Recipe Source Name</span>
+              <span className="author"><a href={this.props.recipe.source.sourceRecipeUrl} target="_blank" >{this.props.recipe.source.sourceDisplayName}</a></span>
               <h1 className="title"><a href="#">{this.props.recipe.name}</a></h1>
               <a onClick={() => this.onHandleRecipePreview(this.props.recipe.id)} className="button__card">Preview Recipe</a>
               <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
@@ -75,19 +75,9 @@ export default class FavoriteCard extends React.Component{
                     ))}</div>
                     {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
                   </div>}
-                  
                   <button onClick={this.closeModal}>close</button>
                 </div>  
-        
               </Modal>
-              
-            </div>
-            <div className="data">
-              <div className="content">
-                <span className="author">Recipe Source Name</span>
-                <h1 className="title"><a href="#">{this.props.recipe.recipe_name}</a></h1>
-                <a href="#" className="button__card">Preview Recipe</a>
-              </div>
             </div>
           </div>
         </div>
