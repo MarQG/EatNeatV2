@@ -180,58 +180,72 @@ router.get("/search/:recipe_id", function (req, res) {
                     res.json({ Error: "Something went wrong. Please go back and try again" })
                 }
 
+                let json = JSON.parse(body).nutritionEstimates
                 let info = {
-                    YummlyRecipe: JSON.parse(body),
-                    Spoonacular: JSON.parse(data)
+                    calories: null,
+                    fat: null,
+                    carbs: null,
+                    protein: null,
+                    nutritionFound: false 
                 }
-                res.json(info)
+                if (json.length === 0) {
+                   info.nutritionFound = false
+                } else {
+                    info.nutritionFound = true
+                    for (var i = 0; i < json.length; i++) {
+                        if (json[i].attribute === "FAMS") {
+                            info.fat = json[i].value
+                        }
+                        if (json[i].attribute === "PROCNT") {
+                            info.protein = json[i].value
+                        }
+                        if (json[i].attribute === "CHOCDF") {
+                            info.carbs = json[i].value
+                        }
+                        if (info.fat != null && info.carbs != null && info.protein != null) {
+                            info.calories = (Math.ceil(info.fat) * 9) + (Math.ceil(info.carbs) * 4) + (Math.ceil(info.protein) * 4)
+
+                            break;
+                        }
+                    }
+                }
+
+                const {
+                    source,
+                    ingredientLines,
+                    images,
+                    attribution,
+                    numberOfServings,
+                    totalTime,
+                    name,
+                    id
+                } = JSON.parse(body);
+
+                const { 
+                    dishTypes,
+                    instructions,
+                    image
+                } = JSON.parse(data);
+
+
+                const detailedRecipe = {
+                    source,
+                    ingredientLines,
+                    images,
+                    attribution,
+                    numberOfServings,
+                    totalTime,
+                    dishTypes,
+                    instructions,
+                    image,
+                    name,
+                    id,
+                    spoon,
+                    info
+                };
+
+                res.json(detailedRecipe);
             })
-        }
-    })
-})
-
-router.get("/search/:recipe_id/nutrition", function (req, res) {
-    recipeId = req.params.recipe_id
-
-    let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
-
-    request(yumRecURL, function (err, response, body) {
-        if (response.statusCode === 404) {
-            console.log(err)
-            console.log("Status Code:", response && response.statusCode);
-            res.json({ Error: "Something went wrong. Please go back and try again" })
-        }
-        let json = JSON.parse(body).nutritionEstimates
-        if (json.length === 0) {
-            res.json({ nutrition: "No nutrition estimates found, please visit " + JSON.parse(body).source.sourceRecipeUrl + " for more details" })
-        } else {
-            let info = {
-                servings: JSON.parse(body).numberOfServings,
-                calories: null,
-                fat: null,
-                carbs: null,
-                protein: null,
-                additionalInfo: JSON.parse(body).source.sourceRecipeUrl
-            }
-
-            for (var i = 0; i < json.length; i++) {
-                if (json[i].attribute === "FAMS") {
-                    info.fat = json[i].value
-                }
-                if (json[i].attribute === "PROCNT") {
-                    info.protein = json[i].value
-                }
-                if (json[i].attribute === "CHOCDF") {
-                    info.carbs = json[i].value
-                }
-                if (info.fat != null && info.carbs != null && info.protein != null) {
-                    info.calories = (Math.ceil(info.fat) * 9) + (Math.ceil(info.carbs) * 4) + (Math.ceil(info.protein) * 4)
-
-                    break;
-                }
-            }
-
-            res.json(info)
         }
     })
 })

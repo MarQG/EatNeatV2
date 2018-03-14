@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setCurrentSearch } from '../actions/search';
 import { getUser, saveUser } from "../actions/user";
+import FavoriteCard from './FavoriteCard';
 import API from "../utils/api";
 
 let loading = false;
@@ -26,15 +27,10 @@ export class FavoritesPage extends React.Component {
             _id
         } = this.props.user;
         
-            for (var i = 0; i < this.props.user.favorites.length; i++) {
-                if (this.props.user.favorites[i].recipe_id === id) {
-                    this.props.user.favorites.splice(i, 1)
-                }
-            }
-            console.log(this.props.user)
-            console.log(id)
+            const filteredFavs = favorites.filter(favorite => favorite.id != id);
+
             const updatedUser = {
-                favorites,
+                favorites: filteredFavs,
                 user_id,
                 recent_searches,
                 my_week,
@@ -45,62 +41,53 @@ export class FavoritesPage extends React.Component {
             this.props.saveUser(updatedUser);
     }
 
-    onHandleGroceryList = id => {
-        loading = true;
-        API.getDetailRecipe(id).then(response => {
-            
-            console.log(response.data.YummlyRecipe)
-            loading = false;
-
-            console.log(id)
-            console.log(this.props.user)
-            let currentGrocery = false;
+    onHandleGroceryList = groceryItem => {
+        console.log(groceryItem);
+        const {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list,
+            _id
+        } = this.props.user;
         
-            const {
-                favorites,
-                user_id,
-                recent_searches,
-                my_week,
-                grocery_list,
-                _id
-            } = this.props.user;
-        
-            const newList = [response.data.YummlyRecipe.ingredientLines];
+        grocery_list.push(groceryItem);
 
-            
-            grocery_list.push(newList);
-            console.log(grocery_list);
-            // else if (favorites.some(favorite => favorite.recipe_id === newFav.recipe_id)) {
-            //     favorites.filter()
-            // }
-            const updatedUser = {
-                favorites,
-                user_id,
-                recent_searches,
-                my_week,
-                grocery_list,
-                _id
-            }
-            console.log(updatedUser);
-            this.props.saveUser(updatedUser);
-        })
+        const updatedUser = {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list,
+            _id
+        } 
+
+        
+
+
+        console.log(updatedUser);
+        this.props.saveUser(updatedUser);
     }
 
-    render(){
+    render = () =>{
         return(    
-        <div>
-            {this.props.user.favorites.length > 0 ? this.props.user.favorites.map(favorites => (
-                <div key={favorites.attributes}>
-                    <img src={favorites.imageUrlBySize["90"]} onClick={() => this.onHandleDetailFavorites(favorites.recipe_id)} />
-                    <div>Name: {favorites.recipe_name}</div>
-                    <div>Rating: {favorites.rating}</div>
-                    <div>Time To Make: {favorites.totalTimeInSeconds / 60} minutes.</div>
-                    <button onClick={() => this.onHandleRemoveFavorite(favorites.recipe_id)}> Remove from Favorites </button>
-                    <button> Add to my week </button>
-                    <button onClick={() => this.onHandleGroceryList(favorites.recipe_id)}> Add to grocery list </button>
-                </div>
-            )) : <div></div> }
-        </div>
+            <div>
+                {this.props.user.favorites.length > 0 ? this.props.user.favorites.map((favorite, i) => (
+                    <div key={favorite.id} className="col-md-3">
+                        <FavoriteCard recipe={favorite} onHandleFavorites={this.onHandleRemoveFavorite}/>
+                    </div>
+                    // <div key={favorites.id}>
+                    //     <img src={favorites.image} onClick={() => this.onHandleDetailFavorites(favorites.id)} />
+                    //     <div>Name: {favorites.name}</div>
+                    //     <div>Serving: {favorites.numberOfServings}</div>
+                    //     <div>Time To Make: {favorites.totalTime}</div>
+                    //     <button onClick={() => this.onHandleRemoveFavorite(favorites.id)}> Remove from Favorites </button>
+                    //     <button> Add to my week </button>
+                    //     <button onClick={() => this.onHandleGroceryList({ name: favorites.name, servings: favorites.numberOfServings ,ingredients: favorites.ingredientLines })}> Add to grocery list </button>
+                    // </div>
+                )) : <div></div> }
+            </div>
         );
     }
 };
