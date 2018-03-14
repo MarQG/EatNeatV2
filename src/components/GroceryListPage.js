@@ -19,14 +19,11 @@ export class GroceryListPage extends React.Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    setCurrentSearch: (search) => dispatch(setCurrentSearch(search)),
-    getUser: () => dispatch(getUser()),
     saveUser: (user) => dispatch(saveUser(user))
 })
 
 const mapStateToProps = (state) => ({
-    user: state.user,
-    search: state.search
-})
+    user: state.user
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroceryListPage);

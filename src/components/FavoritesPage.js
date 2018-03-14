@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setCurrentSearch } from '../actions/search';
 import { getUser, saveUser } from "../actions/user";
+import FavoriteCard from './FavoriteCard';
 import API from "../utils/api";
 
 let loading = false;
@@ -69,21 +70,24 @@ export class FavoritesPage extends React.Component {
         this.props.saveUser(updatedUser);
     }
 
-    render(){
+    render = () =>{
         return(    
-        <div>
-            {this.props.user.favorites.length > 0 ? this.props.user.favorites.map(favorites => (
-                <div key={favorites.id}>
-                    <img src={favorites.image} onClick={() => this.onHandleDetailFavorites(favorites.id)} />
-                    <div>Name: {favorites.name}</div>
-                    <div>Serving: {favorites.numberOfServings}</div>
-                    <div>Time To Make: {favorites.totalTime}</div>
-                    <button onClick={() => this.onHandleRemoveFavorite(favorites.id)}> Remove from Favorites </button>
-                    <button> Add to my week </button>
-                    <button onClick={() => this.onHandleGroceryList({ name: favorites.name, servings: favorites.numberOfServings ,ingredients: favorites.ingredientLines })}> Add to grocery list </button>
-                </div>
-            )) : <div></div> }
-        </div>
+            <div>
+                {this.props.user.favorites.length > 0 ? this.props.user.favorites.map((favorite, i) => (
+                    <div key={favorite.id} className="col-md-3">
+                        <FavoriteCard recipe={favorite} onHandleFavorites={this.onHandleRemoveFavorite}/>
+                    </div>
+                    // <div key={favorites.id}>
+                    //     <img src={favorites.image} onClick={() => this.onHandleDetailFavorites(favorites.id)} />
+                    //     <div>Name: {favorites.name}</div>
+                    //     <div>Serving: {favorites.numberOfServings}</div>
+                    //     <div>Time To Make: {favorites.totalTime}</div>
+                    //     <button onClick={() => this.onHandleRemoveFavorite(favorites.id)}> Remove from Favorites </button>
+                    //     <button> Add to my week </button>
+                    //     <button onClick={() => this.onHandleGroceryList({ name: favorites.name, servings: favorites.numberOfServings ,ingredients: favorites.ingredientLines })}> Add to grocery list </button>
+                    // </div>
+                )) : <div></div> }
+            </div>
         );
     }
 };

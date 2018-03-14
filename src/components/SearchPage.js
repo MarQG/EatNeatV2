@@ -10,6 +10,19 @@ import RecipeCard from './RecipeCard';
 let loading = false;
 
 export class SearchPage extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            filteredSearch: []
+        }
+    }
+
+    componentDidMount = () => {
+        const filteredSearch = this.props.search.matches.filter(match => {
+            return (this.props.user.favorites.filter(favorite => favorite.id === match.recipe_id).length === 0);
+        });
+        this.setState({ filteredSearch: filteredSearch});
+    }
 
     onHandleDetailFavorites = id => {
         loading = true;
@@ -21,9 +34,6 @@ export class SearchPage extends React.Component {
     }
 
     onHandleFavorites = (id) => {
-        console.log(id)
-        console.log(this.props.user)
-        let currentFav = false;
         API.getDetailRecipe(id).then(response => {
             console.log(response.data);
 
@@ -57,6 +67,7 @@ export class SearchPage extends React.Component {
             }
     
             this.props.saveUser(updatedUser);
+            this.props.history.push("/search");        
         }).catch(err => {
             console.log(err);
         });
@@ -68,19 +79,14 @@ export class SearchPage extends React.Component {
     render(){
         return(    
         <div className="row">
-            {this.props.search.search != "" ? this.props.search.matches.map((newRecipe,i) => (
-                <div key={i} className="col-md-3">
-                    <RecipeCard recipe={newRecipe} onHandleFavorites={this.onHandleFavorites}/>
-                </div>
-            )) : <div>Try Searching for Something</div> }
+            {console.log(this.state.filteredSearch)}
+            {this.state.filteredSearch.length > 0 ? this.state.filteredSearch.map(match => <div key={match.recipe_id} className="col-md-3"><RecipeCard recipe={match} onHandleFavorites={this.onHandleFavorites}/></div> ) : <p>Try Searching for something</p>}
         </div>
         );
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    setCurrentSearch: (search) => dispatch(setCurrentSearch(search)),
-    getUser: () => dispatch(getUser()),
     saveUser: (user) => dispatch(saveUser(user))
 })
 
