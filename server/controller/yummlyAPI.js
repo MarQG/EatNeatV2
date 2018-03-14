@@ -146,14 +146,14 @@ router.post("/search", function(req, res){
                         } else {
                             res.json(data)
                             console.log("Create is triggering...")
-                            saveDetailRecipe(data);
+                            saveDetailRecipe(data, res);
                         }
                     })
                 })
             } else {
                 console.log("It found the search in the database")
                 res.json(data[0])
-                saveDetailRecipe(data[0]);
+                saveDetailRecipe(data[0], res);
             }
         }
     })
@@ -169,7 +169,7 @@ router.get("/search/:recipe_id", function (req, res) {
         } else {
             if (data.length === 0) {
                 console.log("Getting Recipe...")
-                getDetailRecipe(recipeId)
+                getDetailRecipe(recipeId, res)
             } else {
                 console.log("Found Data")
                 console.log(data[0])
@@ -224,7 +224,7 @@ router.put("/user", function (req, res) {
 
 
 
-const getDetailRecipe = recipeId => {
+const getDetailRecipe = (recipeId, res) => {
     let yumRecURL = "http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=" + process.env.YUMMY_APP_ID + "&_app_key=" + process.env.YUMMY_API_KEY;
     request(yumRecURL, function(err, response, body){
         console.log("Status Code:", response.statusCode);
@@ -249,77 +249,7 @@ const getDetailRecipe = recipeId => {
                     res.json({ Error: "Something went wrong. Please go back and try again" })
                 }
 
-                let json = JSON.parse(body).nutritionEstimates
-                let info = {
-                    calories: null,
-                    fat: null,
-                    carbs: null,
-                    protein: null,
-                    nutritionFound: false 
-                }
-                if (json.length === 0) {
-                   info.nutritionFound = false
-                } else {
-                    info.nutritionFound = true
-                    for (var i = 0; i < json.length; i++) {
-                        if (json[i].attribute === "FAMS") {
-                            info.fat = json[i].value
-                        }
-                        if (json[i].attribute === "PROCNT") {
-                            info.protein = json[i].value
-                        }
-                        if (json[i].attribute === "CHOCDF") {
-                            info.carbs = json[i].value
-                        }
-                        if (info.fat != null && info.carbs != null && info.protein != null) {
-                            info.calories = (Math.ceil(info.fat) * 9) + (Math.ceil(info.carbs) * 4) + (Math.ceil(info.protein) * 4)
-
-                            break;
-                        }
-                    }
-                }
-
-                const {
-                    source,
-                    ingredientLines,
-                    images,
-                    attribution,
-                    numberOfServings,
-                    totalTime,
-                    name,
-                    id
-                } = JSON.parse(body);
-
-                const { 
-                    dishTypes,
-                    instructions,
-                    image
-                } = JSON.parse(data);
-
-
-                const detailedRecipe = {
-                    source,
-                    ingredientLines,
-                    images,
-                    attribution,
-                    numberOfServings,
-                    totalTime,
-                    dishTypes,
-                    instructions,
-                    image,
-                    name,
-                    id,
-                    spoon,
-                    info
-                };
-
-               detail.create({id: recipeId, recipe: detailedRecipe}, function(err, data){
-                   if (err) {
-                       console.log(err)
-                   } else {
-                       res.json(data[0])
-                   }
-               });
+                recipeDetail(body, data, res)
                 
             })
         }
@@ -327,7 +257,7 @@ const getDetailRecipe = recipeId => {
 }
 
 
-const saveDetailRecipe = theResponse => {
+const saveDetailRecipe = (theResponse, res) => {
     for (var i = 0; i < theResponse.matches.length; i++) {
         let recipeId = theResponse.matches[i].recipe_id
         detail.find({id: recipeId}, function(err, data){
@@ -358,76 +288,8 @@ const saveDetailRecipe = theResponse => {
                                     console.log("Status Code:", resp && resp.statusCode);
                                     
                                 }
-                                let json = JSON.parse(body).nutritionEstimates
-                                let info = {
-                                    calories: null,
-                                    fat: null,
-                                    carbs: null,
-                                    protein: null,
-                                    nutritionFound: false 
-                                }
-                                if (json.length === 0) {
-                                   info.nutritionFound = false
-                                } else {
-                                    info.nutritionFound = true
-                                    for (var i = 0; i < json.length; i++) {
-                                        if (json[i].attribute === "FAMS") {
-                                            info.fat = json[i].value
-                                        }
-                                        if (json[i].attribute === "PROCNT") {
-                                            info.protein = json[i].value
-                                        }
-                                        if (json[i].attribute === "CHOCDF") {
-                                            info.carbs = json[i].value
-                                        }
-                                        if (info.fat != null && info.carbs != null && info.protein != null) {
-                                            info.calories = (Math.ceil(info.fat) * 9) + (Math.ceil(info.carbs) * 4) + (Math.ceil(info.protein) * 4)
-                
-                                            break;
-                                        }
-                                    }
-                                }
-                
-                                const {
-                                    source,
-                                    ingredientLines,
-                                    images,
-                                    attribution,
-                                    numberOfServings,
-                                    totalTime,
-                                    name,
-                                    id
-                                } = JSON.parse(body);
-                
-                                const { 
-                                    dishTypes,
-                                    instructions,
-                                    image
-                                } = JSON.parse(data);
-                
-                
-                                const detailedRecipe = {
-                                    source,
-                                    ingredientLines,
-                                    images,
-                                    attribution,
-                                    numberOfServings,
-                                    totalTime,
-                                    dishTypes,
-                                    instructions,
-                                    image,
-                                    name,
-                                    id,
-                                    spoon,
-                                    info
-                                };
-                                detail.create({id: recipeId, recipe: detailedRecipe}, function(err, data){
-                                    if (err) {
-                                        console.log(err)
-                                    } else {
-                                        console.log(data)
-                                    }
-                                })
+                                
+                                recipeDetail(body, data, res);
                             })
                         }
                     })   
@@ -437,6 +299,79 @@ const saveDetailRecipe = theResponse => {
             }
         })
     }
+}
+
+const recipeDetail = (body, data, res) => {
+    let json = JSON.parse(body).nutritionEstimates
+    let info = {
+        calories: null,
+        fat: null,
+        carbs: null,
+        protein: null,
+        nutritionFound: false 
+    }
+    if (json.length === 0) {
+       info.nutritionFound = false
+    } else {
+        info.nutritionFound = true
+        for (var i = 0; i < json.length; i++) {
+            if (json[i].attribute === "FAMS") {
+                info.fat = json[i].value
+            }
+            if (json[i].attribute === "PROCNT") {
+                info.protein = json[i].value
+            }
+            if (json[i].attribute === "CHOCDF") {
+                info.carbs = json[i].value
+            }
+            if (info.fat != null && info.carbs != null && info.protein != null) {
+                info.calories = (Math.ceil(info.fat) * 9) + (Math.ceil(info.carbs) * 4) + (Math.ceil(info.protein) * 4)
+
+                break;
+            }
+        }
+    }
+
+    const {
+        source,
+        ingredientLines,
+        images,
+        attribution,
+        numberOfServings,
+        totalTime,
+        name,
+        id
+    } = JSON.parse(body);
+
+    const { 
+        dishTypes,
+        instructions,
+        image
+    } = JSON.parse(data);
+
+
+    const detailedRecipe = {
+        source,
+        ingredientLines,
+        images,
+        attribution,
+        numberOfServings,
+        totalTime,
+        dishTypes,
+        instructions,
+        image,
+        name,
+        id,
+        spoon,
+        info
+    };
+    detail.create({id: recipeId, recipe: detailedRecipe}, function(err, data){
+        if (err) {
+            console.log(err)
+        } else {
+            res.json(data[0])
+        }
+    })
 }
 
 module.exports = router;
