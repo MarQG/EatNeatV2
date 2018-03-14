@@ -47,25 +47,6 @@ export class SearchBar extends React.Component {
             this.setState({ filters: { ...this.state.filters, diet: [ ...this.state.filters.diet, e.target.name ]}})
         }
     }
-        
-    onHandleQueryChange = (e) => {
-
-        let newValue = e.target.value;
-        this.props.setQuery(newValue);
-        this.setState({search: {query: newValue}})
-        
-    }
-
-    onHandleSubmit = (e) => {
-        e.preventDefault();
-        API.getRecipe(this.state.search.query).then((response) => {
-            console.log(response);
-            this.setState({ search: { query: "" } })
-        }).catch(err => {
-            console.log(err);
-        })
-
-    }
 
     onHandleSubmit = (e) => {
         e.preventDefault();

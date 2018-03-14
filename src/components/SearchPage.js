@@ -72,7 +72,7 @@ export class SearchPage extends React.Component {
                     <div>Time To Make: {newRecipes.totalTimeInSeconds / 60} minutes.</div>
                     <button id={newRecipes.recipe_id}  onClick={() => this.onHandleFavorites(newRecipes.recipe_id, newRecipes.recipe_name, newRecipes.imageUrlBySize, newRecipes.totalTimeInSeconds, newRecipes.attributes, newRecipes.rating)}>Add To Favs</button>
                 </div>
-            )) : <div></div> }
+            )) : <div>Try Searching for Something</div> }
         </div>
         );
     }
