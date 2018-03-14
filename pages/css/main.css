@@ -1,0 +1,441 @@
+body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #a5a8a9;
+  background: #fff;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+.gray-bg {
+  background: #ECF0F1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure {
+  color: #25283D;
+  margin: 0 0 20px 0;
+}
+
+.faq-light-grey {
+  background: #fafafa;
+}
+
+#faq-services {
+  padding: 7em 0;
+  clear: both;
+}
+
+@media screen and (max-width: 768px) {
+  #faq-services {
+    padding: 3em 0;
+  }
+}
+
+.wrap {
+  padding-left: 2em;
+}
+
+@media screen and (max-width: 768px) {
+  .wrap {
+    padding-left: 0;
+  }
+}
+
+.services {
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.services .desc {
+  padding-left: 75px;
+}
+
+.services .desc h3 {
+  line-height: 34px;
+}
+
+.faq-heading {
+  margin-bottom: 5em;
+}
+
+.faq-heading .sm {
+  font-size: 16px;
+  letter-spacing: 20px;
+  color: #cccccc;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.faq-heading h2 {
+  font-size: 50px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.faq-heading h2 span {
+  display: block;
+  margin-bottom: 0;
+  line-height: 60px;
+}
+
+@media screen and (max-width: 480px) {
+  .faq-heading h2 span {
+    line-height: 50px;
+    font-size: 40px;
+  }
+}
+
+.faq-heading h2 .thin {
+  font-weight: 100;
+}
+
+.faq-heading h2 .thick {
+  font-weight: 700;
+}
+
+.sp-title {
+  font-size: 60px;
+  margin-bottom: 40px;
+}
+
+.sp-title span {
+  background: #8F3985;
+  padding: 0 10px;
+  color: #fff;
+  display: inline-block;
+}
+
+.pt100 {
+  padding-top: 100px;
+}
+
+.pb100 {
+  padding-bottom: 100px;
+}
+
+.pt50 {
+  padding-top: 50px;
+}
+
+.pb50 {
+  padding-bottom: 50px;
+}
+
+.mb100 {
+  margin-bottom: 100px;
+}
+
+.spad {
+  padding: 100px 0;
+}
+
+.section-title {
+  margin-bottom: 75px;
+}
+
+.section-title h1,
+.section-title h2 {
+  display: inline-block;
+  background: #baff00;
+  padding: 0 20px;
+  margin-bottom: 0;
+  font-size: 60px;
+}
+
+.set-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.intro-text p {
+  margin-bottom: 50px;
+}
+
+.cta-section {
+  position: relative;
+  margin-bottom: 100px;
+}
+
+.cta-section:after {
+  content: "";
+  position: absolute;
+  width: 67%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  background: #222222;
+  z-index: 2;
+}
+
+.cta-section .cta-image-box {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 0;
+  background-image: url("../img/cta-img.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cta-section .container {
+  position: relative;
+  z-index: 9;
+}
+
+.cta-section .cta-content h2 {
+  color: #fff;
+}
+
+.cta-section .cta-content p {
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.cta-section .cta-content .cta-img-icon:last-child {
+  margin-right: 0;
+}
+
+.cta-section .cta-content .cta-img-icon img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-height: 100%;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.mt-120 {
+  margin-top: 120px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.pb-30 {
+  padding-bottom: 30px;
+}
+
+.pb-40 {
+  padding-bottom: 40px;
+}
+
+.section-gap {
+  padding: 120px 0;
+}
+
+.info-area .info-thumb {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.info-area .info-content:after {
+  content: "";
+  box-shadow: -35.355px 35.355px 50px 0px rgba(157, 157, 157, 0.3);
+  position: absolute;
+  right: 100%;
+  top: 0;
+  background: #fff;
+  width: 70px;
+  height: 100%;
+}
+
+.info-area .info-content h1 {
+  line-height: 1.15em;
+  margin-bottom: 30px;
+}
+
+.info-area .info-content .meta {
+  color: #222;
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.info-area .info-left {
+  z-index: 2;
+}
+
+@media (max-width: 575px) {
+  .info-area .info-content {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .info-area .info-content:after {
+    width: 50px;
+  }
+}
+
+@media (max-width: 575px) {
+  .info-area .info-content:after {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .info-area .info-content {
+    padding: 30px 30px 30px 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .info-area .info-content {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 800px) {
+  .info-area .info-left {
+    margin-top: 0px;
+    margin-bottom: 40px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .cta-section {
+    background: #222;
+    margin-bottom: 0;
+  }
+  .cta-image-box,
+  .cta-section:after {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  h1,
+  .sp-title {
+    font-size: 45px;
+  }
+  .cta-section {
+    background: #222;
+    margin-bottom: 0;
+  }
+  .cta-image-box,
+  .cta-section:after {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 479px) {}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.mt-120 {
+  margin-top: 120px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.pb-30 {
+  padding-bottom: 30px;
+}
+
+.pb-40 {
+  padding-bottom: 40px;
+}
+
+.section-gap {
+  padding: 120px 0;
+}
+
+.info-area .info-thumb {
+  overflow: hidden;
+  display: inline-block;
+}
+
+@media (max-width: 800px) {
+  .info-area .info-content {
+    text-align: center;
+    padding: 80px 30px 80px 0;
+  }
+}
+
+.info-area .info-content {
+  box-shadow: 0px 0px 50px 0px rgba(157, 157, 157, 0.3);
+  position: relative;
+  background: #fff;
+  padding: 80px 100px 80px 40px;
+}
+
+@media (max-width: 575px) {
+  .info-area .info-content {
+    margin-top: 30px;
+  }
+}
+
+.info-area .info-content:after {
+  content: "";
+  box-shadow: -35.355px 35.355px 50px 0px rgba(157, 157, 157, 0.3);
+  position: absolute;
+  right: 100%;
+  top: 0;
+  background: #fff;
+  width: 70px;
+  height: 100%;
+}
+
+@media (max-width: 991px) {
+  .info-area .info-content:after {
+    width: 50px;
+  }
+}
+
+@media (max-width: 575px) {
+  .info-area .info-content:after {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .info-area .info-content {
+    padding: 30px 30px 30px 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .info-area .info-content {
+    padding: 30px;
+  }
+}
+
+.info-area .info-content h1 {
+  line-height: 1.15em;
+  margin-bottom: 30px;
+}
+
+.info-area .info-content .meta {
+  color: #222;
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.info-area .info-left {
+  z-index: 2;
+}
+
+@media (max-width: 800px) {
+  .info-area .info-left {
+    margin-top: 0px;
+    margin-bottom: 40px;
+  }
+}
