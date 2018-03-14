@@ -2,7 +2,7 @@ import React from 'react';
 import API from '../utils/api';
 import Modal from 'react-modal';
 
-export default class RecipeCard extends React.Component{
+export default class FavoriteCard extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -24,7 +24,7 @@ export default class RecipeCard extends React.Component{
   };
 
   wrapperStyles = {
-    backgroundImage: 'url(' + this.props.recipe.imageUrlBySize[90] + ')',
+    backgroundImage: 'url(' + this.props.recipe.image + ')',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center'
@@ -53,16 +53,16 @@ export default class RecipeCard extends React.Component{
         <div className="wrapper" style={this.wrapperStyles}>      
           <div className="header__card">
             <ul className="menu-content">
-              <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.recipe_id)} className="fa fa-heart-o"></a></li>
-              <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTimeInSeconds / 60} minutes</span></a></li>
+              <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.id)} className="fa fa-heart"></a></li>
+              <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTime}</span></a></li>
               <li><a className="fa fa-users"><span>2-4</span></a></li>
             </ul>
           </div>
           <div className="data">
             <div className="content">
               <span className="author">Recipe Source Name</span>
-              <h1 className="title"><a href="#">{this.props.recipe.recipe_name}</a></h1>
-              <a onClick={() => this.onHandleRecipePreview(this.props.recipe.recipe_id)} className="button__card">Preview Recipe</a>
+              <h1 className="title"><a href="#">{this.props.recipe.name}</a></h1>
+              <a onClick={() => this.onHandleRecipePreview(this.props.recipe.id)} className="button__card">Preview Recipe</a>
               <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
                 <div>
                   {this.state.recipe.name === undefined ? <img src="./images/loader.gif"/> : <div>

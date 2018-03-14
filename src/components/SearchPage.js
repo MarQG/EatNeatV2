@@ -80,7 +80,7 @@ export class SearchPage extends React.Component {
         return(    
         <div className="row">
             {console.log(this.state.filteredSearch)}
-            {this.state.filteredSearch.length > 0 ? this.state.filteredSearch.map(match => <RecipeCard recipe={match} onHandleFavorites={this.onHandleFavorites}/>): <p>Try Searching for something</p>}
+            {this.state.filteredSearch.length > 0 ? this.state.filteredSearch.map(match => <div key={match.recipe_id} className="col-md-3"><RecipeCard recipe={match} onHandleFavorites={this.onHandleFavorites}/></div> ) : <p>Try Searching for something</p>}
         </div>
         );
     }
