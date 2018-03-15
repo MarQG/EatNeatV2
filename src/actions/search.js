@@ -1,9 +1,5 @@
-export const setSearchFilters = (filters = []) => ({
-    type: "SET_SEARCH_FILTERS",
-    filters
-});
 
-export const setQuery = (query = '') => ({
-    type: "SET_QUERY",
-    query
+export const setCurrentSearch = (search = {}) => ({
+    type: "SET_CURRENT_SEARCH",
+    search
 });
