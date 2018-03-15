@@ -346,6 +346,7 @@ const saveBulkRecipe = (body, data) => {
         attribution,
         numberOfServings,
         totalTime,
+        totalTimeInSeconds,
         name,
         id
     } = recipeInfo;

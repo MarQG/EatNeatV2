@@ -38,6 +38,7 @@ export default class RecipeCard extends React.Component{
     })
   }
   
+  
   afterOpenModal =() => {
     // references are now sync'd and can be accessed.
   }
@@ -55,39 +56,36 @@ export default class RecipeCard extends React.Component{
             <ul className="menu-content">
               <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.recipe_id)} className="fa fa-heart-o"></a></li>
               <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTimeInSeconds / 60} minutes</span></a></li>
-              <li><a className="fa fa-users"><span>2-4</span></a></li>
+              <li><a className="fa fa-star"><span>{this.props.recipe.rating}</span></a></li>
             </ul>
           </div>
           <div className="data">
             <div className="content">
-              <span className="author">Recipe Source Name</span>
-              <h1 className="title"><a href="#">{this.props.recipe.recipe_name}</a></h1>
+              <span className="author">information powered by <img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></span>
+              <h1 className="title">{this.props.recipe.recipe_name}</h1>
               <a onClick={() => this.onHandleRecipePreview(this.props.recipe.recipe_id)} className="button__card">Preview Recipe</a>
               <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
                 <div>
                   {this.state.recipe.name === undefined ? <img src="./images/loader.gif"/> : <div>
                     <h2>{this.state.recipe.name}</h2>
-                    <img src={this.state.recipe.image} />
+                    <img src={this.state.recipe.images[0].hostedLargeUrl} />
                     <div>Servings: {this.state.recipe.numberOfServings}</div>
                     <div>Total Time: {this.state.recipe.totalTime}</div>
                     <div>Ingredients: {this.state.recipe.ingredientLines.map((element, i) => (
                       <div key={i}>{element}</div>
                     ))}</div>
                     {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
+                  
+                    <button onClick={() => this.props.onHandleAddToWeek(this.props.recipe.recipe_id)}>Add To Week</button>
+                    <button onClick={() => this.props.onHandleToGrocery(this.state.recipe)}>Add To Grocery List</button>
                   </div>}
+                  
                   
                   <button onClick={this.closeModal}>close</button>
                 </div>  
         
               </Modal>
               
-            </div>
-            <div className="data">
-              <div className="content">
-                <span className="author">Recipe Source Name</span>
-                <h1 className="title"><a href="#">{this.props.recipe.recipe_name}</a></h1>
-                <a href="#" className="button__card">Preview Recipe</a>
-              </div>
             </div>
           </div>
         </div>
