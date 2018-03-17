@@ -7,6 +7,7 @@ export default class RecipeCard extends React.Component{
     super(props);
     this.state = {
       modalIsOpen: false,
+      weekModalOpen: false,
       recipe: {}
     }
   }
@@ -47,6 +48,10 @@ export default class RecipeCard extends React.Component{
     this.setState({ modalIsOpen: false });
   }
 
+  closeWeekModal = () => {
+    this.setState({ weekModalOpen: false });
+  }
+ 
   render(){
     return(
       <div className="example-2 card">
@@ -74,7 +79,7 @@ export default class RecipeCard extends React.Component{
                     <div>Ingredients: {this.state.recipe.ingredientLines.map((element, i) => (
                       <div key={i}>{element}</div>
                     ))}</div>
-                    {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
+                    {this.state.recipe.instructions === null ? <div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
                   
                     <button onClick={() => this.props.onHandleAddToWeek(this.props.recipe.recipe_id)}>Add To Week</button>
                     {!this.props.inGrocery ? 
