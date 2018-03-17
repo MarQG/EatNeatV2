@@ -11,8 +11,17 @@ import SearchPage from '../components/SearchPage';
 import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
+import { ToastContainer, style } from 'react-toastify';
 
 export const history = createHistory();
+
+style({
+    colorInfo: "#25283D",
+    TOP_RIGHT: {
+        top: '5em',
+        right: '1em'
+    },
+});
 
 const AppRouter = () => (
     <Router history={history}>
@@ -26,6 +35,7 @@ const AppRouter = () => (
                 <PrivateRoute path="/search" component={SearchPage}/>
                 <Route component={NotFoundPage}/>
             </Switch>
+            <ToastContainer autoClose={8000} />
         </div>
         
     </Router>

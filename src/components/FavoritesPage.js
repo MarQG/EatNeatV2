@@ -4,6 +4,7 @@ import { setCurrentSearch } from '../actions/search';
 import { getUser, saveUser } from "../actions/user";
 import FavoriteCard from './FavoriteCard';
 import API from "../utils/api";
+import { toast } from 'react-toastify';
 
 let loading = false;
 export class FavoritesPage extends React.Component {
@@ -27,18 +28,26 @@ export class FavoritesPage extends React.Component {
             _id
         } = this.props.user;
         
-            const filteredFavs = favorites.filter(favorite => favorite.id != id);
-
-            const updatedUser = {
-                favorites: filteredFavs,
-                user_id,
-                recent_searches,
-                my_week,
-                grocery_list,
-                _id
+        const filteredFavs = favorites.filter(favorite => {
+            if(favorite.id === id){
+                toast.info(`Removed ${favorite.name} from Favorites!`);
             }
-    
-            this.props.saveUser(updatedUser);
+            
+            return favorite.id != id;
+        });
+
+        const updatedUser = {
+            favorites: filteredFavs,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list,
+            _id
+        }
+
+        
+
+        this.props.saveUser(updatedUser);
     }
 
     onHandleGroceryList = groceryItem => {
