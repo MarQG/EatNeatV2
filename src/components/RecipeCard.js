@@ -60,7 +60,6 @@ export default class RecipeCard extends React.Component{
           </div>
           <div className="data">
             <div className="content">
-              <span>{this.recipe.}</span>
               {/* <span className="author">information powered by <img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></span> */}
               <h1 className="title">{this.props.recipe.recipe_name}</h1>
               <a onClick={() => this.onHandleRecipePreview(this.props.recipe.recipe_id)} className="button__card">Preview Recipe</a>
