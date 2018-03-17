@@ -404,7 +404,7 @@ const recipeDetail = ( body, data, res) => {
         protein: null,
         nutritionFound: false 
     }
-    if (recipeInfo.nutritionEstimates.length === 0) {
+    if (recipeInfo.nutritionEstimates.length === 0 && recipeInfo.nutritionEstimates.length != undefined) {
        info.nutritionFound = false
     } else {
         info.nutritionFound = true
