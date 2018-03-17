@@ -121,6 +121,10 @@ export class SearchPage extends React.Component {
             this.props.saveUser(updatedUser);
     }
 
+    onHandleWeek = (recipe) => {
+        
+    }
+
 
     render(){
         return(    

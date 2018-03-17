@@ -7,6 +7,7 @@ export default class RecipeCard extends React.Component{
     super(props);
     this.state = {
       modalIsOpen: false,
+      weekModalOpen: false,
       recipe: {}
     }
   }
@@ -23,13 +24,6 @@ export default class RecipeCard extends React.Component{
       background: '#ECF0F1'
     }
   };
-
-  wrapperStyles = {
-    backgroundImage: 'url(' + this.props.recipe.imageUrlBySize[90] + ')',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
-  }
 
   onHandleRecipePreview = id => {
     this.setState({ modalIsOpen: true });
@@ -48,21 +42,26 @@ export default class RecipeCard extends React.Component{
     this.setState({ modalIsOpen: false });
   }
 
+  closeWeekModal = () => {
+    this.setState({ weekModalOpen: false });
+  }
+ 
   render(){
     return(
       <div className="example-2 card">
         {}
-        <div className="wrapper" style={this.wrapperStyles}>      
+        <div className="wrapper"> 
+          <img src={this.props.recipe.imageUrlBySize[90]}/>     
           <div className="header__card">
             <ul className="menu-content">
               <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.recipe_id)} className="fa fa-heart-o"></a></li>
-              <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTimeInSeconds / 60} minutes</span></a></li>
+              <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTimeInSeconds / 60}</span></a></li>
               <li><a className="fa fa-star"><span>{this.props.recipe.rating}</span></a></li>
             </ul>
           </div>
           <div className="data">
             <div className="content">
-              <span className="author">information powered by <img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></span>
+              {/* <span className="author">information powered by <img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></span> */}
               <h1 className="title">{this.props.recipe.recipe_name}</h1>
               <a onClick={() => this.onHandleRecipePreview(this.props.recipe.recipe_id)} className="button__card">Preview Recipe</a>
               <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
