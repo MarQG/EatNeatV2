@@ -18,12 +18,6 @@ export class FavoritesPage extends React.Component {
         })
     }
 
-    // onHandleMyWeek = (id) =>{
-    //     const {
-
-    //     } 
-    // }
-
     onHandleRemoveFavorite = id => {
         const {
             favorites,

@@ -23,7 +23,7 @@
         display: inline-block;;
       }
       #faveBtn {
-        padding-right:14px;
+        padding-right:35px;
       }
       a {
         color: $off-white;
@@ -37,7 +37,8 @@
       }
     }
     .wrapper:hover img {
-      opacity: 0.2
+      opacity: 0.2;
+      transition: 0.3s ease;
     }
     .wrapper {
       background-color: #8F3985;
