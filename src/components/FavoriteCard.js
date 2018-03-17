@@ -59,7 +59,9 @@ export default class FavoriteCard extends React.Component{
             <ul className="menu-content">
               <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.id)} className="fa fa-heart"></a></li>
               <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTime}</span></a></li>
-              <li><a className="fa fa-users"><span>{this.props.recipe.numberOfServings}</span></a></li>
+              <li><a className="fas fa-calendar-plus"><span>{this.props.recipe.totalTime}</span></a></li>
+
+              {/* <li><a id="myWkBtn" onClick={() => this.props.onHandleMyWeek(this.props.recipe.id)} className="fa fa-calendar-plus"></a></li> */}
             </ul>
           </div>
           <div className="data">
