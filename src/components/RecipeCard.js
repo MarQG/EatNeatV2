@@ -50,11 +50,12 @@ export default class RecipeCard extends React.Component{
     return(
       <div className="example-2 card">
         {}
-        <div className="wrapper" style={this.wrapperStyles}>      
+        <div className="wrapper" style={this.wrapperStyles}> 
+          <img src={this.props.recipe.imageUrlBySize[90]}>     
           <div className="header__card">
             <ul className="menu-content">
               <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.recipe_id)} className="fa fa-heart-o"></a></li>
-              <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTimeInSeconds / 60} minutes</span></a></li>
+              <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTimeInSeconds / 60}</span></a></li>
               <li><a className="fa fa-star"><span>{this.props.recipe.rating}</span></a></li>
             </ul>
           </div>

@@ -36,8 +36,8 @@
         transform: translate(-50%, 0);
       }
     }
-    .wrapper:hover{
-        background-color:#99aeff;
+    .wrapper:hover {
+      background-color:#8F3985;
     }
     .wrapper {
       background-color: $off-white;
@@ -70,6 +70,10 @@
       margin-top: 10px;
       margin-bottom: 10px;
     }
+  }
+
+  .wrapper img {
+    opacity: 0.2;
   }
   
   .example-2 {
