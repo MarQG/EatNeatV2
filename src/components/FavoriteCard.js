@@ -85,12 +85,18 @@ export default class FavoriteCard extends React.Component{
                     {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
                   </div>
                     
-                    
-                    
+                    <button className="button" onClick={() => this.props.onHandleAddToWeek(this.props.recipe.recipe_id)}>Add To Week</button>
+                    {!this.props.inGrocery ? 
+                      <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Add To Grocery List</button> 
+                      : 
+                    <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Remove From Grocery List</button>}                  
                   </div>}
+
                   <button className="button" onClick={this.closeModal}>close</button>
                 </div>  
+
               </Modal>
+
             </div>
           </div>
         </div>
