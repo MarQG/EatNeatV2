@@ -19,7 +19,8 @@ export default class FavoriteCard extends React.Component{
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      color: 'black'
+      color: 'black',
+      backgroundColor: "#ECF0F1"
     }
   };
 
@@ -65,17 +66,29 @@ export default class FavoriteCard extends React.Component{
               <a onClick={() => this.onHandleRecipePreview(this.props.recipe.id)} className="button__card">Preview Recipe</a>
               <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
                 <div>
-                  {this.state.recipe.name === undefined ? <img src="./images/loader.gif"/> : <div>
+                  {this.state.recipe.name === undefined ? <img src="./images/loader.gif"/> : 
+                  <div className="row">
+                  <div className="col-md-6">
                     <h2>{this.state.recipe.name}</h2>
-                    <img src={this.state.recipe.image} />
-                    <div>Servings: {this.state.recipe.numberOfServings}</div>
+                    <img src={this.state.recipe.image} style={{width: "100%", height: "max-content", padding: "0px 0px 20px" }}/>
+                  </div>
+                  <div className="col-md-6">
+                  <div>Servings: {this.state.recipe.numberOfServings}</div>
                     <div>Total Time: {this.state.recipe.totalTime}</div>
-                    <div>Ingredients: {this.state.recipe.ingredientLines.map((element, i) => (
-                      <div key={i}>{element}</div>
-                    ))}</div>
+                    <h4>Ingredients: </h4>
+                    <div style={{padding:"20px"}}>
+                      
+                      {this.state.recipe.ingredientLines.map((element, i) => (
+                        <div key={i}>{element}</div>
+                      ))}
+                    </div>
                     {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
+                  </div>
+                    
+                    
+                    
                   </div>}
-                  <button onClick={this.closeModal}>close</button>
+                  <button className="button" onClick={this.closeModal}>close</button>
                 </div>  
               </Modal>
             </div>
