@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const GroceryCard = (props) => (
-    <form className="todo-list">
+    <div className="todo-list">
             <h1 className="grocery-title"> {props.grocery.name}</h1>
             <p>Serving Size: {props.grocery.servings} People</p>
             
@@ -10,9 +10,9 @@ const GroceryCard = (props) => (
             {props.grocery.ingredients.length > 0 ? 
                 props.grocery.ingredients.map(
                     (ingredient, i) =>
-                    <div  key={i}>
-                        <input type="checkbox" id={i}/>
-                        <label htmlFor={i} className="todo">
+                        <div key={props.grocery.id + i}>
+                            <input type="checkbox" id= {props.grocery.id + i}/>
+                            <label htmlFor={props.grocery.id + i} className="todo">
                             <i className="fa fa-check"></i>
                             {ingredient}
                         </label>
@@ -21,8 +21,10 @@ const GroceryCard = (props) => (
                         ) : 
                 <li>Sorry no ingredients found</li>}
             </span>
-        
-    </form>
+
+    </div>
 )
+
+
 
 export default GroceryCard;
