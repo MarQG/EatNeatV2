@@ -5,6 +5,8 @@ import { getUser, saveUser } from "../actions/user";
 import API from "../utils/api";
 import SearchBar from './SearchBar';
 import RecipeCard from './RecipeCard';
+import { toast } from 'react-toastify';
+import { css } from 'glamor';
 
 // for loading detailed recipe if you want to put a loader GIF
 let loading = false;
@@ -34,6 +36,7 @@ export class SearchPage extends React.Component {
     }
 
     onHandleFavorites = (id) => {
+
         API.getDetailRecipe(id).then(response => {
             console.log(response.data);
 
@@ -53,7 +56,7 @@ export class SearchPage extends React.Component {
                 favorites.push(newFav);
             } 
             else if (favorites.some(favorite => favorite.id === newFav.id)) {
-                console.log("Checing and removing a favorite");
+                console.log("Checking and removing a favorite");
                 favorites.filter(favorite => favorite.id != newFav.id);
             }
 
@@ -65,7 +68,7 @@ export class SearchPage extends React.Component {
                 grocery_list,
                 _id
             }
-    
+            toast.info(`Added ${newFav.name} to your Favorites!`);
             this.props.saveUser(updatedUser);
             this.props.history.push("/search");        
         }).catch(err => {
@@ -75,12 +78,55 @@ export class SearchPage extends React.Component {
         
     }
 
+    onHandleGroceryList = (recipe, inGrocery) => {
+        console.log(recipe);
+
+            const {
+                favorites,
+                user_id,
+                recent_searches,
+                my_week,
+                grocery_list,
+                _id
+            } = this.props.user;
+
+            const newList = {
+                id: recipe.id,
+                name: recipe.name,
+                ingredients: recipe.ingredientLines,
+                servings: recipe.numberOfServings
+            }
+
+            let filteredList = [];
+
+            // grocery_list.push(newList)
+            if (!inGrocery) {
+                toast.info(`Added ${newList.name} to your Grocery List!`);
+                grocery_list.push(newList);
+            }
+            else{
+                toast.info(`Updated your Grocery List!`);
+                filteredList = grocery_list.filter(grocery => grocery.id != newList.id);
+            }
+
+            const updatedUser = {
+                favorites,
+                user_id,
+                recent_searches,
+                my_week,
+                grocery_list: inGrocery ? filteredList : grocery_list,
+                _id
+            }
+
+            this.props.saveUser(updatedUser);
+    }
+
 
     render(){
         return(    
         <div className="row">
             {console.log(this.state.filteredSearch)}
-            {this.state.filteredSearch.length > 0 ? this.state.filteredSearch.map(match => <div key={match.recipe_id} className="col-md-3"><RecipeCard recipe={match} onHandleFavorites={this.onHandleFavorites}/></div> ) : <p>Try Searching for something</p>}
+            {this.state.filteredSearch.length > 0 ? this.state.filteredSearch.map(match => <div key={match.recipe_id} className="col-md-3"><RecipeCard recipe={match} onHandleFavorites={this.onHandleFavorites} onHandleToGrocery={this.onHandleGroceryList} inGrocery={this.props.user.grocery_list.some(item => item.id === match.recipe_id)}/></div> ) : <p>Try Searching for something</p>}
         </div>
         );
     }
