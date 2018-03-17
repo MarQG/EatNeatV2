@@ -41,22 +41,10 @@ export default class RecipeCard extends React.Component{
     this.setState({ modalIsOpen: false });
   }
 
-<<<<<<< HEAD
   closeWeekModal = () => {
     this.setState({ weekModalOpen: false });
   }
  
-=======
-  // wrapperStyles = {
-  //   backgroundImage: 'url(' + this.props.recipe.imageUrlBySize[90] + ')',
-  //   backgroundSize: 'cover',
-  //   backgroundRepeat: 'no-repeat',
-  //   backgroundPosition: 'center'
-  // }
-
-  // style={this.wrapperStyles}
-
->>>>>>> 62a1dd8dd1035b2650499940c7977cece30bf33e
   render(){
     return(
       <div className="example-2 card">
