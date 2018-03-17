@@ -137,7 +137,7 @@ export default class RecipeCard extends React.Component{
                     <option value="dinner">Dinner</option>
                   </select>
                   <button onClick={() => {
-                    this.props.onHandleSubmitWeek(this.state.recipe);
+                    this.props.onHandleSubmitWeek(this.state.recipe, this.state.daySelect, this.state.mealSelect);
                     this.onHandleSubmitToWeek();
                     }}>Submit</button>
                   <button onClick={this.closeWeekModal}>Close</button>

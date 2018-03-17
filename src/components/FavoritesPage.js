@@ -50,8 +50,8 @@ export class FavoritesPage extends React.Component {
         this.props.saveUser(updatedUser);
     }
 
-    onHandleGroceryList = groceryItem => {
-        console.log(groceryItem);
+    onHandleSubmitWeek = (recipe, day, mealTime) => {
+        console.log(recipe);
         const {
             favorites,
             user_id,
@@ -60,22 +60,66 @@ export class FavoritesPage extends React.Component {
             grocery_list,
             _id
         } = this.props.user;
-        
-        grocery_list.push(groceryItem);
+
+        const updateWeek = {
+            ...my_week,
+            [day]: {
+                [mealTime]: recipe
+            }
+        }
 
         const updatedUser = {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week: updateWeek,
+            grocery_list,
+            _id
+        }
+
+        this.props.saveUser(updatedUser);
+    }
+
+    onHandleGroceryList = (recipe, inGrocery) => {
+        console.log(recipe);
+
+        const {
             favorites,
             user_id,
             recent_searches,
             my_week,
             grocery_list,
             _id
-        } 
+        } = this.props.user;
 
-        
+        const newList = {
+            id: recipe.id,
+            name: recipe.name,
+            ingredients: recipe.ingredientLines,
+            servings: recipe.numberOfServings
+        }
 
+        let filteredList = [];
 
-        console.log(updatedUser);
+        // grocery_list.push(newList)
+        if (!inGrocery) {
+            toast.info(`Added ${newList.name} to your Grocery List!`);
+            grocery_list.push(newList);
+        }
+        else {
+            toast.info(`Updated your Grocery List!`);
+            filteredList = grocery_list.filter(grocery => grocery.id != newList.id);
+        }
+
+        const updatedUser = {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list: inGrocery ? filteredList : grocery_list,
+            _id
+        }
+
         this.props.saveUser(updatedUser);
     }
 
@@ -84,7 +128,13 @@ export class FavoritesPage extends React.Component {
             <div>
                 {this.props.user.favorites.length > 0 ? this.props.user.favorites.map((favorite, i) => (
                     <div key={favorite.id} className="col-md-3">
-                        <FavoriteCard recipe={favorite} onHandleFavorites={this.onHandleRemoveFavorite}/>
+                        <FavoriteCard recipe={favorite}
+                            onHandleFavorites={this.onHandleFavorites}
+                            onHandleToGrocery={this.onHandleGroceryList}
+                            inGrocery={
+                                this.props.user.grocery_list.some(
+                                    item => item.id === favorite.id)}
+                            onHandleSubmitWeek={this.onHandleSubmitWeek}/>
                     </div>
                     // <div key={favorites.id}>
                     //     <img src={favorites.image} onClick={() => this.onHandleDetailFavorites(favorites.id)} />

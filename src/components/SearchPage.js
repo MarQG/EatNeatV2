@@ -121,8 +121,34 @@ export class SearchPage extends React.Component {
             this.props.saveUser(updatedUser);
     }
 
-    onHandleSubmitWeek = (recipe) => {
+    onHandleSubmitWeek = (recipe, day, mealTime) => {
         console.log(recipe);
+        const {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list,
+            _id
+        } = this.props.user;
+
+        const updateWeek = {
+            ...my_week,
+            [day]: {
+                [mealTime]: recipe
+            }
+        }
+
+        const updatedUser = {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week: updateWeek,
+            grocery_list,
+            _id
+        }
+
+        this.props.saveUser(updatedUser);
     }
 
 
