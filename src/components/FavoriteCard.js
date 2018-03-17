@@ -24,13 +24,6 @@ export default class FavoriteCard extends React.Component{
     }
   };
 
-  wrapperStyles = {
-    backgroundImage: 'url(' + this.props.recipe.images[0].hostedLargeUrl + ')',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
-  }
-
   onHandleRecipePreview = id => {
     this.setState({ modalIsOpen: true });
     API.getDetailRecipe(id).then(response => {
@@ -47,11 +40,21 @@ export default class FavoriteCard extends React.Component{
     this.setState({ modalIsOpen: false });
   }
 
+  // wrapperStyles = {
+  //   backgroundImage: 'url(' + this.props.recipe.images[0].hostedLargeUrl + ')',
+  //   backgroundSize: 'cover',
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundPosition: 'center'
+  // }
+
+  // style={this.wrapperStyles}
+
   render(){
     return(
       <div className="example-2 card">
         {}
-        <div className="wrapper" style={this.wrapperStyles}>      
+        <div className="wrapper">      
+          <img src={this.props.recipe.images[0].hostedLargeUrl}/>
           <div className="header__card">
             <ul className="menu-content">
               <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.id)} className="fa fa-heart"></a></li>
