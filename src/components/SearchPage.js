@@ -121,8 +121,8 @@ export class SearchPage extends React.Component {
             this.props.saveUser(updatedUser);
     }
 
-    onHandleWeek = (recipe) => {
-        
+    onHandleSubmitWeek = (recipe) => {
+        console.log(recipe);
     }
 
 
@@ -130,7 +130,22 @@ export class SearchPage extends React.Component {
         return(    
         <div className="row">
             {console.log(this.state.filteredSearch)}
-            {this.state.filteredSearch.length > 0 ? this.state.filteredSearch.map(match => <div key={match.recipe_id} className="col-md-3"><RecipeCard recipe={match} onHandleFavorites={this.onHandleFavorites} onHandleToGrocery={this.onHandleGroceryList} inGrocery={this.props.user.grocery_list.some(item => item.id === match.recipe_id)}/></div> ) : <p>Try Searching for something</p>}
+            {this.state.filteredSearch.length > 0 ? 
+                this.state.filteredSearch.map(
+                    match => 
+                    <div key={match.recipe_id} className="col-md-3">
+                        <RecipeCard 
+                            recipe={match} 
+                            onHandleFavorites={this.onHandleFavorites} 
+                            onHandleToGrocery={this.onHandleGroceryList} 
+                            inGrocery={
+                                this.props.user.grocery_list.some(
+                                    item => item.id === match.recipe_id)}
+                            onHandleSubmitWeek={this.onHandleSubmitWeek}
+                        />
+                        </div>) 
+                        : 
+                        <p>Try Searching for something</p>}
         </div>
         );
     }
