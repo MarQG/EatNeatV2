@@ -55,14 +55,16 @@ export class MyWeekPage extends React.Component {
 
     render(){
         return (
-            <div> 
-                <MyWeekCard day={'monday'} dayMeals={this.props.user.my_week.monday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>
-                <MyWeekCard day={'tuesday'} dayMeals={this.props.user.my_week.tuesday} onHandleToGrocery={this.onHandleGroceryList}  grocery_list={this.props.user.grocery_list}/>   
-                <MyWeekCard day={'wednesday'} dayMeals={this.props.user.my_week.wednesday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>   
-                <MyWeekCard day={'thursday'} dayMeals={this.props.user.my_week.thursday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>   
-                <MyWeekCard day={'friday'} dayMeals={this.props.user.my_week.friday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>   
-                <MyWeekCard day={'saturday'} dayMeals={this.props.user.my_week.saturday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>   
-                <MyWeekCard day={'sunday'} dayMeals={this.props.user.my_week.sunday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>
+            <div className="container-fluid">
+                <div className="row"> 
+                    <MyWeekCard day={'monday'} dayMeals={this.props.user.my_week.monday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>
+                    <MyWeekCard day={'tuesday'} dayMeals={this.props.user.my_week.tuesday} onHandleToGrocery={this.onHandleGroceryList}  grocery_list={this.props.user.grocery_list}/>   
+                    <MyWeekCard day={'wednesday'} dayMeals={this.props.user.my_week.wednesday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>   
+                    <MyWeekCard day={'thursday'} dayMeals={this.props.user.my_week.thursday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>   
+                    <MyWeekCard day={'friday'} dayMeals={this.props.user.my_week.friday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>   
+                    <MyWeekCard day={'saturday'} dayMeals={this.props.user.my_week.saturday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>   
+                    <MyWeekCard day={'sunday'} dayMeals={this.props.user.my_week.sunday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>
+                </div>
             </div>
         );
     }

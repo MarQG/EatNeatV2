@@ -51,6 +51,7 @@ export class FavoritesPage extends React.Component {
     }
 
     onHandleSubmitWeek = (recipe, day, mealTime) => {
+
         console.log(recipe);
         const {
             favorites,
@@ -64,10 +65,12 @@ export class FavoritesPage extends React.Component {
         const updateWeek = {
             ...my_week,
             [day]: {
+                ...my_week[day],
                 [mealTime]: recipe
             }
         }
 
+        toast.info(`Added ${recipe.name} to ${day.toUpperCase()} for ${mealTime.toUpperCase()}.`);
         const updatedUser = {
             favorites,
             user_id,
@@ -124,29 +127,32 @@ export class FavoritesPage extends React.Component {
     }
 
     render = () =>{
-        return(    
-            <div>
-                {this.props.user.favorites.length > 0 ? this.props.user.favorites.map((favorite, i) => (
-                    <div key={favorite.id} className="col-md-3">
-                        <FavoriteCard recipe={favorite}
-                            onHandleFavorites={this.onHandleFavorites}
-                            onHandleToGrocery={this.onHandleGroceryList}
-                            inGrocery={
-                                this.props.user.grocery_list.some(
-                                    item => item.id === favorite.id)}
-                            onHandleSubmitWeek={this.onHandleSubmitWeek}/>
-                    </div>
-                    // <div key={favorites.id}>
-                    //     <img src={favorites.image} onClick={() => this.onHandleDetailFavorites(favorites.id)} />
-                    //     <div>Name: {favorites.name}</div>
-                    //     <div>Serving: {favorites.numberOfServings}</div>
-                    //     <div>Time To Make: {favorites.totalTime}</div>
-                    //     <button onClick={() => this.onHandleRemoveFavorite(favorites.id)}> Remove from Favorites </button>
-                    //     <button> Add to my week </button>
-                    //     <button onClick={() => this.onHandleGroceryList({ name: favorites.name, servings: favorites.numberOfServings ,ingredients: favorites.ingredientLines })}> Add to grocery list </button>
-                    // </div>
-                )) : <div></div> }
-            </div>
+        return(
+            <div className="container">
+                <div className="row">
+                    {this.props.user.favorites.length > 0 ? this.props.user.favorites.map((favorite, i) => (
+                        <div key={favorite.id} className="col-lg-4 col-md-6 col-sm-12">
+                            <FavoriteCard recipe={favorite}
+                                onHandleFavorites={this.onHandleRemoveFavorite}
+                                onHandleToGrocery={this.onHandleGroceryList}
+                                inGrocery={
+                                    this.props.user.grocery_list.some(
+                                        item => item.id === favorite.id)}
+                                onHandleSubmitWeek={this.onHandleSubmitWeek}/>
+                        </div>
+                        // <div key={favorites.id}>
+                        //     <img src={favorites.image} onClick={() => this.onHandleDetailFavorites(favorites.id)} />
+                        //     <div>Name: {favorites.name}</div>
+                        //     <div>Serving: {favorites.numberOfServings}</div>
+                        //     <div>Time To Make: {favorites.totalTime}</div>
+                        //     <button onClick={() => this.onHandleRemoveFavorite(favorites.id)}> Remove from Favorites </button>
+                        //     <button> Add to my week </button>
+                        //     <button onClick={() => this.onHandleGroceryList({ name: favorites.name, servings: favorites.numberOfServings ,ingredients: favorites.ingredientLines })}> Add to grocery list </button>
+                        // </div>
+                    )) : <div></div> }
+                </div>
+            </div>    
+            
         );
     }
 };

@@ -20,6 +20,7 @@ export default class RecipeCard extends React.Component{
       left: '50%',
       right: 'auto',
       bottom: 'auto',
+      marginTop: '70px',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       color: 'black',
@@ -74,7 +75,6 @@ export default class RecipeCard extends React.Component{
   render(){
     return(
       <div className="example-2 card">
-        {}
         <div className="wrapper"> 
           <img src={this.props.recipe.imageUrlBySize[90]}/>     
           <div className="header__card">
@@ -86,7 +86,7 @@ export default class RecipeCard extends React.Component{
           </div>
           <div className="data">
             <div className="content">
-              <h1 className="title">{this.props.recipe.recipe_name}</h1>
+              <h4 className="title">{this.props.recipe.recipe_name}</h4>
               <a onClick={() => this.onHandleRecipePreview(this.props.recipe.recipe_id)} className="button__card">Preview Recipe</a>
 
               <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
@@ -95,7 +95,18 @@ export default class RecipeCard extends React.Component{
                   <div className="row">
                   <div className="col-md-6">
                     <h2>{this.state.recipe.name}</h2>
-                    <img src={this.state.recipe.image} style={{width: "100%", height: "max-content", padding: "0px 0px 20px" }}/>
+                    <img src={this.state.recipe.images[0].hostedLargeUrl} style={{width: "100%", padding: "0px 0px 20px" }}/>
+                    <div className="row">
+                      <div className="col-sm-6">
+                        <button className="button" onClick={() => this.onHandleMyWeek()}>Add To Week</button>
+                      </div>
+                      <div className="col-sm-6">
+                      {!this.props.inGrocery ? 
+                        <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Add To Grocery List</button> 
+                        : 
+                      <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Remove From Grocery List</button>}
+                      </div>
+                    </div>
                   </div>
                   <div className="col-md-6" >
                   <div>Servings: {this.state.recipe.numberOfServings}</div>
@@ -111,39 +122,65 @@ export default class RecipeCard extends React.Component{
                   </div>
                     
 
-                    <button onClick={this.onHandleMyWeek}>Add To Week</button>
-                    {!this.props.inGrocery ? 
-                      <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Add To Grocery List</button> 
-                      : 
-                    <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Remove From Grocery List</button>}                  
+                                      
                   </div>}
 
-                  <button className="button" onClick={this.closeModal}>close</button>
+                  <div className="row">
+                    <div className="col-sm-4">
+                      <button className="button button--secondary" onClick={this.closeModal}>Close</button>
+                    </div>
+                    <div className="col-sm-8">
+
+                    </div>
+                  </div>
                 </div>  
 
               </Modal>
 
               <Modal isOpen={this.state.weekModalOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeWeekModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
-                <div>
-                  <select name="day" onChange={this.onChangeWeekSelect}>
-                    <option value="sunday">Sunday</option>
-                    <option value="monday">Monday</option>
-                    <option value="tuesday">Tuesday</option>
-                    <option value="wednesday">Wednesday</option>
-                    <option value="thursday">Thurday</option>
-                    <option value="friday">Friday</option>
-                    <option value="saturday">Saturday</option>
-                  </select>
-                  <select name="meal" onChange={this.onChangeWeekSelect}>
-                    <option value="breakfast">Breakfast</option>
-                    <option value="lunch">Lunch</option>
-                    <option value="dinner">Dinner</option>
-                  </select>
-                  <button onClick={() => {
-                    this.props.onHandleSubmitWeek(this.state.recipe, this.state.daySelect, this.state.mealSelect);
-                    this.onHandleSubmitToWeek();
-                    }}>Submit</button>
-                  <button onClick={this.closeWeekModal}>Close</button>
+              <div style={{ width: "50vw"}}>
+                  <div className="col-sm-12">
+
+                    <h2>Add to Week</h2>
+                  <div className="form-horizontal">
+                    
+                    <div className="form-group row">
+                      <label htmlFor="day" className="col-sm-3 control-label">Day of the Week:</label>
+                      <div className="col-sm-9">
+                        <select className="form-control" name="day" onChange={this.onChangeWeekSelect}>
+                          <option value="sunday">Sunday</option>
+                          <option value="monday">Monday</option>
+                          <option value="tuesday">Tuesday</option>
+                          <option value="wednesday">Wednesday</option>
+                          <option value="thursday">Thurday</option>
+                          <option value="friday">Friday</option>
+                          <option value="saturday">Saturday</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label htmlFor="meal" className="col-sm-3 control-label">Meal of the Day: </label>
+                      <div className="col-sm-9">
+                        <select className="form-control" name="meal" onChange={this.onChangeWeekSelect}>
+                          <option value="breakfast">Breakfast</option>
+                          <option value="lunch">Lunch</option>
+                          <option value="dinner">Dinner</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <div className=" col-sm-8">
+                        <button className="button button--secondary" onClick={this.closeWeekModal}>Close</button> 
+                      </div>
+                      <div className="col-sm-4">
+                        <button className="button" onClick={() => {
+                          this.props.onHandleSubmitWeek(this.state.recipe, this.state.daySelect, this.state.mealSelect);
+                          this.onHandleSubmitToWeek();
+                        }}>Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
                 </div>
               </Modal>
               

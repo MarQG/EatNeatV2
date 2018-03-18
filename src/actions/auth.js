@@ -1,8 +1,10 @@
 import { firebase, googleAuthProvider, facebookAuthProvider } from '../firebase/firebase.js';
 
-export const login = (uid) => ({
+export const login = (uid, username, userphoto) => ({
     type: 'LOGIN',
-    uid
+    uid,
+    username,
+    userphoto
 });
 
 export const logout = () => ({
