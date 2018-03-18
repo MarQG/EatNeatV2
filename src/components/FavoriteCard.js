@@ -3,11 +3,14 @@ import API from '../utils/api';
 import Modal from 'react-modal';
 
 export default class FavoriteCard extends React.Component{
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       modalIsOpen: false,
-      recipe: {}
+      weekModalOpen: false,
+      recipe: {},
+      daySelect: "Sunday",
+      mealSelect: "Breakfast"
     }
   }
 
@@ -32,7 +35,19 @@ export default class FavoriteCard extends React.Component{
     })
   }
   
-  afterOpenModal =() => {
+  onChangeWeekSelect = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === "day") {
+      this.setState({ daySelect: value });
+    } else {
+      this.setState({ mealSelect: value });
+    }
+
+  }
+
+
+  afterOpenModal = () => {
     // references are now sync'd and can be accessed.
   }
 
@@ -40,14 +55,19 @@ export default class FavoriteCard extends React.Component{
     this.setState({ modalIsOpen: false });
   }
 
-  // wrapperStyles = {
-  //   backgroundImage: 'url(' + this.props.recipe.images[0].hostedLargeUrl + ')',
-  //   backgroundSize: 'cover',
-  //   backgroundRepeat: 'no-repeat',
-  //   backgroundPosition: 'center'
-  // }
+  closeWeekModal = () => {
+    this.setState({ modalIsOpen: true, weekModalOpen: false });
+  }
 
-  // style={this.wrapperStyles}
+  onHandleMyWeek = id => {
+    this.setState({ modalIsOpen: false, weekModalOpen: true })
+  }
+
+  onHandleSubmitToWeek = id => {
+    let currentRecipe = this.state.recipe;
+    this.setState({ modalIsOpen: false, weekModalOpen: false });
+
+  }
 
   render(){
     return(
@@ -100,6 +120,32 @@ export default class FavoriteCard extends React.Component{
                   <button className="button" onClick={this.closeModal}>close</button>
                 </div>  
 
+                  
+
+              </Modal>
+
+              <Modal isOpen={this.state.weekModalOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeWeekModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
+                <div>
+                  <select name="day" onChange={this.onChangeWeekSelect}>
+                    <option value="sunday">Sunday</option>
+                    <option value="monday">Monday</option>
+                    <option value="tuesday">Tuesday</option>
+                    <option value="wednesday">Wednesday</option>
+                    <option value="thursday">Thurday</option>
+                    <option value="friday">Friday</option>
+                    <option value="saturday">Saturday</option>
+                  </select>
+                  <select name="meal" onChange={this.onChangeWeekSelect}>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                  </select>
+                  <button onClick={() => {
+                    this.props.onHandleSubmitWeek(this.state.recipe, this.state.daySelect, this.state.mealSelect);
+                    this.onHandleSubmitToWeek();
+                  }}>Submit</button>
+                  <button onClick={this.closeWeekModal}>Close</button>
+                </div>
               </Modal>
 
             </div>

@@ -121,8 +121,34 @@ export class SearchPage extends React.Component {
             this.props.saveUser(updatedUser);
     }
 
-    onHandleWeek = (recipe) => {
-        
+    onHandleSubmitWeek = (recipe, day, mealTime) => {
+        console.log(recipe);
+        const {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list,
+            _id
+        } = this.props.user;
+
+        const updateWeek = {
+            ...my_week,
+            [day]: {
+                [mealTime]: recipe
+            }
+        }
+
+        const updatedUser = {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week: updateWeek,
+            grocery_list,
+            _id
+        }
+
+        this.props.saveUser(updatedUser);
     }
 
 
@@ -130,7 +156,22 @@ export class SearchPage extends React.Component {
         return(    
         <div className="row">
             {console.log(this.state.filteredSearch)}
-            {this.state.filteredSearch.length > 0 ? this.state.filteredSearch.map(match => <div key={match.recipe_id} className="col-md-3"><RecipeCard recipe={match} onHandleFavorites={this.onHandleFavorites} onHandleToGrocery={this.onHandleGroceryList} inGrocery={this.props.user.grocery_list.some(item => item.id === match.recipe_id)}/></div> ) : <p>Try Searching for something</p>}
+            {this.state.filteredSearch.length > 0 ? 
+                this.state.filteredSearch.map(
+                    match => 
+                    <div key={match.recipe_id} className="col-md-3">
+                        <RecipeCard 
+                            recipe={match} 
+                            onHandleFavorites={this.onHandleFavorites} 
+                            onHandleToGrocery={this.onHandleGroceryList} 
+                            inGrocery={
+                                this.props.user.grocery_list.some(
+                                    item => item.id === match.recipe_id)}
+                            onHandleSubmitWeek={this.onHandleSubmitWeek}
+                        />
+                        </div>) 
+                        : 
+                        <p>Try Searching for something</p>}
         </div>
         );
     }
