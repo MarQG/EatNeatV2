@@ -20,13 +20,13 @@
       padding: 0;
       list-style-type: none;
       li {
-        display: inline-block;;
+        display: inline-block;
       }
       #faveBtn {
         padding-right:35px;
       }
       a {
-        color: $off-white;
+        color: $off-white !important;
       }
       span {
         padding-left: 5px;
@@ -43,7 +43,6 @@
     .wrapper {
       background-color: #8F3985;
       height: auto;
-      min-width: 350px;
       position: relative;
       overflow: hidden;
       box-shadow: 0 19px 38px rgba($off-black, 0.3), 0 15px 12px rgba($off-black, 0.2);
@@ -67,6 +66,7 @@
     }
     .author {
       font-size: 12px;
+      color: $off-white;
     }
     .title {
       margin-top: 10px;
@@ -119,8 +119,9 @@
       transform: translateY(calc(70px + 4em));
     }
     .title {
+      color: $off-white;
       a {
-        color: $off-white;
+        
       }
     }
     .button__card {
@@ -148,5 +149,15 @@
           opacity: 1;
         }
       }
+    }
+    a{
+      color: $off-white;
+    }
+    a:hover{
+      color: $dark-grey;
+    }
+
+    h4{
+      margin-top:20px;
     }
   }

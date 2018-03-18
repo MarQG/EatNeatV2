@@ -138,7 +138,8 @@ export class SearchPage extends React.Component {
                 [mealTime]: recipe
             }
         }
-
+        
+        toast.info(`Added ${recipe.name} to ${day.toUpperCase()} for ${mealTime.toUpperCase()}.`);
         const updatedUser = {
             favorites,
             user_id,
@@ -153,7 +154,8 @@ export class SearchPage extends React.Component {
 
 
     render(){
-        return(    
+        return(
+
         <div className="row">
             {console.log(this.state.filteredSearch)}
             {this.state.filteredSearch.length > 0 ? 

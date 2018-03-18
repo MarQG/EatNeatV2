@@ -1,4 +1,9 @@
-
+.day {
+  text-align: left;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-weight: 300;
+}
 
 .grocery-title {
   text-align: left;
@@ -14,7 +19,7 @@
 
 .todo-list {
   width: 400px;
-  margin: 0 auto 50px auto;
+  margin: 50px auto 50px auto;
   padding: 25px;
   background: white;
   position: relative;
@@ -233,4 +238,28 @@
   &.todo-wrap {
     box-shadow: 0 0 400px rgba(0, 0, 0, 0.8), inset 0 0px 0 2px #ebebeb;
   }
+}
+
+.todo, .todo-meal, .todo-title {
+  display: inline-block;
+  font-weight: 200;
+  padding: 10px 5px;
+  height: 37px;
+  width: 100%;
+  color: $main-color;
+  position: relative;
+  border-bottom: 1px $dark-grey solid; 
+  .sub-title{
+    color: $dark-grey;
+  }
+
+}
+
+.todo-title-empty{
+  display: inline-block;
+  font-weight: 200;
+  padding: 10px 5px;
+  height: 37px;
+  width: 100%;
+  position: relative;
 }

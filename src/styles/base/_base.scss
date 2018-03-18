@@ -1,11 +1,20 @@
 *{
-    box-sizing: border-box;
+  -webkit-transition: .25s ease-in-out;
+  -moz-transition: .25s ease-in-out;
+  -o-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+  font-family: helvetica neue, helvetica, arial, sans-serif;
+  font-size: 18px;
+  line-height: 18px;
+  box-sizing: border-box;
+  margin: 0;
 }
 html{
     font-size: 50%;
 }
 
 body{
+    margin-top: 200px;
     color:$dark-grey;
     font-family: Helvetica, Arial, sans-serif;
     font-size: $m-size;
