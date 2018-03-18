@@ -59,7 +59,9 @@ export default class FavoriteCard extends React.Component{
             <ul className="menu-content">
               <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.id)} className="fa fa-heart"></a></li>
               <li><a className="fa fa-clock-o"><span>{this.props.recipe.totalTime}</span></a></li>
-              <li><a className="fa fa-users"><span>{this.props.recipe.numberOfServings}</span></a></li>
+              <li><a id="myWeekBtn" className="fa fa-calendar-plus-o"></a></li>
+
+              {/* <li><a id="myWkBtn" onClick={() => this.props.onHandleMyWeek(this.props.recipe.id)} className="fa fa-calendar-plus"></a></li> */}
             </ul>
           </div>
           <div className="data">
@@ -85,13 +87,15 @@ export default class FavoriteCard extends React.Component{
                         <div key={i}>{element}</div>
                       ))}
                     </div>
-                    {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
+                    {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }   
                   </div>
-                    
-                    
-                    
+                  <button className="button" onClick={() => this.props.onHandleAddToWeek(this.props.recipe.recipe_id)}>Add To Week</button>
+                    {!this.props.inGrocery ? 
+                      <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Add To Grocery List</button> 
+                      : 
+                      <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Remove From Grocery List</button>}
                   </div>}
-                  <button className="button" onClick={this.closeModal}>close</button>
+                  <button className="button" onClick={this.closeModal}>Close</button>
                 </div>  
               </Modal>
             </div>

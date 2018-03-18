@@ -24,3 +24,83 @@ button:disabled{
 .is-active{
     font-weight: bold;
 }
+
+
+//from Nav template
+a {
+    color: #6f6f6f;
+    outline: none;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    &:active, &:focus {
+      outline: none;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+      outline: none;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+    }
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #3f3f3f;
+    margin: 0 0 15px 0;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
+  
+  h1 {
+    font-size: 48px;
+    line-height: 52px;
+  }
+  
+  h2 {
+    font-size: 36px;
+    line-height: 48px;
+  }
+  
+  h3 {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  
+  h4 {
+    font-size: 24px;
+    line-height: 30px;
+  }
+  
+  h5 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  
+  h6 {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  
+  p {
+    margin-bottom: 20px;
+  }
+  
+  .section {
+    padding: 70px 0;
+    position: relative;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
