@@ -192,7 +192,13 @@ router.post("/user", function (req, res) {
                     favorites: [],
                     recent_searches: [],
                     my_week: {
-                        monday: ''
+                        monday: '',
+                        tuesday: '',
+                        wednesday: '',
+                        thursday: '',
+                        friday: '',
+                        saturday: '',
+                        sunday: ''
                     },
                     grocery_list: []
                 }, function (err, body) {
