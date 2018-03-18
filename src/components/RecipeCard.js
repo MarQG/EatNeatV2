@@ -20,7 +20,8 @@ export default class RecipeCard extends React.Component{
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      color: 'black'
+      color: 'black',
+      background: '#ECF0F1'
     }
   };
 
@@ -71,7 +72,7 @@ export default class RecipeCard extends React.Component{
                     <h2>{this.state.recipe.name}</h2>
                     <img src={this.state.recipe.image} style={{width: "100%", height: "max-content", padding: "0px 0px 20px" }}/>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-6" >
                   <div>Servings: {this.state.recipe.numberOfServings}</div>
                     <div>Total Time: {this.state.recipe.totalTime}</div>
                     <h4>Ingredients: </h4>
@@ -81,16 +82,19 @@ export default class RecipeCard extends React.Component{
                         <div key={i}>{element}</div>
                       ))}
                     </div>
-                    {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }   
+                    {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
                   </div>
-                  <button className="button" onClick={() => this.props.onHandleAddToWeek(this.props.recipe.recipe_id)}>Add To Week</button>
+                    
+                    <button className="button" onClick={() => this.props.onHandleAddToWeek(this.props.recipe.recipe_id)}>Add To Week</button>
                     {!this.props.inGrocery ? 
                       <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Add To Grocery List</button> 
                       : 
-                      <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Remove From Grocery List</button>}
+                    <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Remove From Grocery List</button>}                  
                   </div>}
-                  <button className="button" onClick={this.closeModal}>Close</button>
+
+                  <button className="button" onClick={this.closeModal}>close</button>
                 </div>  
+
               </Modal>
               
             </div>

@@ -1,14 +1,17 @@
 
 .button {
-    background: $blue;
+    background: #AA63A5;
     border: none;
-    color: $dark-grey;
+    color: white;
     display: inline-block;
-    font-size: $font-size-large;
+    font-size: $font-size-small;
     font-weight: 300;
     line-height: 1;
     padding: $s-size;
+    margin: 10px;
+    border-radius: 4px;
     text-decoration: none;
+    border: 1px solid white;
 }
 
 .button--link {
