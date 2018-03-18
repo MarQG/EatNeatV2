@@ -26,13 +26,15 @@ export default class MyWeekCard extends React.Component{
 
     render(){
         return(
-            <div>
-                <h2>{this.props.day.toUpperCase()}</h2>
+            <form id="todo-list">
+                <h1 class="day">{this.props.day.toUpperCase()}</h1>
                 {this.props.dayMeals != undefined ?
                     <div>
                         {this.props.dayMeals.breakfast != undefined ?
                             <div>
-                                Breakfast
+                                <span className="todo-wrap">
+                                    <label className="todo-meal">Breakfast</label>
+                                </span>
                                     {this.props.dayMeals.breakfast.name}
                                     <button 
                                         value={this.props.dayMeals.breakfast.id} 
@@ -61,9 +63,13 @@ export default class MyWeekCard extends React.Component{
                             </div> : <h4>Add a recipe to breakfast</h4>}
                         {this.props.dayMeals.lunch != undefined ?
                             <div>
-                                Lunch
-                                    {this.props.dayMeals.lunch.name}
-                                <button value={this.props.dayMeals.lunch.id} onClick={() => this.viewRecipe(this.props.dayMeals.lunch)}>View Recipe</button>
+                                <span className="todo-wrap">
+                                    <label className="todo-meal">Lunch</label>
+                                </span>
+                                <span className="todo-wrap">
+                                    <label className="todo-title">{this.props.dayMeals.lunch.name}</label>
+                                    <button value={this.props.dayMeals.lunch.id} onClick={() => this.viewRecipe(this.props.dayMeals.lunch)}>View Recipe</button>
+                                </span>
                                 <Modal inGrocery={
                                     this.props.grocery_list.some(
                                         item => item.id === this.props.dayMeals.lunch.id)} isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
@@ -89,9 +95,13 @@ export default class MyWeekCard extends React.Component{
                             </div> : <h4>Add a recipe to lunch</h4>}
                         {this.props.dayMeals.dinner != undefined ?
                             <div>
-                                Dinner
-                                    {this.props.dayMeals.dinner.name}
-                                <button value={this.props.dayMeals.dinner.id} onClick={() =>this.viewRecipe(this.props.dayMeals.dinner)}>View Recipe</button>
+                                <span className="todo-wrap">
+                                    <label className="todo-meal">Dinner</label>
+                                </span>
+                                <span className="todo-wrap">
+                                    <label className="todo-title">{this.props.dayMeals.dinner.name}</label>
+                                    <button value={this.props.dayMeals.dinner.id} onClick={() =>this.viewRecipe(this.props.dayMeals.dinner)}>View Recipe</button>
+                                </span>
                                 <Modal inGrocery={
                                     this.props.grocery_list.some(
                                         item => item.id === this.props.dayMeals.dinner.id)} isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
@@ -118,7 +128,7 @@ export default class MyWeekCard extends React.Component{
                     </div> : <div>Add something to your {this.props.day.toUpperCase()}!</div>}
 
                   
-            </div>
+            </form>
         )
     }
 }
