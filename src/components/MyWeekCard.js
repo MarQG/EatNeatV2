@@ -13,15 +13,16 @@ export default class MyWeekCard extends React.Component{
 
     customStyles = {
         content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginTop: '70px',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-          color: 'black',
-          backgroundColor: "#ECF0F1"
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            color: 'black',
+            backgroundColor: "#ECF0F1",
+            height: '80%',
+            overflow: "scroll"
         }
       };
 

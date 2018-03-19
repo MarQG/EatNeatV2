@@ -17,6 +17,13 @@
 
 .button--link {
     background: none;
+    border:none;
+    color:$dark-grey;
+    font-size: $font-size-large;
+    &:hover{
+        color: $main-color;
+    }
+    
 }
 
 .button--secondary {
@@ -43,6 +50,23 @@
     outline: none;
     &:hover{
         color: $dark-grey;
+    }
+    &:focus{
+        outline: none;
+    }
+}
+
+.button--close{
+    background: none;
+    color: $dark-grey;
+    width: auto;
+    border: none;
+    margin: 0;
+    font-size: $m-size;
+    padding: $m-size;
+    outline: none;
+    &:hover{
+        color: $main-color;
     }
     &:focus{
         outline: none;

@@ -41,7 +41,7 @@
   
   .secondary-nav {
     position: relative;
-    z-index: 1;
+
     clear: both;
     width: 100%;
     height: 50px;
@@ -58,7 +58,6 @@
       /* gradient on the right - to indicate it's possible to scroll */
       content: '';
       position: absolute;
-      z-index: 1;
       top: 0;
       right: 0;
       height: 100%;

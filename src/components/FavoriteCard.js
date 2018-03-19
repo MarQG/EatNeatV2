@@ -20,11 +20,12 @@ export default class FavoriteCard extends React.Component{
       left: '50%',
       right: 'auto',
       bottom: 'auto',
-      marginTop: '70px',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       color: 'black',
-      backgroundColor: "#ECF0F1"
+      backgroundColor: "#ECF0F1",
+      height: '80%',
+      overflow: "scroll"
     }
   };
 

@@ -17,7 +17,7 @@ export class ENNavBar extends React.Component {
 
     onHandleShowSearchBar = () => {
         console.log("clicked");
-        this.setState({ showSearch: true });
+        this.setState({ showSearch: !this.state.showSearch });
     }
 
     onHandleCloseSearchBar = (e) => {
@@ -33,22 +33,23 @@ export class ENNavBar extends React.Component {
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     <div className="navbar-header">
-                        <Link className="navbar-brand" to="/dashboard" >
+                        <Link className="navbar-brand" to="/favorites" >
                             <img src="/images/logo-purple2.png" alt="EAT NEAT"/>
                         </Link>
                     </div>
                     <ul className="navbar__list">
+                            <li className="navbar__item"><Link to="/favorites">Hi {this.props.auth.username}!</Link></li>
                             <li className="navbar__item"><Link to="/faq">FAQ</Link></li>
                             <li className="navbar__item"><Link to="/about">About</Link></li>     
                             <li className="navbar__item"><Link to="/why">Why Eat Neat</Link></li>
-                            <li className="navbar__item"><button className="button" onClick={this.props.startLogout}>Logout</button></li>          
+                            <li className="navbar__item"><button className="button button--link" onClick={this.props.startLogout}>Logout</button></li>          
                         </ul>
                 </div>
             </nav>
             <nav className="secondary-nav">
                 <ul>
                     <li><Link to="/search" >Search</Link></li>     
-                    <li><Link to="/myweek" >My Week</Link></li>     
+                    <li><Link to="/myweek" >Meal Plan</Link></li>     
                     <li><Link to="/favorites" >Recipe Book</Link></li>     
                     <li><Link to="/grocerylist" >Grocery List</Link></li>
                     <li><button onClick={this.onHandleShowSearchBar} className="button--search"><i className="fa fa-search" aria-hidden="true"></i></button></li> 
@@ -61,8 +62,11 @@ export class ENNavBar extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => ({
+    auth: state.auth
+})
 const mapDispatchToProps = (dispatch) => ({
     startLogout: () => dispatch(startLogout())
 });
 
-export default connect(undefined, mapDispatchToProps)(ENNavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(ENNavBar);

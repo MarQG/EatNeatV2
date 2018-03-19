@@ -9,8 +9,8 @@ export default class RecipeCard extends React.Component{
       modalIsOpen: false,
       weekModalOpen: false,
       recipe: {},
-      daySelect: "Sunday",
-      mealSelect: "Breakfast"
+      daySelect: "sunday",
+      mealSelect: "breakfast"
     }
   }
 
@@ -20,11 +20,12 @@ export default class RecipeCard extends React.Component{
       left: '50%',
       right: 'auto',
       bottom: 'auto',
-      marginTop: '70px',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       color: 'black',
-      background: '#ECF0F1'
+      background: '#ECF0F1',
+      height: '80%',
+      overflow: "scroll"
     }
   };
 
@@ -91,8 +92,16 @@ export default class RecipeCard extends React.Component{
 
               <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
                 <div>
-                  {this.state.recipe.name === undefined ? <img src="./images/loader.gif"/> : 
                   <div className="row">
+                      <div className="col-sm-11">
+                        
+                      </div>
+                      <div className="col-sm-1">
+                        <button className="button--close" onClick={this.closeModal}>Close <i className="fa fa-times" aria-hidden="true"></i></button>
+                      </div>
+                    </div>
+                  {this.state.recipe.name === undefined ? <img src="./images/loader.gif"/> : 
+                  <div className="row recipe-card">
                   <div className="col-md-6">
                     <h2>{this.state.recipe.name}</h2>
                     <img src={this.state.recipe.images[0].hostedLargeUrl} style={{width: "100%", padding: "0px 0px 20px" }}/>
@@ -118,21 +127,14 @@ export default class RecipeCard extends React.Component{
                         <div key={i}>{element}</div>
                       ))}
                     </div>
-                    {this.state.recipe.instructions === null ?<div>Source URL: {this.state.recipe.source.sourceRecipeUrl}</div> : <div>Instructions: {this.state.recipe.instructions}</div> }
+                    {this.state.recipe.instructions === null ?<div><a href={this.state.recipe.source.sourceRecipeUrl} target="_blank">Click Here to View Recipe Instructions.</a></div> : <p>Instructions: {this.state.recipe.instructions}</p> }
                   </div>
                     
 
                                       
                   </div>}
 
-                  <div className="row">
-                    <div className="col-sm-4">
-                      <button className="button button--secondary" onClick={this.closeModal}>Close</button>
-                    </div>
-                    <div className="col-sm-8">
-
-                    </div>
-                  </div>
+                  
                 </div>  
 
               </Modal>

@@ -248,11 +248,14 @@
   width: 100%;
   color: $main-color;
   position: relative;
-  border-bottom: 1px $dark-grey solid; 
   .sub-title{
     color: $dark-grey;
   }
 
+}
+
+.todo-title{
+  border-bottom: 1px $dark-grey solid; 
 }
 
 .todo-title-empty{

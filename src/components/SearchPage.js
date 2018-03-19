@@ -68,7 +68,7 @@ export class SearchPage extends React.Component {
                 grocery_list,
                 _id
             }
-            toast.info(`Added ${newFav.name} to your Favorites!`);
+            toast.info(`Added ${newFav.name} to your Recipe Book!`);
             this.props.saveUser(updatedUser);
             this.props.history.push("/search");        
         }).catch(err => {
@@ -135,9 +135,11 @@ export class SearchPage extends React.Component {
         const updateWeek = {
             ...my_week,
             [day]: {
+                ...my_week[day],
                 [mealTime]: recipe
             }
         }
+        console.log(updateWeek);
         
         toast.info(`Added ${recipe.name} to ${day.toUpperCase()} for ${mealTime.toUpperCase()}.`);
         const updatedUser = {
@@ -155,26 +157,68 @@ export class SearchPage extends React.Component {
 
     render(){
         return(
-
-        <div className="row">
-            {console.log(this.state.filteredSearch)}
-            {this.state.filteredSearch.length > 0 ? 
-                this.state.filteredSearch.map(
-                    match => 
-                    <div key={match.recipe_id} className="col-md-3">
-                        <RecipeCard 
-                            recipe={match} 
-                            onHandleFavorites={this.onHandleFavorites} 
-                            onHandleToGrocery={this.onHandleGroceryList} 
-                            inGrocery={
-                                this.props.user.grocery_list.some(
-                                    item => item.id === match.recipe_id)}
-                            onHandleSubmitWeek={this.onHandleSubmitWeek}
-                        />
-                        </div>) 
-                        : 
-                        <p>Try Searching for something</p>}
-        </div>
+        <div className="container current-search text-center"> 
+            {this.props.search.search != "" ? 
+                <div className="row current-search__header">
+                    <div className="col-sm-12">
+                        <h2>Current Search: {this.props.search.search}</h2>
+                        <div className="row">
+                            <div className="col-lg-6">
+                                <h3>Allergies</h3>
+                                <ul className="list-group">
+                                    {this.props.search.filters[0].allergies.length > 0 ? 
+                                        this.props.search.filters[0].allergies.map(allergy => (
+                                            <li key={allergy} className="list-group-item"><i class="fa fa-plus-circle" aria-hidden="true"></i> {allergy}</li>
+                                        )) 
+                                    : <li>No Filters</li>
+                                    }
+                                </ul>
+                            </div>
+                            <div className="col-lg-6">
+                                <h3>Diet</h3>
+                                <ul className="list-group">
+                                    {this.props.search.filters[0].diet.length > 0 ? 
+                                        this.props.search.filters[0].diet.map(diet => (
+                                            <li key={diet} className="list-group-item"><i class="fa fa-plus-circle" aria-hidden="true"></i> {diet}</li>
+                                        )) 
+                                    : <li>No Filters</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div> 
+                : false 
+            } 
+            <div className="row current-search__content">
+                
+                {this.state.filteredSearch.length > 0 ? 
+                    this.state.filteredSearch.map(
+                        match => 
+                        <div key={match.recipe_id} className="col-md-3">
+                            <RecipeCard 
+                                recipe={match} 
+                                onHandleFavorites={this.onHandleFavorites} 
+                                onHandleToGrocery={this.onHandleGroceryList} 
+                                inGrocery={
+                                    this.props.user.grocery_list.some(
+                                        item => item.id === match.recipe_id)}
+                                onHandleSubmitWeek={this.onHandleSubmitWeek}
+                            />
+                            </div>) 
+                            : 
+                            this.props.search.search != "" ? 
+                                <div className="col-sm-12">
+                                    <h2>Sorry we couldn't find anything. Please try something else.</h2>
+                                </div> 
+                            : 
+                                <div className="col-sm-12">
+                                    <h2>Get started by clicking the <span><i className="fa fa-search" aria-hidden="true"></i></span> above.</h2>
+                                </div>
+                            }
+            </div>
+        </div>  
         );
     }
 }

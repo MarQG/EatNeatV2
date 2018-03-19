@@ -82,9 +82,8 @@ export class SearchBar extends React.Component {
                 <form className="form" onSubmit={this.onHandleSubmit}>
                     <div className="form-group">
                             <input className="" placeholder="Search For Recipes..." onChange={this.onHandleQueryChange} name="query" type="text" value={this.state.query}/>
-                            
-                            <button className="button button--search" onClick={this.onHandleToggleFilters}><i className="fa fa-filter" aria-hidden="true" ></i> Filter</button>
                             <button className="button button--search" type="submit"><i className="fa fa-search" aria-hidden="true"></i></button>
+                            <button className="button button--search" onClick={this.onHandleToggleFilters}><i className="fa fa-filter" aria-hidden="true" ></i> Filter</button>
                             <button className="button button--search" onClick={this.props.onHandleCloseSearchBar}><i className="fa fa-times" aria-hidden="true"></i></button>
                             
                     </div>

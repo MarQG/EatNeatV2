@@ -14,7 +14,6 @@ html{
 }
 
 body{
-    margin-top: 200px;
     color:$dark-grey;
     font-family: Helvetica, Arial, sans-serif;
     font-size: $m-size;
@@ -111,5 +110,21 @@ a {
   
   ul {
     list-style: none;
+  }
+
+  .content__header{
+    margin: 20px auto;
+    font-weight: 200;
+    h2{
+      font-weight: 300;
+    }
+  }
+
+  .content__empty{
+    margin: 20px auto;
+    font-weight: 200;
+    h2{
+      font-weight: 300;
+    }
   }
   

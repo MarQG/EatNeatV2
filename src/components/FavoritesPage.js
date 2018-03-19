@@ -129,6 +129,12 @@ export class FavoritesPage extends React.Component {
     render = () =>{
         return(
             <div className="container">
+                <div className="content__header row text-center">
+                    <div className="col-sm-12">
+                        <h2>{this.props.auth.username}'s Recipe Book</h2>
+                    </div>
+                    
+                </div>
                 <div className="row">
                     {this.props.user.favorites.length > 0 ? this.props.user.favorites.map((favorite, i) => (
                         <div key={favorite.id} className="col-lg-4 col-md-6 col-sm-12">
@@ -149,7 +155,10 @@ export class FavoritesPage extends React.Component {
                         //     <button> Add to my week </button>
                         //     <button onClick={() => this.onHandleGroceryList({ name: favorites.name, servings: favorites.numberOfServings ,ingredients: favorites.ingredientLines })}> Add to grocery list </button>
                         // </div>
-                    )) : <div></div> }
+                    )) : 
+                    <div className="col-sm-12 content__empty text-center">
+                        <h2>Search for recipes to add to your Recipe Book. Click <span><i className="fa fa-search" aria-hidden="true"></i></span> above get started.</h2>
+                    </div> }
                 </div>
             </div>    
             
@@ -165,7 +174,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
     user: state.user,
-    search: state.search
+    search: state.search,
+    auth: state.auth
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoritesPage);

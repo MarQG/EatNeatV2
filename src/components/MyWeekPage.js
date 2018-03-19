@@ -56,6 +56,11 @@ export class MyWeekPage extends React.Component {
     render(){
         return (
             <div className="container-fluid">
+            <div className="content__header row text-center">
+                    <div className="col-sm-12">
+                        <h2>{this.props.auth.username}'s Weekly Meal Plan</h2>
+                    </div>
+                </div>
                 <div className="row"> 
                     <MyWeekCard day={'monday'} dayMeals={this.props.user.my_week.monday} onHandleToGrocery={this.onHandleGroceryList} grocery_list={this.props.user.grocery_list}/>
                     <MyWeekCard day={'tuesday'} dayMeals={this.props.user.my_week.tuesday} onHandleToGrocery={this.onHandleGroceryList}  grocery_list={this.props.user.grocery_list}/>   
@@ -76,7 +81,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+    auth: state.auth
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyWeekPage);  

@@ -161,3 +161,15 @@
       margin-top:20px;
     }
   }
+
+  .recipe-card{
+    font-weight: 200;
+    font-size: $s-size;
+    h2,h4{
+      font-weight: 300;
+    }
+
+    p{
+      font-size: $m-size;
+    }
+  }
