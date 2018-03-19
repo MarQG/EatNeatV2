@@ -33,6 +33,12 @@ const defaultUserState = {
     grocery_list: []
 }
 
+const searchDefaultState = {
+    search: '',
+    filters: [],
+    matches: []
+}
+
 const jsx = (
     <Provider store={store}>
         <AppRouter />
@@ -59,7 +65,7 @@ firebase.auth().onAuthStateChanged((user) => {
         
     } else {
         store.dispatch(getUser(defaultUserState));
-        store.dispatch(setCurrentSearch())
+        store.dispatch(setCurrentSearch(searchDefaultState))
         store.dispatch(logout());
         renderApp();
         history.push("/");
