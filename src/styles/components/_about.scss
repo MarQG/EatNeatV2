@@ -34,6 +34,8 @@
   
   .services .desc h3 {
     line-height: 34px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
   }
   
   .faq-heading {
@@ -46,7 +48,7 @@
     color: #cccccc;
     text-transform: uppercase;
     display: block;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     font-weight: 300;
   }
   
@@ -70,14 +72,19 @@
   }
   
   .faq-heading h2 .thin {
-    font-weight: 100;
+    font-weight: 300;
+    font-size: 60px;
   }
   
   .faq-heading h2 .thick {
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 60px;
+    letter-spacing: 2px;
   }
   
   .sp-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
     font-size: 60px;
     margin-bottom: 40px;
   }
@@ -196,6 +203,9 @@
   
   .mb-10 {
     margin-bottom: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 40px;
   }
   
   .pb-30 {
@@ -321,6 +331,9 @@
   
   .pb-30 {
     padding-bottom: 30px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 40px;
   }
   
   .pb-40 {

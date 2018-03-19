@@ -3,9 +3,11 @@
   -moz-transition: .25s ease-in-out;
   -o-transition: .25s ease-in-out;
   transition: .25s ease-in-out;
-  font-family: helvetica neue, helvetica, arial, sans-serif;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
   font-size: 18px;
   line-height: 18px;
+  letter-spacing: .045em;
   box-sizing: border-box;
   margin: 0;
 }
@@ -16,7 +18,8 @@ html{
 body{
     margin-top: 200px;
     color:$dark-grey;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
     font-size: $m-size;
     line-height: 1.6;
     background: $light-grey;

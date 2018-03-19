@@ -3,12 +3,11 @@
   padding-bottom: 10px;
   padding-top: 10px;
   font-weight: 300;
+  font-size: 25px;
 }
 
 .grocery-title {
   text-align: left;
-  padding-bottom: 10px;
-  padding-top: 10px;
 }
 
 .fa-check {
@@ -50,10 +49,18 @@
   }
 
   h1{
-    font-size: 30px;
+    font-size: 20px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
     margin-right: 10px;
     color: #8F3985;
     margin-top: 0px;
+    line-height: 20px;
+  }
+  p{
+    font-size: 18px;
+    margin-bottom: 10px;
   }
 }
 
@@ -242,15 +249,16 @@
 
 .todo, .todo-meal, .todo-title {
   display: inline-block;
-  font-weight: 200;
+  font-weight: 300;
   padding: 10px 5px;
   height: 37px;
   width: 100%;
-  color: $main-color;
+  /*color: $main-color;*/
   position: relative;
-  border-bottom: 1px $dark-grey solid; 
+  line-height: 20px;
+  font-size: 15px;
   .sub-title{
-    color: $dark-grey;
+    color: #25283D;
   }
 
 }

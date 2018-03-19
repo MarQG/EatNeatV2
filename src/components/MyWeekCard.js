@@ -49,7 +49,7 @@ export default class MyWeekCard extends React.Component{
                     <div className="todo-wrap">
                         {this.props.dayMeals.breakfast != undefined ?
                             <div className="todo-title" >
-                                <p >Breakfast </p> 
+                                <p >BREAKFAST </p> 
                                 <p className="sub-title">
                                     {this.props.dayMeals.breakfast.name} 
                                 </p>
@@ -110,7 +110,7 @@ export default class MyWeekCard extends React.Component{
                             }
                         {this.props.dayMeals.lunch != undefined ?
                             <div className="todo-title">
-                                <p>Lunch </p> 
+                                <p>LUNCH </p> 
                                 <p className="sub-title">
                                     {this.props.dayMeals.lunch.name} 
                                 </p>
@@ -165,7 +165,7 @@ export default class MyWeekCard extends React.Component{
                         {this.props.dayMeals.dinner != undefined ?
                             <div className="todo-title">
                                 <div>
-                                    <p>Dinner </p> 
+                                    <p>DINNER </p> 
                                     <p className="sub-title">
                                         {this.props.dayMeals.dinner.name} 
                                     </p>

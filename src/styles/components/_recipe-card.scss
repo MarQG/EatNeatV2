@@ -71,6 +71,10 @@
     .title {
       margin-top: 10px;
       margin-bottom: 10px;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      text-transform: uppercase;
     }
   }
 
@@ -130,10 +134,11 @@
       margin:auto;
       text-align: center;
       font-size: 12px;
+      font-weight: 400;
+      text-transform: uppercase;
       color: $off-white;
       line-height: 1;
       position: relative;
-      font-weight: 700;
       &::after {
         content: '\2192';
         opacity: 0;
@@ -154,7 +159,7 @@
       color: $off-white;
     }
     a:hover{
-      color: $dark-grey;
+      color: $light-grey;
     }
 
     h4{

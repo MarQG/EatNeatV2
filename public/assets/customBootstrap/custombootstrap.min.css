@@ -413,7 +413,7 @@ input[type=checkbox]:focus {
 
 .navbar-brand {
     float: left;
-    height: 50px;
+    width: 60%;
     padding: 15px 15px;
     font-size: 18px;
     line-height: 20px

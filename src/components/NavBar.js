@@ -13,24 +13,24 @@ export class ENNavBar extends React.Component {
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     <div className="navbar-header">
-                        <Link className="navbar-brand" to="/dashboard" >
+                        <Link className="navbar-brand" to="/favorites" >
                             <img src="/images/logo-purple2.png" alt="EAT NEAT"/>
                         </Link>
                     </div>
                     <ul className="navbar__list">
+                            <li className="navbar__item"><Link to="/why">WHY</Link></li>
+                            <li className="navbar__item"><Link to="/about">ABOUT</Link></li>     
                             <li className="navbar__item"><Link to="/faq">FAQ</Link></li>
-                            <li className="navbar__item"><Link to="/about">About</Link></li>     
-                            <li className="navbar__item"><Link to="/why">Why Eat Neat</Link></li>
-                            <li className="navbar__item"><button className="button" onClick={this.props.startLogout}>Logout</button></li>          
+                            <li className="navbar__item"><button className="button" onClick={this.props.startLogout}>LOGOUT</button></li>          
                         </ul>
                 </div>
             </nav>
             <nav className="secondary-nav">
-                <ul>
-                    <li><Link to="/search" >Search Page</Link></li>     
-                    <li><Link to="/myweek" >My Week Page</Link></li>     
-                    <li><Link to="/favorites" >Favorites Recipes Page</Link></li>     
-                    <li><Link to="/grocerylist" >Grocery List Page</Link></li> 
+                <ul>     
+                    <li><Link to="/favorites" >My Favorites</Link></li> 
+                    <li><Link to="/myweek" >My Week</Link></li>         
+                    <li><Link to="/grocerylist" >My Grocery List</Link></li> 
+                    <li><Link to="/search" >Search</Link></li>
                 </ul>
             </nav>
             <SearchBar history={this.props.history}/> 
