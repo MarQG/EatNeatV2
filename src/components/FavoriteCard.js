@@ -175,13 +175,13 @@ export default class FavoriteCard extends React.Component{
                           <label htmlFor="day" className="col-sm-3 control-label">Day of the Week:</label>
                           <div className="col-sm-9">
                             <select className="form-control" name="day" onChange={this.onChangeWeekSelect}>
-                              <option value="sunday">Sunday</option>
                               <option value="monday">Monday</option>
                               <option value="tuesday">Tuesday</option>
                               <option value="wednesday">Wednesday</option>
                               <option value="thursday">Thurday</option>
                               <option value="friday">Friday</option>
                               <option value="saturday">Saturday</option>
+                              <option value="sunday">Sunday</option>
                             </select>
                           </div>  
                           </div>
