@@ -9,7 +9,7 @@ export default class FavoriteCard extends React.Component{
       modalIsOpen: false,
       weekModalOpen: false,
       recipe: {},
-      daySelect: "sunday",
+      daySelect: "monday",
       mealSelect: "breakfast"
     }
   }
