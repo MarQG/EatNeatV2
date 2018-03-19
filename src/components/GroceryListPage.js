@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setCurrentSearch } from '../actions/search';
-import { getUser } from "../actions/user";
+import { saveUser } from "../actions/user";
 import GroceryCard from './GroceryCard';
+import { toast } from 'react-toastify';
+
 
 
 export class GroceryListPage extends React.Component {
