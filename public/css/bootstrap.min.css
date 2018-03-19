@@ -1009,7 +1009,8 @@ pre code {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 50%;
         flex: 0 0 50%;
-        max-width: 50%
+        max-width: 50%;
+        float: left;
     }
     .col-sm-7 {
         -webkit-box-flex: 0;
@@ -1210,7 +1211,8 @@ pre code {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 50%;
         flex: 0 0 50%;
-        max-width: 50%
+        max-width: 50%;
+        float: left;
     }
     .col-md-7 {
         -webkit-box-flex: 0;

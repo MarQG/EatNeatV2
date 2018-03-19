@@ -91,7 +91,7 @@ export default class FavoriteCard extends React.Component{
           </div>
           <div className="data">
             <div className="content">
-              <span className="author">Source: <a href={this.props.recipe.source.sourceRecipeUrl} target="_blank" >{this.props.recipe.source.sourceDisplayName}</a></span>
+              <span className="author">SOURCE: <a href={this.props.recipe.source.sourceRecipeUrl} target="_blank" >{this.props.recipe.source.sourceDisplayName}</a></span>
               <h4 className="title">{this.props.recipe.name}</h4>
               <a onClick={() => this.onHandleRecipePreview(this.props.recipe.id)} className="button__card">Preview Recipe</a>
               
