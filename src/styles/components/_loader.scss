@@ -4,9 +4,11 @@
     width: 100vw;
     display: flex;
     justify-content: center;
+
+    
 }
 
-.loader__image {
-    height: 6rem;
-    width: 6rem;
+.loader_image {
+    height: 12rem !important;
+    width: 12rem !important;
 }

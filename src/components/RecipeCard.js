@@ -106,10 +106,13 @@ export default class RecipeCard extends React.Component{
                     <h2>{this.state.recipe.name}</h2>
                     <img src={this.state.recipe.images[0].hostedLargeUrl} style={{width: "100%", padding: "0px 0px 20px" }}/>
                     <div className="row">
-                      <div className="col-sm-6">
-                        <button className="button" onClick={() => this.onHandleMyWeek()}>Add To Week</button>
+                    <div className="col-sm-4">
+                        <button className="button" onClick={() => this.props.onHandleFavorites(this.props.recipe.recipe_id)}>Add/Remove From Recipe Book</button>
                       </div>
-                      <div className="col-sm-6">
+                      <div className="col-sm-4">
+                        <button className="button" onClick={() => this.onHandleMyWeek()}>Add To Meal Plan</button>
+                      </div>
+                      <div className="col-sm-4">
                       {!this.props.inGrocery ? 
                         <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Add To Grocery List</button> 
                         : 
@@ -140,48 +143,54 @@ export default class RecipeCard extends React.Component{
               </Modal>
 
               <Modal isOpen={this.state.weekModalOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeWeekModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
-              <div style={{ width: "50vw"}}>
-                  <div className="col-sm-12">
+              <div className="meal-plan" style={{ width: "50vw"}}>
+                  <div className="row text-center">
+                    <div className="col-sm-10">
 
-                    <h2>Add to Week</h2>
-                  <div className="form-horizontal">
-                    
-                    <div className="form-group row">
-                      <label htmlFor="day" className="col-sm-3 control-label">Day of the Week:</label>
-                      <div className="col-sm-9">
-                        <select className="form-control" name="day" onChange={this.onChangeWeekSelect}>
-                          <option value="sunday">Sunday</option>
-                          <option value="monday">Monday</option>
-                          <option value="tuesday">Tuesday</option>
-                          <option value="wednesday">Wednesday</option>
-                          <option value="thursday">Thurday</option>
-                          <option value="friday">Friday</option>
-                          <option value="saturday">Saturday</option>
-                        </select>
-                      </div>
                     </div>
-                    <div className="form-group row">
-                      <label htmlFor="meal" className="col-sm-3 control-label">Meal of the Day: </label>
-                      <div className="col-sm-9">
-                        <select className="form-control" name="meal" onChange={this.onChangeWeekSelect}>
-                          <option value="breakfast">Breakfast</option>
-                          <option value="lunch">Lunch</option>
-                          <option value="dinner">Dinner</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="form-group row">
-                      <div className=" col-sm-8">
-                        <button className="button button--secondary" onClick={this.closeWeekModal}>Close</button> 
-                      </div>
-                      <div className="col-sm-4">
-                        <button className="button" onClick={() => {
-                          this.props.onHandleSubmitWeek(this.state.recipe, this.state.daySelect, this.state.mealSelect);
-                          this.onHandleSubmitToWeek();
-                        }}>Submit</button>
-                      </div>
+                    <div className="col-sm-2">
+                      <button className="button--close" onClick={this.closeWeekModal}>Close <i className="fa fa-times"></i></button> 
                     </div>
                   </div>
+                  <div className="row">
+                    <div className="col-sm-12">
+                      <h2>Add to Meal Plan</h2>
+                      <div className="form-horizontal">
+                        <div className="form-group row">
+                          <label htmlFor="day" className="col-sm-3 control-label">Day of the Week:</label>
+                          <div className="col-sm-9">
+                            <select className="form-control" name="day" onChange={this.onChangeWeekSelect}>
+                              <option value="sunday">Sunday</option>
+                              <option value="monday">Monday</option>
+                              <option value="tuesday">Tuesday</option>
+                              <option value="wednesday">Wednesday</option>
+                              <option value="thursday">Thurday</option>
+                              <option value="friday">Friday</option>
+                              <option value="saturday">Saturday</option>
+                            </select>
+                          </div>  
+                          </div>
+                          <div className="form-group row">
+                            <label htmlFor="meal" className="col-sm-3 control-label">Meal of the Day: </label>
+                            <div className="col-sm-9">
+                              <select className="form-control" name="meal" onChange={this.onChangeWeekSelect}>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div className="form-group row">
+                            
+                            <div className="col-sm-4">
+                              <button className="button" onClick={() => {
+                                this.props.onHandleSubmitWeek(this.state.recipe, this.state.daySelect, this.state.mealSelect);
+                                this.onHandleSubmitToWeek();
+                              }}>Submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                 </div>
               </Modal>

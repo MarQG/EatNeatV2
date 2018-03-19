@@ -1,11 +1,53 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setCurrentSearch } from '../actions/search';
-import { getUser } from "../actions/user";
+import { saveUser } from "../actions/user";
 import GroceryCard from './GroceryCard';
+import { toast } from 'react-toastify';
 
 
 export class GroceryListPage extends React.Component {
+    
+    onHandleGroceryList = (recipe, inGrocery) => {
+        const {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list,
+            _id
+        } = this.props.user;
+
+        const newList = {
+            id: recipe.id,
+            name: recipe.name,
+            ingredients: recipe.ingredientLines,
+            servings: recipe.numberOfServings
+        }
+
+        let filteredList = [];
+
+        // grocery_list.push(newList)
+        if (!inGrocery) {
+            toast.info(`Added ${newList.name} to your Grocery List!`);
+            grocery_list.push(newList);
+        }
+        else {
+            toast.info(`Updated your Grocery List!`);
+            filteredList = grocery_list.filter(grocery => grocery.id != newList.id);
+        }
+
+        const updatedUser = {
+            favorites,
+            user_id,
+            recent_searches,
+            my_week,
+            grocery_list: inGrocery ? filteredList : grocery_list,
+            _id
+        }
+
+        this.props.saveUser(updatedUser);
+    }
 
     render(){
         return(
@@ -19,7 +61,7 @@ export class GroceryListPage extends React.Component {
             <div className="row">
                 {this.props.user.grocery_list.length > 0 ? this.props.user.grocery_list.map((grocery, i)=> (
                     <div key={grocery.id} className="col-lg-4 col-md-6 col-sm-12">
-                    <GroceryCard grocery={grocery} key={i} />
+                    <GroceryCard grocery={grocery} onHandleToGrocery={this.onHandleGroceryList} key={i} />
                     </div>
                 ))  : <div className="col-sm-12 content__empty text-center">
                         <h2>Search for recipes to add to your Grocery List. Click <span><i className="fa fa-search" aria-hidden="true"></i></span> above get started.</h2>

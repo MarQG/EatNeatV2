@@ -8,7 +8,7 @@ export const LoginPage = ({ startLogin, startFB }) => (
         <div className="box-layout__box">
             <img className="box_layout__logo" src="./images/eat_neat_logo_wht.png" alt="EAT NEAT"/>
             <h1 className="box-layout__title">Welcome to EatNeat.</h1>
-            <button className="button" onClick={startLogin}>Login with Google</button>
+            <button className="button button--google" onClick={startLogin}> <span className="fa fa-google"></span> Sign In with Google</button>
         </div>
     </div>
 );

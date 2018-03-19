@@ -37,7 +37,7 @@ export class MyWeekPage extends React.Component {
             grocery_list.push(newList);
         }
         else {
-            toast.info(`Updated your Grocery List!`);
+            toast.info(`Removed  ${newList.name} from your Grocery List!`);
             filteredList = grocery_list.filter(grocery => grocery.id != newList.id);
         }
 

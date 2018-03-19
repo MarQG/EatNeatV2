@@ -64,6 +64,15 @@ export default class MyWeekCard extends React.Component{
                                     style={this.customStyles} 
                                     contentLabel="Example Modal">
                                     <div>
+                                        <div className="row">
+                                            <div className="col-sm-10">
+                                                
+                                            
+                                            </div>
+                                            <div className="col-sm-2">
+                                                <button className="button--close" onClick={this.closeModal}>Close <i className="fa fa-times"></i></button>
+                                            </div>
+                                        </div>
                                         {this.props.dayMeals.breakfast.name === undefined ? <img src="./images/loader.gif" /> : 
                                         <div className="row">
                                             <div className="col-md-6">
@@ -71,6 +80,7 @@ export default class MyWeekCard extends React.Component{
                                                 <img src={this.props.dayMeals.breakfast.images[0].hostedLargeUrl} style={{width: "100%", padding: "0px 0px 20px" }} />
                                                 <div className="row">
                                                     <div className="col-sm-6">
+                                                        
                                                         <button className="button" onClick={() => this.props.onHandleToGrocery(this.props.dayMeals.breakfast)}>Add/Remove Grocery List Card</button>
                                                     </div>
                                                     <div className="col-sm-6">
@@ -90,15 +100,7 @@ export default class MyWeekCard extends React.Component{
                                             
                                             
                                         </div>}
-                                        <div className="row">
-                                            <div className="col-sm-4">
-                                                <button className="button button--secondary" onClick={this.closeModal}>close</button>
-                                            
-                                            </div>
-                                            <div className="col-sm-8">
-
-                                            </div>
-                                        </div>
+                                        
                                         
                                     </div>
 
@@ -106,7 +108,7 @@ export default class MyWeekCard extends React.Component{
                             </div> : 
                             
                             <div className="todo-title-empty">
-                                <p >Add a recipe to breakfast</p>
+                                <p >Add a Recipe from your Recipe Book to Breakfast</p>
                             </div>
                             }
                         {this.props.dayMeals.lunch != undefined ?
@@ -120,6 +122,15 @@ export default class MyWeekCard extends React.Component{
                                     this.props.grocery_list.some(
                                         item => item.id === this.props.dayMeals.lunch.id)} isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
                                         <div>
+                                        <div className="row">
+                                            <div className="col-sm-10">
+                                                
+                                            
+                                            </div>
+                                            <div className="col-sm-2">
+                                                <button className="button--close" onClick={this.closeModal}>Close <i className="fa fa-times"></i></button>
+                                            </div>
+                                        </div>    
                                         {this.props.dayMeals.lunch.name === undefined ? <img src="./images/loader.gif" /> : 
                                         <div className="row">
                                             <div className="col-md-6">
@@ -146,21 +157,13 @@ export default class MyWeekCard extends React.Component{
                                             
                                             
                                         </div>}
-                                        <div className="row">
-                                            <div className="col-sm-4">
-                                                <button className="button button--secondary" onClick={this.closeModal}>close</button>
-                                            
-                                            </div>
-                                            <div className="col-sm-8">
-
-                                            </div>
-                                        </div>
+                                        
                                         
                                     </div>
                                 </Modal>
                             </div> : 
                             <div className="todo-title-empty">
-                                <p >Add a recipe to lunch</p>
+                                <p >Add a Recipe from your Recipe Book to Lunch</p>
                             </div>
                             }
                         {this.props.dayMeals.dinner != undefined ?
@@ -175,6 +178,15 @@ export default class MyWeekCard extends React.Component{
                                         this.props.grocery_list.some(
                                             item => item.id === this.props.dayMeals.dinner.id)} isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
                                             <div>
+                                            <div className="row">
+                                            <div className="col-sm-10">
+                                                
+                                            
+                                            </div>
+                                            <div className="col-sm-2">
+                                                <button className="button--close" onClick={this.closeModal}>Close <i className="fa fa-times"></i></button>
+                                            </div>
+                                        </div>
                                         {this.props.dayMeals.dinner.name === undefined ? <img src="./images/loader.gif" /> : 
                                         <div className="row">
                                             <div className="col-md-6">
@@ -201,25 +213,15 @@ export default class MyWeekCard extends React.Component{
                                             
                                             
                                         </div>}
-                                        <div className="row">
-                                            <div className="col-sm-4">
-                                                <button className="button button--secondary" onClick={this.closeModal}>close</button>
-                                            
-                                            </div>
-                                            <div className="col-sm-8">
-
-                                            </div>
-                                        </div>
-                                        
                                     </div>
 
                                     </Modal> 
                                 </div>
                             </div> : 
                             <div className="todo-title-empty">
-                                <p >Add a recipe to dinner</p>
+                                <p >Add a Recipe from your Recipe Book to Dinner</p>
                             </div>}
-                    </div> : <div className="todo-title-empty">Add something to your {this.props.day.toUpperCase()}!</div>}
+                    </div> : <div className="todo-title-empty">Add Recipe from your Recipe Book to your {this.props.day.toUpperCase()}!</div>}
 
                   </div>
             </div>
