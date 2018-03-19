@@ -103,10 +103,13 @@ export default class FavoriteCard extends React.Component{
                     <h2>{this.state.recipe.name}</h2>
                     <img src={this.state.recipe.images[0].hostedLargeUrl} style={{width: "100%", padding: "0px 0px 20px" }}/>
                     <div className="row">
-                      <div className="col-sm-6">
+                      <div className="col-sm-4">
+                        <button className="button" onClick={() => this.props.onHandleFavorites(this.props.recipe.id)}>Remove From Recipe Book</button>
+                      </div>
+                      <div className="col-sm-4">
                         <button className="button" onClick={() => this.onHandleMyWeek(this.props.recipe.recipe_id)}>Add To Week</button>
                       </div>
-                      <div className="col-sm-6">
+                      <div className="col-sm-4">
                       {!this.props.inGrocery ? 
                         <button className="button" onClick={() => this.props.onHandleToGrocery(this.state.recipe, this.props.inGrocery)}>Add To Grocery List</button> 
                         : 
