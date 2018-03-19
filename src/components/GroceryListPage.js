@@ -46,16 +46,26 @@ export class GroceryListPage extends React.Component {
 
         this.props.saveUser(updatedUser);
     }
-    
     render(){
-        return(   
-        <div>
-            {this.props.user.grocery_list.length > 0 ? this.props.user.grocery_list.map((grocery, i)=> (
-                <div key={grocery.id} className="col-md-4">
-                   <GroceryCard grocery={grocery} key={i} />
+        return(
+        <div className="container-fluid">
+            <div className="content__header row text-center">
+                <div className="col-sm-12">
+                    <h2>{this.props.auth.username}'s Grocery List</h2>
                 </div>
-            ))  : <div></div> }
-        </div>
+                
+            </div>
+            <div className="row">
+                {this.props.user.grocery_list.length > 0 ? this.props.user.grocery_list.map((grocery, i)=> (
+                    <div key={grocery.id} className="col-lg-4 col-md-6 col-sm-12">
+                    <GroceryCard grocery={grocery} onHandleToGrocery={this.onHandleGroceryList} key={i} />
+                    </div>
+                ))  : <div className="col-sm-12 content__empty text-center">
+                        <h2>Search for recipes to add to your Grocery List. Click <span><i className="fa fa-search" aria-hidden="true"></i></span> above get started.</h2>
+                    </div> }
+            </div>
+        </div>   
+        
         );
     }
 };
