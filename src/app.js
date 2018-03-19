@@ -11,6 +11,7 @@ import { firebase } from './firebase/firebase';
 import LoadingPage from "./components/LoadingPage";
 import API from './utils/api';
 import { getUser } from './actions/user';
+import { setCurrentSearch } from './actions/search';
 
 const store = configureStore();
 
@@ -21,6 +22,16 @@ const renderApp = () => {
         hasRendered = true;
     }
 };
+
+const defaultUserState = {
+    user_id: '',
+    favorites: [],
+    my_week: {
+        monday: ''
+    },
+    recent_searches: [],
+    grocery_list: []
+}
 
 const jsx = (
     <Provider store={store}>
@@ -47,8 +58,9 @@ firebase.auth().onAuthStateChanged((user) => {
         })
         
     } else {
+        store.dispatch(getUser(defaultUserState));
+        store.dispatch(setCurrentSearch())
         store.dispatch(logout());
-        store.dispatch(getUser());
         renderApp();
         history.push("/");
     }
