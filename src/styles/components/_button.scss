@@ -32,6 +32,23 @@
     padding: 0;
 }
 
+.button--search{
+    background: none;
+    color: $off-white;
+    width: auto;
+    border: none;
+    margin: 0;
+    font-size: $m-size;
+    padding: $m-size;
+    outline: none;
+    &:hover{
+        color: $dark-grey;
+    }
+    &:focus{
+        outline: none;
+    }
+}
+
 .button__card {
     display: block;
     width: 120px;

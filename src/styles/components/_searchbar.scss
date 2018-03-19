@@ -1,7 +1,47 @@
 .searchbar{
-    color:$dark-grey;
+    color:$off-white;
+    background: $off-black;
+    font-size: $m-size;
+    font-weight: 300;
 
-    input: {
-        color: $dark-grey;
+    input[type="text"]{
+        color: $off-white;
+        display: inline-block;
+        background:none;
+        border:none;
+        border-bottom: 2px $off-white solid;
+        outline: none;
+        
+        padding: $s-size;
+        width: 80%;
+        margin: $l-size $m-size;
     }
+
+    input[type="text"]::placeholder{
+        color: $off-white;
+    }
+    
+    .search--error{
+        margin: 0 auto;
+        margin-bottom: 30px;
+        font-size: $l-size;
+    }
+}
+
+
+.searchbar--filters{
+    h4{
+        color: $off-white;
+        font-size: $l-size;
+        font-weight: 300;
+    }
+    label{
+        font-weight: 300;
+        padding: 0 $s-size;
+    }
+
+    li{
+        margin: $s-size;
+    }
+
 }

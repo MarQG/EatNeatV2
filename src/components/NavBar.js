@@ -7,6 +7,26 @@ import { Navbar, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 
 export class ENNavBar extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            showSearch: false
+        }
+    }
+    
+
+    onHandleShowSearchBar = () => {
+        console.log("clicked");
+        this.setState({ showSearch: true });
+    }
+
+    onHandleCloseSearchBar = (e) => {
+        e.preventDefault();
+        this.setState({ showSearch: false });
+    }
+
+    
+
     render(){
         return(
             <div>
@@ -27,13 +47,15 @@ export class ENNavBar extends React.Component {
             </nav>
             <nav className="secondary-nav">
                 <ul>
-                    <li><Link to="/search" >Search Page</Link></li>     
-                    <li><Link to="/myweek" >My Week Page</Link></li>     
-                    <li><Link to="/favorites" >Favorites Recipes Page</Link></li>     
-                    <li><Link to="/grocerylist" >Grocery List Page</Link></li> 
+                    <li><Link to="/search" >Search</Link></li>     
+                    <li><Link to="/myweek" >My Week</Link></li>     
+                    <li><Link to="/favorites" >Recipe Book</Link></li>     
+                    <li><Link to="/grocerylist" >Grocery List</Link></li>
+                    <li><button onClick={this.onHandleShowSearchBar} className="button--search"><i className="fa fa-search" aria-hidden="true"></i></button></li> 
                 </ul>
             </nav>
-            <SearchBar history={this.props.history}/> 
+            {this.state.showSearch ? <SearchBar history={this.props.history} onHandleCloseSearchBar={this.onHandleCloseSearchBar}/>  : false}
+            
             </div>
         );
     }
