@@ -107,10 +107,10 @@ export default class RecipeCard extends React.Component{
                     <img src={this.state.recipe.images[0].hostedLargeUrl} style={{width: "100%", padding: "0px 0px 20px" }}/>
                     <div className="row">
                     <div className="col-sm-4">
-                        <button className="button" onClick={() => this.props.onHandleFavorites(this.props.recipe.recipe_id)}>Add To Recipe Book</button>
+                        <button className="button" onClick={() => this.props.onHandleFavorites(this.props.recipe.recipe_id)}>Add/Remove From Recipe Book</button>
                       </div>
                       <div className="col-sm-4">
-                        <button className="button" onClick={() => this.onHandleMyWeek()}>Add To Week</button>
+                        <button className="button" onClick={() => this.onHandleMyWeek()}>Add To Meal Plan</button>
                       </div>
                       <div className="col-sm-4">
                       {!this.props.inGrocery ? 

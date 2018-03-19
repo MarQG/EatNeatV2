@@ -26,14 +26,15 @@ const GroceryCard = (props) => (
                     
                         )} 
                         
-                            <button className="button" onClick={() => this.props.onHandleToGrocery(this.props.recipe, this.props.inGrocery)}>Remove From Grocery List</button>
+                            
                         </div> :
                    
                        
                     <li>Sorry no ingredients found</li>}
                 </span>
-
+                <button className="button__card--remove" onClick={() => props.onHandleToGrocery(props.grocery, true)}>Remove <span className="fa fa-times"></span></button>
         </div>
+       
     </div>
     
 )

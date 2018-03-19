@@ -68,7 +68,7 @@
 
 .button--close{
     background: none;
-    color: $dark-grey;
+    color: $off-black;
     width: auto;
     border: none;
     margin: 0;
@@ -96,6 +96,7 @@
     font-size: $font-size-small;
     border: none;
     outline: none;
+    padding-top: $s-size;
     &::after {
       content: '\2192';
       opacity: 0;
@@ -110,5 +111,26 @@
         transform: translate(5px, -50%);
         opacity: 1;
       }
+    }
+  }
+
+
+  .button__card--remove {
+    display: block;
+    width: 120px;
+    margin:auto;
+    text-align: center;
+    font-size: 12px;
+    color: $main-color;
+    line-height: 1;
+    position: relative;
+    font-weight: 300;
+    font-size: $font-size-large;
+    border: none;
+    outline: none;
+    padding-top: $s-size;
+    
+    &:hover {
+      font-weight: 600;
     }
   }

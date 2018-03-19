@@ -107,7 +107,7 @@ export default class FavoriteCard extends React.Component{
                         <button className="button" onClick={() => this.props.onHandleFavorites(this.props.recipe.id)}>Remove From Recipe Book</button>
                       </div>
                       <div className="col-sm-4">
-                        <button className="button" onClick={() => this.onHandleMyWeek(this.props.recipe.recipe_id)}>Add To Week</button>
+                        <button className="button" onClick={() => this.onHandleMyWeek(this.props.recipe.recipe_id)}>Add To Meal Plan</button>
                       </div>
                       <div className="col-sm-4">
                       {!this.props.inGrocery ? 

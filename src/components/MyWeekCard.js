@@ -106,7 +106,7 @@ export default class MyWeekCard extends React.Component{
                             </div> : 
                             
                             <div className="todo-title-empty">
-                                <p >Add a recipe to breakfast</p>
+                                <p >Add a Recipe from your Recipe Book to Breakfast</p>
                             </div>
                             }
                         {this.props.dayMeals.lunch != undefined ?
@@ -160,7 +160,7 @@ export default class MyWeekCard extends React.Component{
                                 </Modal>
                             </div> : 
                             <div className="todo-title-empty">
-                                <p >Add a recipe to lunch</p>
+                                <p >Add a Recipe from your Recipe Book to Lunch</p>
                             </div>
                             }
                         {this.props.dayMeals.dinner != undefined ?
@@ -217,9 +217,9 @@ export default class MyWeekCard extends React.Component{
                                 </div>
                             </div> : 
                             <div className="todo-title-empty">
-                                <p >Add a recipe to dinner</p>
+                                <p >Add a Recipe from your Recipe Book to Dinner</p>
                             </div>}
-                    </div> : <div className="todo-title-empty">Add something to your {this.props.day.toUpperCase()}!</div>}
+                    </div> : <div className="todo-title-empty">Add Recipe from your Recipe Book to your {this.props.day.toUpperCase()}!</div>}
 
                   </div>
             </div>
