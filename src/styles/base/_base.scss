@@ -115,6 +115,12 @@ a {
     list-style: none;
   }
 
+  select{
+    height: auto!important;
+    padding: $l-size !important;
+    font-size: $l-size !important;
+  }
+
   .content__header{
     margin: 20px auto;
     font-weight: 200;
