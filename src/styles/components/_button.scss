@@ -51,11 +51,11 @@
 
 .button--search{
     background: none;
-    color: $off-white;
+    color: $off-white !important;
     width: auto;
     border: none;
     margin: 0;
-    font-size: $m-size;
+    font-size: 18px;
     padding: $m-size;
     outline: none;
     &:hover{

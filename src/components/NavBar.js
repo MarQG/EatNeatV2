@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startLogout } from "../actions/auth";
 import SearchBar from './SearchBar';
-import { Navbar, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 
 export class ENNavBar extends React.Component {
 
@@ -52,7 +51,7 @@ export class ENNavBar extends React.Component {
                     <li><Link to="/myweek" >Meal Plan</Link></li>     
                     <li><Link to="/favorites" >Recipe Book</Link></li>     
                     <li><Link to="/grocerylist" >Grocery List</Link></li>
-                    <li><button onClick={this.onHandleShowSearchBar} className="button--search"><i className="fa fa-search" aria-hidden="true"></i></button></li> 
+                    <li><a onClick={this.onHandleShowSearchBar} className="button--search">Search <i className="fa fa-search" aria-hidden="true"></i></a></li> 
                 </ul>
             </nav>
             {this.state.showSearch ? <SearchBar history={this.props.history} onHandleCloseSearchBar={this.onHandleCloseSearchBar}/>  : false}
