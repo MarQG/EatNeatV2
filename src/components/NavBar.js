@@ -48,9 +48,9 @@ export class ENNavBar extends React.Component {
             </nav>
             <nav className="secondary-nav">
                 <ul>
-                    <li><Link to="/search" >Current Search</Link></li>     
+                    <li><Link to="/search" >Current Search</Link></li>  
+                    <li><Link to="/favorites" >Recipe Book</Link></li>      
                     <li><Link to="/myweek" >Meal Plan</Link></li>     
-                    <li><Link to="/favorites" >Recipe Book</Link></li>     
                     <li><Link to="/grocerylist" >Grocery List</Link></li>
                     <li><button onClick={this.onHandleShowSearchBar} className="button--search"><i className="fa fa-search" aria-hidden="true"></i></button></li> 
                 </ul>
