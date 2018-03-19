@@ -75,7 +75,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+    auth: state.auth
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroceryListPage);
