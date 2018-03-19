@@ -46,6 +46,7 @@ export default class MyWeekCard extends React.Component{
 
                 
                 <h2 className="day">{this.props.day.toUpperCase()}</h2>
+                <hr /> 
                 {this.props.dayMeals != undefined ?
                     <div className="todo-wrap">
                         {this.props.dayMeals.breakfast != undefined ?
@@ -55,6 +56,7 @@ export default class MyWeekCard extends React.Component{
                                     {this.props.dayMeals.breakfast.name} 
                                 </p>
                                 <button className="button__card" value={this.props.dayMeals.breakfast.id} onClick={() =>this.viewRecipe(this.props.dayMeals.breakfast)}>View Recipe</button>
+                                <br />
                                 <Modal inGrocery={
                                     this.props.grocery_list.some(
                                         item => item.id === this.props.dayMeals.breakfast.id)} 
@@ -116,6 +118,7 @@ export default class MyWeekCard extends React.Component{
                                     {this.props.dayMeals.lunch.name} 
                                 </p>
                                 <button className="button__card" value={this.props.dayMeals.lunch.id} onClick={() =>this.viewRecipe(this.props.dayMeals.lunch)}>View Recipe</button>
+                                <br />
                                 <Modal inGrocery={
                                     this.props.grocery_list.some(
                                         item => item.id === this.props.dayMeals.lunch.id)} isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
@@ -171,6 +174,7 @@ export default class MyWeekCard extends React.Component{
                                         {this.props.dayMeals.dinner.name} 
                                     </p>
                                     <button className="button__card" value={this.props.dayMeals.dinner.id} onClick={() =>this.viewRecipe(this.props.dayMeals.dinner)}>View Recipe</button>
+                                    <br />
                                     <Modal inGrocery={
                                         this.props.grocery_list.some(
                                             item => item.id === this.props.dayMeals.dinner.id)} isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
