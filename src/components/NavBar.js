@@ -38,17 +38,17 @@ export class ENNavBar extends React.Component {
                         </Link>
                     </div>
                     <ul className="navbar__list">
-                            <li className="navbar__item"><Link to="/favorites">Hi {this.props.auth.username}!</Link></li>
-                            <li className="navbar__item"><Link to="/faq">FAQ</Link></li>
-                            <li className="navbar__item"><Link to="/about">About</Link></li>     
-                            <li className="navbar__item"><Link to="/why">Why Eat Neat</Link></li>
-                            <li className="navbar__item"><button className="button button--link" onClick={this.props.startLogout}>Logout</button></li>          
-                        </ul>
+                        <li className="navbar__item"><Link to="/favorites">Hi {this.props.auth.username}!</Link></li>
+                        <li className="navbar__item"><Link to="/faq">FAQ</Link></li>
+                        <li className="navbar__item"><Link to="/about">About</Link></li>     
+                        <li className="navbar__item"><Link to="/why">Why Eat Neat</Link></li>
+                        <li className="navbar__item"><button className="button button--link" onClick={this.props.startLogout}>Logout</button></li>          
+                    </ul>
                 </div>
             </nav>
             <nav className="secondary-nav">
                 <ul>
-                    <li><Link to="/search" >Search</Link></li>     
+                    <li><Link to="/search" >Current Search</Link></li>     
                     <li><Link to="/myweek" >Meal Plan</Link></li>     
                     <li><Link to="/favorites" >Recipe Book</Link></li>     
                     <li><Link to="/grocerylist" >Grocery List</Link></li>

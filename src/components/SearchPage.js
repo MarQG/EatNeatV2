@@ -168,7 +168,7 @@ export class SearchPage extends React.Component {
                                 <ul className="list-group">
                                     {this.props.search.filters[0].allergies.length > 0 ? 
                                         this.props.search.filters[0].allergies.map(allergy => (
-                                            <li key={allergy} className="list-group-item"><i class="fa fa-plus-circle" aria-hidden="true"></i> {allergy}</li>
+                                            <li key={allergy} className="list-group-item"><i class="fa fa-tag" aria-hidden="true"></i> {allergy}</li>
                                         )) 
                                     : <li>No Filters</li>
                                     }
@@ -179,7 +179,7 @@ export class SearchPage extends React.Component {
                                 <ul className="list-group">
                                     {this.props.search.filters[0].diet.length > 0 ? 
                                         this.props.search.filters[0].diet.map(diet => (
-                                            <li key={diet} className="list-group-item"><i class="fa fa-plus-circle" aria-hidden="true"></i> {diet}</li>
+                                            <li key={diet} className="list-group-item"><i class="fa fa-tag" aria-hidden="true"></i> {diet}</li>
                                         )) 
                                     : <li>No Filters</li>
                                     }

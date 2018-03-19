@@ -12,7 +12,17 @@
     border-radius: 4px;
     text-decoration: none;
     border: 1px solid white;
-    width: 30%
+    width: 100%;
+}
+
+.button--google{
+    background:#dd4b39;
+    font-size: $m-size;
+}
+
+.button--facebook{
+    background: #3b5998;
+    font-size: $m-size;
 }
 
 .button--link {
