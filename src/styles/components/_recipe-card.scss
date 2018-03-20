@@ -48,7 +48,11 @@
       position: relative;
       overflow: hidden;
       box-shadow: 0 19px 38px rgba($off-black, 0.3), 0 15px 12px rgba($off-black, 0.2);
-
+      &:hover{
+        .data{
+          transform: translateY(0);
+        }
+      }
     }
     .data {
       position: absolute;
@@ -126,6 +130,7 @@
     }
     .data {
       color: $off-white;
+      transform: translateY(calc(70px + 4em));
     }
     .title {
       color: $off-white;
@@ -182,5 +187,13 @@
 
     p{
       font-size: $m-size;
+    }
+  }
+
+  @media only screen and (max-width: 1024px){
+    .example-2 {
+      .data{
+        transform: none;
+      }
     }
   }
