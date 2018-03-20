@@ -39,7 +39,7 @@
       }
     }
     .wrapper:hover img {
-      opacity: 0.2;
+      opacity: 0.4;
       transition: 0.3s ease;
     }
     .wrapper {
@@ -48,18 +48,12 @@
       position: relative;
       overflow: hidden;
       box-shadow: 0 19px 38px rgba($off-black, 0.3), 0 15px 12px rgba($off-black, 0.2);
-      &:hover {
-        .data {
-          transform: translateY(0);
-        }
-      }
+
     }
     .data {
       position: absolute;
-      bottom: 0;
+      bottom:0;
       width: 100%;
-      transform: translateY(calc(70px + 1em));
-      transition: transform 0.3s;
       .content {
         padding: 1em;
         position: relative;
@@ -110,9 +104,19 @@
     }
     .menu-content {
       float: right;
+      display:flex;
+      justify-content: space-between;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      z-index: 3;
       li {
         margin: 0 7px;
         position: relative;
+        flex: 1;
+        text-align: center;
+        a{
+          white-space: nowrap;
+        }
       }
       span {
         transition: all 0.3s;
@@ -122,7 +126,6 @@
     }
     .data {
       color: $off-white;
-      transform: translateY(calc(70px + 4em));
     }
     .title {
       color: $off-white;
