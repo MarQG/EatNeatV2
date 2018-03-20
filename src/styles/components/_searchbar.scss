@@ -11,9 +11,9 @@
         border:none;
         border-bottom: 2px $off-white solid;
         outline: none;
-        
+        font-family: "Oswald", sans-serif;
         padding: $s-size;
-        width: 80%;
+        width: 100%;
         margin: $l-size $m-size;
     }
 
@@ -25,6 +25,23 @@
         margin: 0 auto;
         margin-bottom: 30px;
         font-size: $l-size;
+    }
+
+    .row{
+        display:flex;
+    }
+
+    .col-xs-4{
+        flex-grow: 1;
+        text-align: center
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .searchbar{
+        input[type="text"]{
+            width:90%;
+        }
     }
 }
 

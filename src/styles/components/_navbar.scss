@@ -1,10 +1,19 @@
 .navbar__list{
     color: $dark-grey;
     list-style: none;
-    padding: 0;
-
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: inherit;
+    overflow: hidden;
+    padding-top: 5px;
     li{
         display: inline-block;
+        flex: 1;
+        text-align: center;
+        padding: $m-size;
+        a{
+          white-space: nowrap;
+        }
     }
 }
 
@@ -26,6 +35,12 @@
   margin-bottom: 0 !important;
 }
 
+.navbar-brand{
+  img{
+    height: 70px;
+  }
+}
+
   
   .profile-img {
     margin-top: -5px;
@@ -39,12 +54,13 @@
     height: 30px;
   }
   
+
   .secondary-nav {
     position: relative;
 
     clear: both;
     width: 100%;
-    height: 50px;
+    height: 100px;
     background-color: #25283D;
     /* Force Hardware Acceleration */
     -webkit-transform: translateZ(0);
@@ -61,7 +77,7 @@
       top: 0;
       right: 0;
       height: 100%;
-      width: 35px;
+      width: 150px;
       background: transparent;
       background: -webkit-linear-gradient(right, #25283D, rgba(37, 40, 61, 0));
       background: linear-gradient(to left, #25283D, rgba(37, 40, 61, 0));
@@ -82,7 +98,9 @@
       display: -ms-flexbox;
       display: flex;
       padding: 0 5%;
-      overflow-x: auto;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      white-space: nowrap;
       -webkit-overflow-scrolling: touch;
       &::after {
         clear: both;
@@ -98,15 +116,15 @@
       -ms-flex-negative: 0;
       flex-shrink: 0;
       &:last-of-type {
-        padding-right: 20px;
+        padding-right: 10px;
       }
     }
     a {
       display: block;
       color: #ffffff;
       opacity: .6;
-      line-height: 50px;
-      padding: 0 1em;
+      line-height: 45px;
+      padding: 0 1.2rem;
       &:hover, &.active {
         opacity: 1;
       }
@@ -115,7 +133,7 @@
   
   @media only screen and (min-width: 1024px) {
     .secondary-nav {
-      height: 70px;
+      height: 100px;
       overflow: visible;
       ul {
         /* reset mobile style */
@@ -130,7 +148,7 @@
         flex-shrink: 1;
       }
       a {
-        line-height: 70px;
+        line-height: 45px;
         &.active {
           box-shadow: inset 0 -3px #8F3985;
         }
@@ -140,7 +158,7 @@
   
   @media only screen and (min-width: 768px) {
     .secondary-nav {
-      height: 70px;
+      height: 100px;
       overflow: visible;
       ul {
         /* reset mobile style */
@@ -155,7 +173,7 @@
         flex-shrink: 1;
       }
       a {
-        line-height: 70px;
+        line-height: 45px;
         &.active {
           box-shadow: inset 0 -3px #8F3985;
         }
@@ -165,7 +183,7 @@
   
   @media only screen and (min-width: 480px) {
     .secondary-nav {
-      height: 70px;
+      height: 100px;
       overflow: visible;
       ul {
         /* reset mobile style */
@@ -180,7 +198,7 @@
         flex-shrink: 1;
       }
       a {
-        line-height: 70px;
+        line-height: 45px;
         &.active {
           box-shadow: inset 0 -3px #8F3985;
         }
@@ -190,7 +208,7 @@
   
   @media only screen and (min-width: 320px) {
     .secondary-nav {
-      height: 70px;
+      height: 100px;
       overflow: visible;
       ul {
         /* reset mobile style */
@@ -205,7 +223,7 @@
         flex-shrink: 1;
       }
       a {
-        line-height: 70px;
+        line-height: 45px;
         &.active {
           box-shadow: inset 0 -3px #8F3985;
         }

@@ -81,11 +81,24 @@ export class SearchBar extends React.Component {
                 
                 <form className="form" onSubmit={this.onHandleSubmit}>
                     <div className="form-group">
+                        <div className="row">
+                            <div className="col-lg-7 col-md-6 col-sm-12">
                             <input className="" placeholder="Search For Recipes..." onChange={this.onHandleQueryChange} name="query" type="text" value={this.state.query}/>
-                            <button className="button button--search" type="submit"><i className="fa fa-search" aria-hidden="true"></i></button>
-                            <button className="button button--search" onClick={this.onHandleToggleFilters}><i className="fa fa-filter" aria-hidden="true" ></i> Filter</button>
-                            <button className="button button--search" onClick={this.props.onHandleCloseSearchBar}><i className="fa fa-times" aria-hidden="true"></i></button>
-                            
+                            </div>
+                            <div className="col-lg-5 col-md-6 col-sm-12">
+                                <div className="row text-center">
+                                    <div className="col-xs-4">
+                                        <button className="button button--search" type="submit"><i className="fa fa-search" aria-hidden="true"></i></button>
+                                    </div>
+                                    <div className="col-xs-4">
+                                        <button className="button button--search" onClick={this.onHandleToggleFilters}><i className="fa fa-filter" aria-hidden="true" ></i> Filter</button>
+                                    </div>
+                                    <div className="col-xs-4">
+                                        <button className="button button--search" onClick={this.props.onHandleCloseSearchBar}><i className="fa fa-times" aria-hidden="true"></i>Close</button>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
                     </div>
                     { this.state.error != "" ? <p className="search--error">{this.state.error}</p> : false }
                     { this.state.showFilters ? 

@@ -5,6 +5,7 @@
     color: white;
     display: inline-block;
     font-size: $font-size-small;
+    font-family: "Oswald", sans-serif;
     font-weight: 300;
     line-height: 1;
     padding: $s-size;
@@ -28,8 +29,11 @@
 .button--link {
     background: none;
     border:none;
-    color:$dark-grey;
-    font-size: $font-size-large;
+    padding: 0;
+    margin: 0;
+    color:$main-color;
+    font-weight: 400;
+    font-size: 18px;
     &:hover{
         color: $main-color;
     }
@@ -52,9 +56,10 @@
 .button--search{
     background: none;
     color: $off-white !important;
-    width: auto;
+    text-align: center;
+    flex-grow: 1;
     border: none;
-    margin: 0;
+    margin: $l-size $m-size;
     font-size: 18px;
     padding: $m-size;
     outline: none;
@@ -97,6 +102,7 @@
     border: none;
     outline: none;
     padding-top: $s-size;
+    background: none;
     &::after {
       content: '\2192';
       opacity: 0;
@@ -129,7 +135,7 @@
     border: none;
     outline: none;
     padding-top: $s-size;
-    
+    background: none;
     &:hover {
       font-weight: 600;
     }
