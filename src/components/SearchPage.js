@@ -30,7 +30,7 @@ export class SearchPage extends React.Component {
         loading = true;
         API.getDetailRecipe(id).then(response => {
             
-            console.log(response)
+
             loading = false;
         })
     }
@@ -38,7 +38,7 @@ export class SearchPage extends React.Component {
     onHandleFavorites = (id) => {
 
         API.getDetailRecipe(id).then(response => {
-            console.log(response.data);
+
 
             const {
                 favorites,
@@ -52,11 +52,11 @@ export class SearchPage extends React.Component {
             const newFav = response.data;
             
             if(!favorites.some(favorite => favorite.id === newFav.id)){
-                console.log("Saving a favorite");
+
                 favorites.push(newFav);
             } 
             else if (favorites.some(favorite => favorite.id === newFav.id)) {
-                console.log("Checking and removing a favorite");
+
                 favorites.filter(favorite => favorite.id != newFav.id);
             }
 
@@ -79,7 +79,6 @@ export class SearchPage extends React.Component {
     }
 
     onHandleGroceryList = (recipe, inGrocery) => {
-        console.log(recipe);
 
             const {
                 favorites,
@@ -122,7 +121,7 @@ export class SearchPage extends React.Component {
     }
 
     onHandleSubmitWeek = (recipe, day, mealTime) => {
-        console.log(recipe);
+
         const {
             favorites,
             user_id,
@@ -139,7 +138,7 @@ export class SearchPage extends React.Component {
                 [mealTime]: recipe
             }
         }
-        console.log(updateWeek);
+
         
         toast.info(`Added ${recipe.name} to ${day.toUpperCase()} for ${mealTime.toUpperCase()}.`);
         const updatedUser = {

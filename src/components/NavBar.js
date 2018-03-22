@@ -15,7 +15,6 @@ export class ENNavBar extends React.Component {
     
 
     onHandleShowSearchBar = () => {
-        console.log("clicked");
         this.setState({ showSearch: !this.state.showSearch });
     }
 

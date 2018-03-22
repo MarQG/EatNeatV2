@@ -32,7 +32,6 @@ export default class RecipeCard extends React.Component{
   onHandleRecipePreview = id => {
     this.setState({ modalIsOpen: true });
     API.getDetailRecipe(id).then(response => {
-      console.log(response)
       this.setState({  recipe: response.data });
     })
   }

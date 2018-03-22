@@ -8,6 +8,8 @@ export default class MyWeekCard extends React.Component{
         super(props);
         this.state = {
             modalIsOpen: false,
+            lunchModal: false,
+            dinnerModal: false
         }
     }
 
@@ -38,6 +40,30 @@ export default class MyWeekCard extends React.Component{
         this.setState({ modalIsOpen: false });
     }
 
+    viewLunchRecipe = recipe => {
+        this.setState({ lunchModal: true });
+    }
+
+    afterLunchOpenModal = () => {
+        // references are now sync'd and can be accessed.
+    }
+
+    closeLunchModal = () => {
+        this.setState({ lunchModal: false });
+    }
+
+    viewDinnerRecipe = recipe => {
+        this.setState({ dinnerModal: true });
+    }
+
+    afterDinnerOpenModal = () => {
+        // references are now sync'd and can be accessed.
+    }
+
+    closeDinnerModal = () => {
+        this.setState({ dinnerModal: false });
+    }
+
 
     render(){
         return(
@@ -57,7 +83,8 @@ export default class MyWeekCard extends React.Component{
                                 </p>
                                 <button className="button__card" value={this.props.dayMeals.breakfast.id} onClick={() =>this.viewRecipe(this.props.dayMeals.breakfast)}>View Recipe</button>
                                 <br />
-                                <Modal inGrocery={
+                                { this.state.modalIsOpen ? 
+                                    <Modal inGrocery={
                                     this.props.grocery_list.some(
                                         item => item.id === this.props.dayMeals.breakfast.id)} 
                                     isOpen={this.state.modalIsOpen} 
@@ -106,7 +133,9 @@ export default class MyWeekCard extends React.Component{
                                         
                                     </div>
 
-                                </Modal>     
+                                </Modal>   
+                                 : null}
+                                  
                             </div> : 
                             
                             <div className="todo-title-empty">
@@ -119,11 +148,15 @@ export default class MyWeekCard extends React.Component{
                                 <p className="sub-title">
                                     {this.props.dayMeals.lunch.name} 
                                 </p>
-                                <button className="button__card" value={this.props.dayMeals.lunch.id} onClick={() =>this.viewRecipe(this.props.dayMeals.lunch)}>View Recipe</button>
+                                <button className="button__card" value={this.props.dayMeals.lunch.id} onClick={() =>this.viewLunchRecipe(this.props.dayMeals.lunch)}>View Recipe</button>
                                 <br />
-                                <Modal inGrocery={
+                                { this.state.lunchModal ?
+                                    <Modal inGrocery={
                                     this.props.grocery_list.some(
-                                        item => item.id === this.props.dayMeals.lunch.id)} isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
+                                        item => item.id === this.props.dayMeals.lunch.id)} 
+                                        isOpen={this.state.lunchModal} 
+                                        onAfterOpen={this.afterLunchOpenModal} 
+                                        onRequestClose={this.closeLunchModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
                                         <div>
                                         <div className="row">
                                             <div className="col-sm-10">
@@ -131,7 +164,7 @@ export default class MyWeekCard extends React.Component{
                                             
                                             </div>
                                             <div className="col-sm-2">
-                                                <button className="button--close" onClick={this.closeModal}>Close <i className="fa fa-times"></i></button>
+                                                <button className="button--close" onClick={this.closeLunchModal}>Close <i className="fa fa-times"></i></button>
                                             </div>
                                         </div>    
                                         {this.props.dayMeals.lunch.name === undefined ? <img src="./images/loader.gif" /> : 
@@ -164,6 +197,8 @@ export default class MyWeekCard extends React.Component{
                                         
                                     </div>
                                 </Modal>
+                                 : null}
+                                
                             </div> : 
                             <div className="todo-title-empty">
                                 <p >Add a Recipe from your Recipe Book to Lunch</p>
@@ -176,50 +211,56 @@ export default class MyWeekCard extends React.Component{
                                     <p className="sub-title">
                                         {this.props.dayMeals.dinner.name} 
                                     </p>
-                                    <button className="button__card" value={this.props.dayMeals.dinner.id} onClick={() =>this.viewRecipe(this.props.dayMeals.dinner)}>View Recipe</button>
+                                    <button className="button__card" value={this.props.dayMeals.dinner.id} onClick={() =>this.viewDinnerRecipe(this.props.dayMeals.dinner)}>View Recipe</button>
                                     <br />
-                                    <Modal inGrocery={
-                                        this.props.grocery_list.some(
-                                            item => item.id === this.props.dayMeals.dinner.id)} isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
-                                            <div>
-                                            <div className="row">
-                                            <div className="col-sm-10">
-                                                
-                                            
-                                            </div>
-                                            <div className="col-sm-2">
-                                                <button className="button--close" onClick={this.closeModal}>Close <i className="fa fa-times"></i></button>
-                                            </div>
-                                        </div>
-                                        {this.props.dayMeals.dinner.name === undefined ? <img src="./images/loader.gif" /> : 
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <h2>{this.props.dayMeals.dinner.name}</h2>
-                                                <img src={this.props.dayMeals.dinner.images[0].hostedLargeUrl} style={{width: "100%", padding: "0px 0px 20px" }} />
+                                    { this.state.dinnerModal ? 
+                                        <Modal inGrocery={
+                                            this.props.grocery_list.some(
+                                                item => item.id === this.props.dayMeals.dinner.id)} 
+                                                isOpen={this.state.dinnerModal} 
+                                                onAfterOpen={this.afterDinnerOpenModal} 
+                                                onRequestClose={this.closeDinnerModal} ariaHideApp={false} style={this.customStyles} contentLabel="Example Modal">
+                                                <div>
                                                 <div className="row">
-                                                    <div className="col-sm-6">
-                                                        <button className="button" onClick={() => this.props.onHandleToGrocery(this.props.dayMeals.dinner)}>Add/Remove Grocery List Card</button>
-                                                    </div>
-                                                    <div className="col-sm-6">
-                                                       
-                                                    </div>
+                                                <div className="col-sm-10">
+                                                    
+                                                
+                                                </div>
+                                                <div className="col-sm-2">
+                                                    <button className="button--close" onClick={this.closeDinnerModal}>Close <i className="fa fa-times"></i></button>
                                                 </div>
                                             </div>
-                                            <div className="col-md-6">
-                                                <div>Servings: {this.props.dayMeals.dinner.numberOfServings}</div>
-                                                <div>Total Time: {this.props.dayMeals.dinner.totalTime}</div>
-                                                <h4>Ingredients:</h4>
-                                                <div style={{ padding: "20px"}}> {this.props.dayMeals.dinner.ingredientLines.map((element, i) => (
-                                                    <div key={i}>{element}</div>
-                                                ))}</div>
-                                                {this.props.dayMeals.dinner.instructions === null ? <div>Source URL: <a href={this.props.dayMeals.dinner.source.sourceRecipeUrl} target="_blank">Click here to view detailed instructions</a></div> : <div>Instructions: {this.props.dayMeals.dinner.instructions}</div>}
-                                            </div>
-                                            
-                                            
-                                        </div>}
-                                    </div>
+                                            {this.props.dayMeals.dinner.name === undefined ? <img src="./images/loader.gif" /> : 
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <h2>{this.props.dayMeals.dinner.name}</h2>
+                                                    <img src={this.props.dayMeals.dinner.images[0].hostedLargeUrl} style={{width: "100%", padding: "0px 0px 20px" }} />
+                                                    <div className="row">
+                                                        <div className="col-sm-6">
+                                                            <button className="button" onClick={() => this.props.onHandleToGrocery(this.props.dayMeals.dinner)}>Add/Remove Grocery List Card</button>
+                                                        </div>
+                                                        <div className="col-sm-6">
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <div>Servings: {this.props.dayMeals.dinner.numberOfServings}</div>
+                                                    <div>Total Time: {this.props.dayMeals.dinner.totalTime}</div>
+                                                    <h4>Ingredients:</h4>
+                                                    <div style={{ padding: "20px"}}> {this.props.dayMeals.dinner.ingredientLines.map((element, i) => (
+                                                        <div key={i}>{element}</div>
+                                                    ))}</div>
+                                                    {this.props.dayMeals.dinner.instructions === null ? <div>Source URL: <a href={this.props.dayMeals.dinner.source.sourceRecipeUrl} target="_blank">Click here to view detailed instructions</a></div> : <div>Instructions: {this.props.dayMeals.dinner.instructions}</div>}
+                                                </div>
+                                                
+                                                
+                                            </div>}
+                                        </div>
 
-                                    </Modal> 
+                                        </Modal>
+                                    : null}
+                                     
                                 </div>
                             </div> : 
                             <div className="todo-title-empty">

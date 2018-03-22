@@ -12,8 +12,6 @@ export class FavoritesPage extends React.Component {
     onHandleDetailFavorites = id => {
         loading = true;
         API.getDetailRecipe(id).then(response => {
-            
-            console.log(response)
             loading = false;
         })
     }
@@ -52,7 +50,6 @@ export class FavoritesPage extends React.Component {
 
     onHandleSubmitWeek = (recipe, day, mealTime) => {
 
-        console.log(recipe);
         const {
             favorites,
             user_id,
@@ -84,7 +81,6 @@ export class FavoritesPage extends React.Component {
     }
 
     onHandleGroceryList = (recipe, inGrocery) => {
-        console.log(recipe);
 
         const {
             favorites,

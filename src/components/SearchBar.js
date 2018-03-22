@@ -56,7 +56,6 @@ export class SearchBar extends React.Component {
         } else {
             this.setState({ error: ""});
             API.getRecipe(this.state).then((response) => {
-                console.log(response)
                 this.setState({ query: "" });
                 this.props.setCurrentSearch(response.data);
                 this.props.history.push("/search");
