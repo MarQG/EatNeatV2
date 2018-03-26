@@ -76,7 +76,7 @@ export default class RecipeCard extends React.Component{
     return(
       <div className="example-2 card">
         <div className="wrapper"> 
-          <img src={this.props.recipe.imageUrlBySize[90]}/>     
+          <img src={this.props.recipe.imageUrlBySize === null ? `http://via.placeholder.com/360?text=${this.props.recipe.recipe_name}` : this.props.recipe.imageUrlBySize[90] }/>     
           <div className="header__card">
             <ul className="menu-content">
               <li><a id="faveBtn" onClick={() => this.props.onHandleFavorites(this.props.recipe.recipe_id)} className="fa fa-heart-o"></a></li>
